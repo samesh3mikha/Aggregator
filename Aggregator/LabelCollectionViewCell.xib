@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Quicksand-Medium.ttf">
+            <string>Quicksand-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="WKg-fq-XCx" customClass="LabelCollectionViewCell" customModule="Aggregator" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="182" height="48"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="182" height="48"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RPm-oc-hj9" customClass="roundView" customModule="Aggregator" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="12" width="174" height="36"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="Q5q-tS-3zi">
+                                <rect key="frame" x="8" y="0.0" width="158" height="36"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="W5a-iz-FuJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Quicksand-Medium" family="Quicksand" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.54503643509999999" green="0.54513353109999996" blue="0.54503029579999995" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="Q5q-tS-3zi" secondAttribute="bottom" id="8FB-a5-hqh"/>
+                            <constraint firstAttribute="trailing" secondItem="Q5q-tS-3zi" secondAttribute="trailing" constant="8" id="E6l-oN-vvh"/>
+                            <constraint firstItem="Q5q-tS-3zi" firstAttribute="top" secondItem="RPm-oc-hj9" secondAttribute="top" id="GU4-Hq-aSq"/>
+                            <constraint firstItem="Q5q-tS-3zi" firstAttribute="leading" secondItem="RPm-oc-hj9" secondAttribute="leading" constant="8" id="x3G-TS-QoD"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="6"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick" translatesAutoresizingMaskIntoConstraints="NO" id="usn-KA-JEd">
+                        <rect key="frame" x="160" y="0.0" width="22" height="22"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="22" id="8b1-JV-E4q"/>
+                            <constraint firstAttribute="height" constant="22" id="I1o-rq-0fv"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="usn-KA-JEd" firstAttribute="top" secondItem="WKg-fq-XCx" secondAttribute="top" id="Z7X-Sf-li6"/>
+                <constraint firstItem="RPm-oc-hj9" firstAttribute="leading" secondItem="WKg-fq-XCx" secondAttribute="leading" id="oT2-Sa-rCG"/>
+                <constraint firstItem="RPm-oc-hj9" firstAttribute="top" secondItem="WKg-fq-XCx" secondAttribute="top" constant="12" id="ocB-1b-85t"/>
+                <constraint firstAttribute="trailing" secondItem="usn-KA-JEd" secondAttribute="trailing" id="t7c-Pr-eb0"/>
+                <constraint firstAttribute="bottom" secondItem="RPm-oc-hj9" secondAttribute="bottom" id="us0-Hv-oNN"/>
+                <constraint firstAttribute="trailing" secondItem="RPm-oc-hj9" secondAttribute="trailing" constant="8" id="wGT-Uk-Mri"/>
+            </constraints>
+            <size key="customSize" width="182" height="37"/>
+            <connections>
+                <outlet property="label" destination="Q5q-tS-3zi" id="rhz-ve-1J5"/>
+                <outlet property="tick" destination="usn-KA-JEd" id="uto-bS-O3G"/>
+            </connections>
+            <point key="canvasLocation" x="835" y="348"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="tick" width="16" height="16"/>
+    </resources>
+</document>

@@ -1,0 +1,63 @@
+#####
+# Created by http://www.gitignore.io
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### Xcode ###
+# Slash on the end, so we only remove the FOLDER, not any files that were badly named "build" (hope not)
+build/
+Pods/Headers/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata
+*.xccheckout
+# If you manually "deprecate" your classes, they get moved here.
+*.moved-aside
+DerivedData
+*.xcuserstate
+####
+
+### Fastlane ###
+report.xml
+test_output/
+xcov_report/
+####
+
+####
+# UNKNOWN: recommended by others, but I can't discover what these files are
+
+.idea/
+
+
+*.scssc
+
+*.sassc
+
+Pods/Pods.xcodeproj/xcuserdata/*
