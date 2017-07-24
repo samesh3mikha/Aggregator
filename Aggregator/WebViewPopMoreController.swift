@@ -67,15 +67,14 @@ class WebViewPopMoreController: UIViewController {
         {
            
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "TableViewController") as! TableViewController
+            let vc = storyboard.instantiateViewController(withIdentifier: "CourseDetailsController") as! CourseDetailsController
             
            // self.present(vc, animated: false, completion: nil)
             DispatchQueue.main.async() {
                 self.navigationController?.dismiss(animated: false, completion: nil)
                 
             }
-            vc.arrayOfCourses = self.arrayOfCourses
-            vc.compareListId = self.compareListId
+            vc.courses = self.arrayOfCourses
             
             }
             

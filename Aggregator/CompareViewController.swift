@@ -11,8 +11,8 @@ import SwiftyJSON
 import SwiftMessages
 import Alamofire
 
-//let baseUrl = "http://202.129.251.174:8089/api/main/"
-let baseUrl = "http://192.168.1.11:8089/api/main/"
+let baseUrl = "http://202.129.251.174:8089/api/main/"
+//let baseUrl = "http://192.168.1.11:8089/api/main/"
 
 
 class CompareViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
@@ -28,32 +28,23 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    self.navigationController?.isNavigationBarHidden = true
-       
-           }
+        self.navigationController?.isNavigationBarHidden = true
+        compareBtn.isUserInteractionEnabled = true
+        compareBtn.alpha = 1
+    }
     
     
     // MARK:PassData
     
     @IBOutlet weak var ComaprLbl: UILabel!
-    @IBAction func compareBtnClicked(_ sender: Any) {        
-        if let compareDetail = storyboard?.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController{
-        _ = UINavigationController(rootViewController: compareDetail)
-            if self.TableView.indexPathsForSelectedRows != nil{
-                let selectedIndexPaths = selectedIDs.joined(separator: ",")
-                compareDetail.compareListId = selectedIndexPaths
-                print("selectedIndexPaths -->", selectedIndexPaths)
-            }
-            self.navigationController?.pushViewController(compareDetail, animated: false)
-        }
+    @IBAction func compareBtnClicked(_ sender: Any) {
+        addChildVC()
     }
-        
+    
     
     override func viewWillAppear(_ animated: Bool) {
-        
-       
-               self.checked.removeAll()
+        self.tabBarController?.tabBar.isHidden = false
+        self.checked.removeAll()
         self.selectedIDs.removeAll()
        
         compareBtn.isUserInteractionEnabled = true
@@ -66,16 +57,31 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
             let decodedUserinfo = NSKeyedUnarchiver.unarchiveObject(with: decoded as! Data) as! UserInfo
             if !decodedUserinfo.access_token.isBlank
             {
-                
-                
-                
                 fetchBookmark(token: decodedUserinfo.access_token)
-                
-                
-                
             }
         }
     }
+    
+    func addChildVC(){
+        if let pageVC = self.storyboard?.instantiateViewController(withIdentifier: "pagecontrollerVCID") as? PageViewController {
+            _ = UINavigationController(rootViewController: pageVC)
+            if self.TableView.indexPathsForSelectedRows != nil{
+                pageVC.bookmarkedCourseIDs = selectedIDs
+            }
+            self.navigationController?.pushViewController(pageVC, animated: false)
+            
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {        
+        if segue.identifier == "segueToPageVC"{
+            if let destVC = segue.destination as? PageViewController{
+                //                destVC.compareListId = [self.compareListId]
+                destVC.bookmarkedCourseIDs = selectedIDs           
+            }
+        }
+    }
+
    
     
     //MARK: Network
@@ -122,10 +128,6 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
                 
             case .success(let value):
                 let json = JSON(value)
-                print(json)
-                
-                
-                
                 let data = JSON(response.result.value!)
                 
                 if let responseStatus = data["STATUS"].arrayObject
@@ -306,7 +308,6 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
                 {
                     cell.tickImage.isHidden = true
                     selectedIDs.remove(at: index)
-                    print(index)
                     checked[indexPath.section] = false
                     
                 }
@@ -332,16 +333,13 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
         {
             compareBtn.isUserInteractionEnabled = true
             compareBtn.alpha = 1
-            
         }
         
         else
         {
             compareBtn.isUserInteractionEnabled = false
             compareBtn.alpha = 0.5
-        }
-        print(selectedIDs)
-    
+        }    
     }
 
     

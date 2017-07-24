@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7DC973111F24540900DC9037 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC9730E1F24540900DC9037 /* MainViewController.swift */; };
 		7DC973121F24540900DC9037 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC9730F1F24540900DC9037 /* PageViewController.swift */; };
-		7DC973131F24540900DC9037 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC973101F24540900DC9037 /* TableViewController.swift */; };
+		7DC973131F24540900DC9037 /* CourseDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC973101F24540900DC9037 /* CourseDetailsController.swift */; };
 		7DC973151F24543900DC9037 /* BasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC973141F24543900DC9037 /* BasicCell.swift */; };
 		A195EFE9BB6794EA4B5BDAB6 /* Pods_Aggregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587899B53703051B849B9405 /* Pods_Aggregator.framework */; };
 		B812E7841F1CAE4900E87926 /* WebViewPopMoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */; };
@@ -92,7 +92,7 @@
 		6345348F314BE3DE8E87AFED /* Pods_AggregatorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AggregatorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DC9730E1F24540900DC9037 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7DC9730F1F24540900DC9037 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
-		7DC973101F24540900DC9037 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		7DC973101F24540900DC9037 /* CourseDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailsController.swift; sourceTree = "<group>"; };
 		7DC973141F24543900DC9037 /* BasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCell.swift; sourceTree = "<group>"; };
 		B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewPopMoreController.swift; sourceTree = "<group>"; };
 		B8EA2C4F1F1DCDE700C6E023 /* EnquiryFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnquiryFormViewController.swift; sourceTree = "<group>"; };
@@ -263,7 +263,7 @@
 			children = (
 				7DC9730E1F24540900DC9037 /* MainViewController.swift */,
 				7DC9730F1F24540900DC9037 /* PageViewController.swift */,
-				7DC973101F24540900DC9037 /* TableViewController.swift */,
+				7DC973101F24540900DC9037 /* CourseDetailsController.swift */,
 				C1B6C0791E80F1900054BBA3 /* CompareViewController.swift */,
 				C18777E61F0A3B9A00EF84A1 /* compareCell */,
 				B8F3CAED1F15E59F00E5B552 /* BasicCompreData.swift */,
@@ -490,7 +490,7 @@
 				TargetAttributes = {
 					C15E9C171E67CF2E006D5B44 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = J74M4S59XT;
+						DevelopmentTeam = Z83ZNTZ5VZ;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -665,7 +665,7 @@
 				C108E0A01E936422000834E8 /* ChooseAreaOfInterestViewController.swift in Sources */,
 				C19072F41EF7D5F9002E9B11 /* areaOfInterestViewController.swift in Sources */,
 				B8F3CAEE1F15E59F00E5B552 /* BasicCompreData.swift in Sources */,
-				7DC973131F24540900DC9037 /* TableViewController.swift in Sources */,
+				7DC973131F24540900DC9037 /* CourseDetailsController.swift in Sources */,
 				C1551E3A1E95FB25002BE99B /* Style.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -825,7 +825,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Aggregator/Aggregator.entitlements;
-				DEVELOPMENT_TEAM = J74M4S59XT;
+				DEVELOPMENT_TEAM = Z83ZNTZ5VZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -850,7 +850,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Aggregator/Aggregator.entitlements;
-				DEVELOPMENT_TEAM = J74M4S59XT;
+				DEVELOPMENT_TEAM = Z83ZNTZ5VZ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

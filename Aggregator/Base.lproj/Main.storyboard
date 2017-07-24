@@ -163,7 +163,7 @@
         <!--Compare View Controller-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
-                <viewController storyboardIdentifier="CompareViewController" hidesBottomBarWhenPushed="YES" id="8rJ-Kc-sve" customClass="CompareViewController" customModule="Aggregator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CompareViewController" id="8rJ-Kc-sve" customClass="CompareViewController" customModule="Aggregator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="L7p-HK-0SC"/>
                         <viewControllerLayoutGuide type="bottom" id="Djb-ko-YwX"/>
@@ -358,6 +358,7 @@
                         <outlet property="compareBtn" destination="R6R-51-w30" id="kKg-hb-TF4"/>
                         <outlet property="holderView" destination="wgJ-GQ-Vug" id="EP3-M0-fhy"/>
                         <outlet property="searchDisplayController" destination="6My-bu-yxC" id="ffe-K6-TAV"/>
+                        <segue destination="nxZ-FN-D5j" kind="show" identifier="segueToPageVC" id="SWK-iJ-6y2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -372,20 +373,20 @@
             </objects>
             <point key="canvasLocation" x="448.125" y="-1434.5070422535211"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Course Details Controller-->
         <scene sceneID="iIY-Iq-pdX">
             <objects>
-                <viewController storyboardIdentifier="TableViewController" modalTransitionStyle="flipHorizontal" id="liI-mm-8xg" customClass="TableViewController" customModule="Aggregator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CourseDetailsController" modalTransitionStyle="flipHorizontal" id="liI-mm-8xg" customClass="CourseDetailsController" customModule="Aggregator" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Rrq-Oh-9H1"/>
                         <viewControllerLayoutGuide type="bottom" id="TYB-7Q-s2r"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="myW-K9-tNi">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="173" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OGg-dZ-9R6">
-                                <rect key="frame" x="0.0" y="50" width="320" height="439"/>
+                                <rect key="frame" x="0.0" y="50" width="320" height="390"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="BasicCell" rowHeight="173" id="D2U-aB-cPe" customClass="BasicCell" customModule="Aggregator" customModuleProvider="target">
@@ -440,8 +441,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="liI-mm-8xg" id="Mo8-xS-wob"/>
-                                    <outlet property="delegate" destination="liI-mm-8xg" id="YL8-vc-KBm"/>
+                                    <outlet property="dataSource" destination="liI-mm-8xg" id="OoE-9U-Wi9"/>
+                                    <outlet property="delegate" destination="liI-mm-8xg" id="sSP-nz-iY2"/>
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comparing 3 courses " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="49F-UK-Cht">
@@ -451,7 +452,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qe4-4l-cpG">
-                                <rect key="frame" x="0.0" y="527" width="320" height="42"/>
+                                <rect key="frame" x="0.0" y="478" width="320" height="42"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greenCancel" translatesAutoresizingMaskIntoConstraints="NO" id="4Ct-OL-itP">
                                         <rect key="frame" x="147" y="7" width="25" height="24"/>
@@ -470,7 +471,7 @@
                                 </constraints>
                             </view>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="8Tn-bp-ocI">
-                                <rect key="frame" x="0.0" y="491" width="320" height="37"/>
+                                <rect key="frame" x="0.0" y="442" width="320" height="37"/>
                                 <color key="backgroundColor" red="0.034001596269999997" green="0.61277771000000003" blue="0.30530640479999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="VZK-ME-GVm"/>
@@ -596,12 +597,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1n-BR-YBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1128.75" y="-1434.5070422535211"/>
+            <point key="canvasLocation" x="1258" y="-1435"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="9YR-Ip-39F">
             <objects>
-                <pageViewController storyboardIdentifier="pagecontrollerVCID" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="flipHorizontal" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="nxZ-FN-D5j" customClass="PageViewController" customModule="Aggregator" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController storyboardIdentifier="pagecontrollerVCID" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="flipHorizontal" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="nxZ-FN-D5j" customClass="PageViewController" customModule="Aggregator" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="liI-mm-8xg" kind="show" identifier="segueToDetails" id="Y0N-bi-0JT"/>
+                    </connections>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5DN-Sv-lk6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2019" y="-1462"/>
@@ -1517,7 +1522,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOO-rK-tZb">
-                                                <rect key="frame" x="36.5" y="506.5" width="247" height="26"/>
+                                                <rect key="frame" x="37" y="506.5" width="247" height="26"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tWY-Jx-F2k">
                                                         <rect key="frame" x="0.0" y="5" width="174" height="20"/>
@@ -3004,8 +3009,8 @@
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
                                                     </view>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" misplaced="YES" text="Recent search" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H52-lQ-ulj">
-                                                        <rect key="frame" x="122" y="21" width="111.5" height="21.5"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="Recent search" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H52-lQ-ulj">
+                                                        <rect key="frame" x="94.5" y="21" width="111.5" height="21.5"/>
                                                         <accessibility key="accessibilityConfiguration" identifier="topViewLabel">
                                                             <accessibilityTraits key="traits" button="YES" staticText="YES"/>
                                                         </accessibility>

@@ -1,5 +1,5 @@
 //
-//  TableViewController.swift
+//  CourseDetailsController.swift
 //  page
 //
 //  Created by Websutra MAC 2 on 7/5/17.
@@ -13,136 +13,74 @@ import SwiftyJSON
 
 let appGreenColor = UIColor(red: 9.0/255.0, green: 156/255.0, blue: 78.0/255.0, alpha: 1.0)
 
-class TableViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate
+class CourseDetailsController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate
 {
    
-      var svc: UIViewController = WebViewPopMoreController()
-      var compareListId = [String]()
-      var arrayOfCourses = [BasicComparedatas]()
-      var section  = ["ENTRY REQUIREMENTS"]
-      var pageIndex:Int! = 0    
+    var svc: UIViewController = WebViewPopMoreController()
+    var courses = [BasicComparedatas]()
+    var section  = ["ENTRY REQUIREMENTS"]
+    var pageIndex:Int! = 0    
     
     @IBOutlet weak var tableView: UITableView!
-   
     @IBOutlet weak var pageControl: UIPageControl!
-   
-   @IBOutlet weak var closeView: UIView!
-    
+    @IBOutlet weak var closeView: UIView!
     @IBOutlet weak var compareingNumLbl: UILabel!
     
-   
-    
-   
-    
-    override func viewDidLoad() {
-        
+
+    override func viewDidLoad() {        
         super.viewDidLoad()
-//       self.tableView?.reloadData()
+
+        self.compareingNumLbl.text = "Comparing \(self.courses.count) Courses."
+        tableView.separatorColor = nil
         
         self.navigationController?.navigationBar.isHidden = true
-        let closeTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TableViewController.closeViewClicked))
+        let closeTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CourseDetailsController.closeViewClicked))
          self.closeView.addGestureRecognizer(closeTap)
         
-        for course in self.arrayOfCourses{
-            print(course.course_name)
+        for course in self.courses{
+            print("course_name ----> ", course.course_name)
         }
-        compareListId = [compareListId.joined(separator: ",")]
-        
-             
-//        tableView.delegate = self
-//        tableView.dataSource = self
-       
-       tableView.separatorColor = nil
-   
-        
-        
     }
-    
-    
-  
-    
+
     func closeViewClicked() {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let newVC = storyboard.instantiateViewController(withIdentifier: "TabViewController")
-        self.present(newVC, animated: false, completion: nil)
-     //   _ = navigationController?.popViewController(animated: true)
-        
+            _ = navigationController?.popToRootViewController(animated: true)
     }
     
-    
-            
-            
-        
-
-    
-   
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        self.compareingNumLbl.text = "Comparing \(self.arrayOfCourses.count) Courses."
-    }
-    
-    
-    
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.compareingNumLbl.text = "Comparing \(self.arrayOfCourses.count) Courses."
-        
-        return self.arrayOfCourses.count
-        
+        self.compareingNumLbl.text = "Comparing \(self.courses.count) Courses."
+        print("self.courses.count - - - - - - - - -- - - - - ", self.courses.count)
+        return self.courses.count
     }
-
-
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        
       return 1
-        
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
         return 30
-        
     }
 
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {        
         let header = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 50))
-        
         header.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 50)
-        
-        
-        
-        
         let headerFrameLbl =  UILabel(frame: CGRect(x: 50, y: 3, width: self.tableView.frame.size.width, height: 20))
-        
-        
-        
         headerFrameLbl.text = "Entry Requirements"
-        
         header.backgroundColor = appGreenColor
         headerFrameLbl.textColor = UIColor.white //make the text black
         headerFrameLbl.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightLight)
         header.addSubview(headerFrameLbl)
         
         return header
-           }
+    }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell") as! BasicCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicCell
 //        let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell", forIndexPath: indexPath) as! BasicCell
 
         // Configure the cell...
-        
-        let name = arrayOfCourses[indexPath.row].course_name
-        print("Course name == ", name)
+        let name = courses[indexPath.row].course_name
         cell.cNameLabel.text = name
         cell.setSomething(label: name)
 
@@ -151,28 +89,22 @@ class TableViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         cell.webView.backgroundColor = UIColor.white
         
         cell.webView.delegate = self as UIWebViewDelegate
-        let cdetail = arrayOfCourses[indexPath.row].entry_requirements
-        print("cdetail === ", cdetail)
-//        cell.webView.reload()
-        cell.webView.loadHTMLString("about:blank", baseURL: nil)        
+        let cdetail = courses[indexPath.row].entry_requirements
         cell.webView.loadHTMLString(cdetail, baseURL: nil)
-        cell.webView.stopLoading()
         cell.selectionStyle = .none
        
          cell.readmoreBtn.tag = indexPath.row
-        cell.readmoreBtn.addTarget(self, action: #selector(TableViewController.ReadmoreActn(_:)), for: .touchUpInside)
+        cell.readmoreBtn.addTarget(self, action: #selector(CourseDetailsController.ReadmoreActn(_:)), for: .touchUpInside)
         
         return cell
     }
     
     func ReadmoreActn(_ sender: Any) {
-        
           let storyboard = UIStoryboard(name: "Main", bundle: nil)
           let newVC = storyboard.instantiateViewController(withIdentifier: "ReadmoreVC") as! WebViewPopMoreController
       
                 newVC.isWebContent = true
-        newVC.compareListId = compareListId
-        newVC.arrayOfCourses = arrayOfCourses
+        newVC.arrayOfCourses = courses
              svc = newVC
          self.present(newVC, animated: true, completion: nil)
         
@@ -197,9 +129,6 @@ class TableViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-     
-        let numberOfCount = compareListId.count
         let statusHud = MessageView.viewFromNib(layout: .StatusLine)
         
         statusHud.id = "statusHud"
@@ -213,7 +142,7 @@ class TableViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         let heightOfVC = self.tableView.frame.height
       
-        let heightOfRow = heightOfVC / CGFloat(self.arrayOfCourses.count) - 10
+        let heightOfRow = heightOfVC / CGFloat(self.courses.count) - 10
         
         return heightOfRow
    
@@ -232,23 +161,15 @@ class TableViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 //        return header
 //    }
 
-
-
-     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
-              
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let name = courses[indexPath.row].course_name
+        print("name --- ", name)
+        print("....................")
     }
-    
-     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    }
         
-        
-        
-        
-        }
-  
-   
-    
-    
-    
 
      func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int)
     {
