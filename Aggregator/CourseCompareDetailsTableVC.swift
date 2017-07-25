@@ -1,5 +1,5 @@
 //
-//  CourseDetailsController.swift
+//  CourseCompareDetailsTableVC.swift
 //  page
 //
 //  Created by Websutra MAC 2 on 7/5/17.
@@ -13,13 +13,13 @@ import SwiftyJSON
 
 let appGreenColor = UIColor(red: 9.0/255.0, green: 156/255.0, blue: 78.0/255.0, alpha: 1.0)
 
-class CourseDetailsController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate
+class CourseCompareDetailsTableVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate
 {
-   
+    var viewModel: CourseCompareDetailsModel? = nil
     var svc: UIViewController = WebViewPopMoreController()
     var courses = [BasicComparedatas]()
-    var section  = ["ENTRY REQUIREMENTS"]
-    var pageIndex:Int! = 0    
+//    var section  = ["ENTRY REQUIREMENTS"]
+    var pageIndex:Int! = 0  
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pageControl: UIPageControl!
@@ -29,12 +29,13 @@ class CourseDetailsController: UIViewController,UITableViewDelegate,UITableViewD
 
     override func viewDidLoad() {        
         super.viewDidLoad()
-
+        viewModel = CourseCompareDetailsModel.init(courses: courses, page: pageIndex)
+        
         self.compareingNumLbl.text = "Comparing \(self.courses.count) Courses."
         tableView.separatorColor = nil
         
         self.navigationController?.navigationBar.isHidden = true
-        let closeTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CourseDetailsController.closeViewClicked))
+        let closeTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CourseCompareDetailsTableVC.closeViewClicked))
          self.closeView.addGestureRecognizer(closeTap)
         
         for course in self.courses{
@@ -47,8 +48,6 @@ class CourseDetailsController: UIViewController,UITableViewDelegate,UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.compareingNumLbl.text = "Comparing \(self.courses.count) Courses."
-        print("self.courses.count - - - - - - - - -- - - - - ", self.courses.count)
         return self.courses.count
     }
 
@@ -57,27 +56,23 @@ class CourseDetailsController: UIViewController,UITableViewDelegate,UITableViewD
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return 45
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {        
-        let header = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 50))
-        header.frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 50)
-        let headerFrameLbl =  UILabel(frame: CGRect(x: 50, y: 3, width: self.tableView.frame.size.width, height: 20))
-        headerFrameLbl.text = "Entry Requirements"
-        header.backgroundColor = appGreenColor
+        let headerFrameLbl =  UILabel(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 45))
+        headerFrameLbl.text = viewModel?.titleForPage()
         headerFrameLbl.textColor = UIColor.white //make the text black
-        headerFrameLbl.font = UIFont.systemFont(ofSize: 15, weight: UIFontWeightLight)
-        header.addSubview(headerFrameLbl)
+        headerFrameLbl.font = UIFont.boldSystemFont(ofSize: 16)
+        headerFrameLbl.textAlignment = .center
+        headerFrameLbl.textColor = UIColor.darkGray
         
-        return header
+        return headerFrameLbl
     }
 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell") as! BasicCell
         let cell = tableView.dequeueReusableCell(withIdentifier: "BasicCell", for: indexPath) as! BasicCell
-//        let cell = tableView.dequeueReusableCellWithIdentifier("BasicCell", forIndexPath: indexPath) as! BasicCell
 
         // Configure the cell...
         let name = courses[indexPath.row].course_name
@@ -89,12 +84,13 @@ class CourseDetailsController: UIViewController,UITableViewDelegate,UITableViewD
         cell.webView.backgroundColor = UIColor.white
         
         cell.webView.delegate = self as UIWebViewDelegate
-        let cdetail = courses[indexPath.row].entry_requirements
-        cell.webView.loadHTMLString(cdetail, baseURL: nil)
+//        let cdetail = courses[indexPath.row].entry_requirements
+        let cdetail = viewModel?.detailsForSection(section: indexPath.row)
+        cell.webView.loadHTMLString(cdetail!, baseURL: nil)
         cell.selectionStyle = .none
        
          cell.readmoreBtn.tag = indexPath.row
-        cell.readmoreBtn.addTarget(self, action: #selector(CourseDetailsController.ReadmoreActn(_:)), for: .touchUpInside)
+        cell.readmoreBtn.addTarget(self, action: #selector(CourseCompareDetailsTableVC.ReadmoreActn(_:)), for: .touchUpInside)
         
         return cell
     }

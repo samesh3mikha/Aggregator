@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		7DC973111F24540900DC9037 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC9730E1F24540900DC9037 /* MainViewController.swift */; };
 		7DC973121F24540900DC9037 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC9730F1F24540900DC9037 /* PageViewController.swift */; };
-		7DC973131F24540900DC9037 /* CourseDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC973101F24540900DC9037 /* CourseDetailsController.swift */; };
+		7DC973131F24540900DC9037 /* CourseCompareDetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC973101F24540900DC9037 /* CourseCompareDetailsTableVC.swift */; };
 		7DC973151F24543900DC9037 /* BasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC973141F24543900DC9037 /* BasicCell.swift */; };
+		7DFCBD2F1F26CD4D00200E08 /* CourseCompareDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */; };
 		A195EFE9BB6794EA4B5BDAB6 /* Pods_Aggregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587899B53703051B849B9405 /* Pods_Aggregator.framework */; };
 		B812E7841F1CAE4900E87926 /* WebViewPopMoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */; };
 		B8EA2C501F1DCDE700C6E023 /* EnquiryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EA2C4F1F1DCDE700C6E023 /* EnquiryFormViewController.swift */; };
@@ -92,8 +93,9 @@
 		6345348F314BE3DE8E87AFED /* Pods_AggregatorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AggregatorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DC9730E1F24540900DC9037 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7DC9730F1F24540900DC9037 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
-		7DC973101F24540900DC9037 /* CourseDetailsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailsController.swift; sourceTree = "<group>"; };
+		7DC973101F24540900DC9037 /* CourseCompareDetailsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCompareDetailsTableVC.swift; sourceTree = "<group>"; };
 		7DC973141F24543900DC9037 /* BasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCell.swift; sourceTree = "<group>"; };
+		7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCompareDetailsModel.swift; sourceTree = "<group>"; };
 		B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewPopMoreController.swift; sourceTree = "<group>"; };
 		B8EA2C4F1F1DCDE700C6E023 /* EnquiryFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnquiryFormViewController.swift; sourceTree = "<group>"; };
 		B8EA2C511F1F29AE00C6E023 /* UniversityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversityViewController.swift; sourceTree = "<group>"; };
@@ -263,12 +265,13 @@
 			children = (
 				7DC9730E1F24540900DC9037 /* MainViewController.swift */,
 				7DC9730F1F24540900DC9037 /* PageViewController.swift */,
-				7DC973101F24540900DC9037 /* CourseDetailsController.swift */,
+				7DC973101F24540900DC9037 /* CourseCompareDetailsTableVC.swift */,
 				C1B6C0791E80F1900054BBA3 /* CompareViewController.swift */,
 				C18777E61F0A3B9A00EF84A1 /* compareCell */,
 				B8F3CAED1F15E59F00E5B552 /* BasicCompreData.swift */,
 				B8F3CAEF1F18BD9C00E5B552 /* Cmodal.swift */,
 				B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */,
+				7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */,
 			);
 			name = "Compare Module";
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				C161C5071EDFCF860032F024 /* PopupViewData.swift in Sources */,
 				C1B6C0811E811FC20054BBA3 /* LoginViewController.swift in Sources */,
 				7DC973151F24543900DC9037 /* BasicCell.swift in Sources */,
+				7DFCBD2F1F26CD4D00200E08 /* CourseCompareDetailsModel.swift in Sources */,
 				C1B6C07E1E80F2140054BBA3 /* NotificationViewController.swift in Sources */,
 				7DC973111F24540900DC9037 /* MainViewController.swift in Sources */,
 				C1F210271EE9215700624040 /* CourseDetailViewController.swift in Sources */,
@@ -665,7 +669,7 @@
 				C108E0A01E936422000834E8 /* ChooseAreaOfInterestViewController.swift in Sources */,
 				C19072F41EF7D5F9002E9B11 /* areaOfInterestViewController.swift in Sources */,
 				B8F3CAEE1F15E59F00E5B552 /* BasicCompreData.swift in Sources */,
-				7DC973131F24540900DC9037 /* CourseDetailsController.swift in Sources */,
+				7DC973131F24540900DC9037 /* CourseCompareDetailsTableVC.swift in Sources */,
 				C1551E3A1E95FB25002BE99B /* Style.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

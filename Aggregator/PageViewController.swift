@@ -17,7 +17,7 @@ import SwiftMessages
 //MARK: protocol
 class PageViewController: UIPageViewController,UIPageViewControllerDataSource,UIPageViewControllerDelegate {
     
-    let viewControllerIdentifier = "CourseDetailsController"
+    let viewControllerIdentifier = "CourseCompareDetailsTableVC"
 
     var titleText : String?
     var bookmarkedCourseIDs = [String]()
@@ -114,8 +114,8 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource,UI
 
 
     // PAGE CONTROLLER DELEGATE
-    private func viewControllerAtIndex(index:Int) -> CourseDetailsController {
-        let childVC = storyboard?.instantiateViewController(withIdentifier: "CourseDetailsController") as? CourseDetailsController
+    private func viewControllerAtIndex(index:Int) -> CourseCompareDetailsTableVC {
+        let childVC = storyboard?.instantiateViewController(withIdentifier: "CourseCompareDetails") as? CourseCompareDetailsTableVC
         childVC?.pageIndex = index
         childVC?.courses = arrayOfCourses        
         return childVC!
@@ -170,7 +170,7 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource,UI
         if !completed {
             return
         }
-        let childVC = pageViewController.viewControllers?.last as? CourseDetailsController
+        let childVC = pageViewController.viewControllers?.last as? CourseCompareDetailsTableVC
         pageControl.currentPage = (childVC?.pageIndex)!
     }
     
@@ -323,12 +323,12 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource,UI
     }
     
     private(set) lazy var orderedViewControllers: [UIViewController] = {
-        var courseDetailsControllers: [UIViewController] = []
+        var courseCompareDetailsTables: [UIViewController] = []
         print("self.arrayOfCourses ===", self.arrayOfCourses)
-        for index in 0..<self.arrayOfCourses.count {
-            courseDetailsControllers.append(self.viewControllerAtIndex(index: index))
+        for index in 0...6 {
+            courseCompareDetailsTables.append(self.viewControllerAtIndex(index: index))
         }
-        return courseDetailsControllers
+        return courseCompareDetailsTables
     }()
     
     
@@ -343,7 +343,7 @@ class PageViewController: UIPageViewController,UIPageViewControllerDataSource,UI
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {        
         if segue.identifier == "segueToDetails"{
-            if let destVC = segue.destination as? CourseDetailsController{
+            if let destVC = segue.destination as? CourseCompareDetailsTableVC {
 //                destVC.compareListId = [self.compareListId]
                 destVC.courses = self.arrayOfCourses           
             }
