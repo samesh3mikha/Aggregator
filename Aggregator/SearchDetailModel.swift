@@ -33,6 +33,7 @@ class SearchDeatils: NSObject{
     let country : String
     let institution_type : String
    
+   
     enum searchCategory: String {
         
         case Courses

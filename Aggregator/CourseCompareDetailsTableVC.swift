@@ -29,6 +29,9 @@ class CourseCompareDetailsTableVC: UIViewController,UITableViewDelegate,UITableV
 
     override func viewDidLoad() {        
         super.viewDidLoad()
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         viewModel = CourseCompareDetailsModel.init(courses: courses, page: pageIndex)
         
         self.compareingNumLbl.text = "Comparing \(self.courses.count) Courses."
