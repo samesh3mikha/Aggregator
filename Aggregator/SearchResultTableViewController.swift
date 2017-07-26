@@ -17,41 +17,24 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     @IBOutlet var bookmarkCountLbl: UILabel!
     @IBOutlet var enquiryCountLbl: UILabel!
     @IBOutlet var wishlistCountLbl: UILabel!
-    
     @IBOutlet var mapImageView: UIImageView!
-    
-    
     @IBOutlet var closeView: UIView!
-    
-    
-    
-    
-    
-    var detailArray = [SearchDeatils]()
-    var data = [String]()
     @IBOutlet var popViewHolder: UIView!
     @IBOutlet var loginViewBtnHolder: UIView!
-    var searchViewController: SearchViewController?
-    var searchbarInstance = UISearchBar()
-    var reloadMainTable = false
-    
-    let searchController = UISearchController(searchResultsController: nil)
-    
-    
-    
-    
-    
-    
     @IBOutlet var heightContraintsofSuggestionTableView: NSLayoutConstraint!
-    
     @IBOutlet var segmentControl: UISegmentedControl!
     @IBOutlet var searchHolderView: UIView!
-    
-    
+    @IBOutlet var saveButton: UIButton!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var suggestionTableView: UITableView!
-    
-    
+    var searchViewController: SearchViewController?
+    var searchbarInstance = UISearchBar()
+    let searchController = UISearchController(searchResultsController: nil)
+
+    var viewModel: SearchResultViewModel? = nil
+    var detailArray = [SearchDeatils]()
+    var data = [String]()
+    var reloadMainTable = false
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -60,16 +43,13 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = SearchResultViewModel.init()
         
         self.navigationController?.navigationBar.isHidden = true
         
-        
-        
         courseArray.removeAll()
-        
         
         searchController.searchBar.delegate = self
         searchController.delegate = self
@@ -79,9 +59,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         
         
         searchController.searchBar.searchBarStyle = .prominent
-        
         searchController.searchBar.tintColor = Style.themeColor
-        
         searchController.searchBar.removeBackground()
         
         let txtField = searchController.searchBar.value(forKey: "searchField") as? UITextField
@@ -90,6 +68,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         searchController.searchBar.layer.borderColor = Style.themeColor.cgColor
         searchController.searchBar.scopeBarBackgroundImage = UIImage.init(color: UIColor.clear)
         searchController.searchBar.showsCancelButton = false
+        searchController.searchBar.becomeFirstResponder()
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -122,19 +101,8 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        
         
         self.view.backgroundColor = UIColor.white//UIColor(patternImage: #imageLiteral(resourceName: "patternBackground"))
         self.searchHolderView.backgroundColor =  UIColor.white// UIColor(patternImage: #imageLiteral(resourceName: "patternBackground"))
@@ -146,53 +114,37 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         {
             loginViewBtnHolder.isHidden = true
             self.FetchUserInfo(token: decodedUserinfo.access_token)
-            
-            
         }
         else
         {
             loginViewBtnHolder.isHidden = false
-            
         }
-        
-          }
-    
-    
-    
-    
-    
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         searchController.isActive = true
-        
     }
     
-    
+    func accessToken() -> String {
+        let decodedUserinfo = self.getUserInfo()
+        return decodedUserinfo.access_token
+    }
     
     //MARK: Search bar delegates
-    
-    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        if !(searchText.isBlank)
-        {
+        if !(searchText.isBlank) {
             self.reloadMainTable = false
             self.tableView.isHidden = true
             fetchSearchData(searchText: searchBar.text!)
-        }
-            
-        else
-            
-        {
+        } else {
             UIView.animate(withDuration: 0.5, animations: {
                 self.mapImageView.alpha = 1.0
-                
             })
+            saveButton.isEnabled = false
             courseArray.removeAll()
             self.tableView.isHidden = true
             self.suggestionTableView.isHidden = true
@@ -215,9 +167,8 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
         self.dismiss(animated: true, completion: nil)
-        
+        saveButton.isEnabled = false
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
@@ -245,22 +196,31 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
 
     }
     
+    @IBAction func saveButtonClicked(_ sender: Any) {
+        let searchText = searchController.searchBar.text
+        viewModel?.saveSearch(searchword: searchText!, option: currentSearchOption(), accessToken: accessToken())
+    }
     
-    
-    
-    
-    
-    
+    func currentSearchOption() -> SearchOption {
+        switch segmentControl.selectedSegmentIndex {
+            case SearchOption.All.rawValue:
+                return SearchOption.All 
+            case SearchOption.Course.rawValue:
+                return SearchOption.Course 
+            case SearchOption.University.rawValue:
+                return SearchOption.University 
+            case SearchOption.Location.rawValue:
+                return SearchOption.Location 
+            default:
+                return SearchOption.All 
+        }
+    }
     
     //MARK: Network
     
     
     func FetchUserInfo(token : String) -> Void {
-        
-        
         SwiftMessages.hideAll()
-        
-        
         let statusHud = MessageView.viewFromNib(layout: .StatusLine)
         
         statusHud.configureTheme(.success)
@@ -272,25 +232,16 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         con.duration = .automatic
         con.dimMode = .none
         
-        
-        
         let headers: HTTPHeaders = [
             "Authorization": "bearer " + token,
             "Content-Type": "application/json"
         ]
-        
         let params : Parameters = [
-            
             "actionname": "user_info_list",
             "data": [
-                
                 ["":""]
-                
-                
             ]
         ]
-        
-        
         Alamofire.request(baseUrl + "ProcessData", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
             
             switch response.result
@@ -374,51 +325,26 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
     func fetchSearchData(searchText : String) -> Void {
-        
         var token = ""
-        
         let decodedUserinfo = self.getUserInfo()
-        if !decodedUserinfo.access_token.isBlank
-        {
-            
-            
+        if !decodedUserinfo.access_token.isBlank {
             token = "bearer " + decodedUserinfo.access_token
-            
-            
-            
-            
         }
         
-    
         var queryString = ""
         switch segmentControl.selectedSegmentIndex {
-        case 0:
-            queryString = searchText
-            
-        case 1:
-            
-            queryString = "course_name:" + searchText
-        case 2:
-            
-            queryString = "institute_name:" + searchText
-        case 3:
-            
-            queryString = "country_id:" + searchText
-            
-    
-        default:
-            queryString =   searchText
+            case SearchOption.All.rawValue:
+                queryString = searchText
+            case SearchOption.Course.rawValue:
+                queryString = "course_name:" + searchText
+            case SearchOption.University.rawValue:
+                queryString = "institute_name:" + searchText
+            case SearchOption.Location.rawValue:
+                queryString = "country_id:" + searchText
+            default:
+                queryString =   searchText
         }
-        
         
         let escapedString = queryString.URLEncoded
         let originalString = "getsearchresult?key=" + escapedString + "*"
@@ -431,78 +357,45 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         Alamofire.request(baseUrl + originalString, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
             //        Alamofire.request(baseUrl, method: .get, parameters: nil, encoding: nil, headers: headers)
             //        Alamofire.request(baseUrl + originalString , header : headers).responseJSON { response in
-            
-            
-            
-            
-            switch response.result
-            {
-                
-            case .success(let value):
-                let json = JSON(value)
-                print(json)
-                
-                
-                let data = JSON(response.result.value!)
-                
-                if let responseArray = data["SEARCHRESULT"].arrayObject
-                {
-                    
-                    courseArray.removeAll()
-                    autoSuggestionArray.removeAll()
-                    allAutosuggestionArray.removeAll()
-                    countryAutosuggestionArray.removeAll()
-                    
-                    let resultDicts = responseArray as! [[String:AnyObject]]
-                    
-                    for dict in resultDicts
-                    {
-                        let c =  Courses.init(course_id : dict["institution_course_id"]! as! String  , courseName: dict["course_name"]! as! String, instituteName: dict["institute_name"]! as! String, studyLevel: dict["study_level_name"]! as! String, country: dict["country_id"]! as! String, institutionType: dict["institution_type"]! as! String, image: dict["institution_logo"]! as! String, isWishlisted: dict["is_wished"]! as! Bool,  isEnquired: dict["is_enquired"]! as! Bool, isBookmarked: dict["is_bookmarked"]! as! Bool)
+            switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    print(json)
+                    let data = JSON(response.result.value!)
+                    if let responseArray = data["SEARCHRESULT"].arrayObject {
+                        courseArray.removeAll()
+                        autoSuggestionArray.removeAll()
+                        allAutosuggestionArray.removeAll()
+                        countryAutosuggestionArray.removeAll()
                         
-                        courseArray.append(c)
+                        let resultDicts = responseArray as! [[String:AnyObject]]
+                        for dict in resultDicts {
+                            let c =  Courses.init(course_id : dict["institution_course_id"]! as! String  , courseName: dict["course_name"]! as! String, instituteName: dict["institute_name"]! as! String, studyLevel: dict["study_level_name"]! as! String, country: dict["country_id"]! as! String, institutionType: dict["institution_type"]! as! String, image: dict["institution_logo"]! as! String, isWishlisted: dict["is_wished"]! as! Bool,  isEnquired: dict["is_enquired"]! as! Bool, isBookmarked: dict["is_bookmarked"]! as! Bool)
+                            courseArray.append(c)
+                        }
+                        if self.reloadMainTable {
+                            self.suggestionTableView.isHidden = true
+                            self.sortAndReloadMainTable()
+                            if courseArray.count > 0 {
+                                //Enable Search button
+                                self.saveButton.isEnabled = true
+                            }
+                        } else {
+                            self.sortAndReloadAutoSuggestionTable()
+                        }
                     }
-                    
-                    if self.reloadMainTable
-                    {
-                        self.suggestionTableView.isHidden = true
-                        self.sortAndReloadMainTable()
-                    }
-                        
-                    else
-                    {
-                        self.sortAndReloadAutoSuggestionTable()
-                        
-                    }
-                    
-                    
-                }
-                
-            case .failure(let error):
-                print(error)
-                
+                case .failure(let error):
+                    print(error)
             }
-            
-            
-            
         }
-        
-        
     }
     
-    
-    
-    
     func  sortAndReloadMainTable() -> Void {
-        
         self.tableView.isHidden = false
         self.tableView.reloadData()
-        
-        
     }
     
     func  sortAndReloadAutoSuggestionTable() -> Void {
-        
-        
         if self.segmentControl.selectedSegmentIndex == 0
             
         {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D22DE051F27AA2E000E3875 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D22DE041F27AA2E000E3875 /* SearchResultViewModel.swift */; };
 		7DC973111F24540900DC9037 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC9730E1F24540900DC9037 /* MainViewController.swift */; };
 		7DC973121F24540900DC9037 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC9730F1F24540900DC9037 /* PageViewController.swift */; };
 		7DC973131F24540900DC9037 /* CourseCompareDetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC973101F24540900DC9037 /* CourseCompareDetailsTableVC.swift */; };
@@ -91,6 +92,7 @@
 		28B740BAE84F5133CF7A97C1 /* Pods-Aggregator.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Aggregator.release.xcconfig"; path = "Pods/Target Support Files/Pods-Aggregator/Pods-Aggregator.release.xcconfig"; sourceTree = "<group>"; };
 		587899B53703051B849B9405 /* Pods_Aggregator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Aggregator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6345348F314BE3DE8E87AFED /* Pods_AggregatorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AggregatorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D22DE041F27AA2E000E3875 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 		7DC9730E1F24540900DC9037 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		7DC9730F1F24540900DC9037 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		7DC973101F24540900DC9037 /* CourseCompareDetailsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCompareDetailsTableVC.swift; sourceTree = "<group>"; };
@@ -358,6 +360,7 @@
 				C17788F71ED6D0A700F92BE9 /* PopPresentationViewController.swift */,
 				C1F210261EE9215700624040 /* CourseDetailViewController.swift */,
 				B8EA2C511F1F29AE00C6E023 /* UniversityViewController.swift */,
+				7D22DE041F27AA2E000E3875 /* SearchResultViewModel.swift */,
 			);
 			name = "Search Module";
 			sourceTree = "<group>";
@@ -661,6 +664,7 @@
 				B8EA2C501F1DCDE700C6E023 /* EnquiryFormViewController.swift in Sources */,
 				B8EA2C541F1F470800C6E023 /* SearchDetailModel.swift in Sources */,
 				C13A681F1ECF0F1F0039A72C /* GlobalVariables.swift in Sources */,
+				7D22DE051F27AA2E000E3875 /* SearchResultViewModel.swift in Sources */,
 				7DC973121F24540900DC9037 /* PageViewController.swift in Sources */,
 				C17788F81ED6D0A700F92BE9 /* PopPresentationViewController.swift in Sources */,
 				C1B6C0781E80E6700054BBA3 /* SearchViewController.swift in Sources */,
