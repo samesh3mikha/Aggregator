@@ -20,7 +20,6 @@ class SearchResultViewModel: NSObject {
         if accessToken.isBlank || searchword.isBlank {
             return
         }
-
         let url = baseUrl + "Processdata"
         let accessKey = "bearer " + accessToken
         let headers: HTTPHeaders = [
@@ -62,5 +61,34 @@ class SearchResultViewModel: NSObject {
                     print(error)
             }
         }
+    }
+    
+    func getFavoriteSearch(accessToken: String) -> [Any] {
+        if accessToken.isBlank {
+            return []
+        }
+        let url = baseUrl + "Processdata"
+        let accessKey = "bearer " + accessToken
+        let headers: HTTPHeaders = [
+            "Authorization":  accessKey,
+            "Content-Type": "application/json"
+        ]
+        let params : Parameters = [
+            "actionname": "favorite_search",
+            "data": [
+                ["flag": "S"]
+            ]
+        ]
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                let data = JSON(value)
+                print("data == >", data)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        return []
     }
 }

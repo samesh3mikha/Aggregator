@@ -11,11 +11,14 @@ import Alamofire
 import SwiftyJSON
 import SwiftMessages
 
+public typealias ShowSearchResultHandler = (Int, String) -> Void
+
 var popUpArray = [PopupViewData]()
 class PopPresentationViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
     @IBOutlet var TableView: UITableView!
     var buttonIndex = 1
+    var showSearchResultHandlerBlock: ShowSearchResultHandler?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,8 +85,8 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
         switch buttonIndex {
             
         case 1:
-            actionName = "user_course_wish"
-            expectedKey = "WISHLIST"
+            actionName = "favorite_search"
+            expectedKey = "FAVORITE_SEARCH"
             flag = "S"
         case 2:
             actionName = "user_course_enquiry"
@@ -141,30 +144,44 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
                         //self.dismiss(animated: false, completion: nil)
                         
                         
-                        if let responseArray = data[expectedKey].arrayObject
-                        {
-                            
-                            
-                            
+                        if let responseArray = data[expectedKey].arrayObject {
                             let popData = responseArray as! [[String:AnyObject]]
-                            
-                            
-                            for dict in popData
-                            {
+                            for dict in popData {
                                 var shortCmnt = ""
-                                
-                                if self.buttonIndex == 2
-                                {
-                                 shortCmnt = "\(dict["shortcomment"]!)"
-                                }
-                                
-                                else
-                                {
+                                if self.buttonIndex == 2 {
+                                    shortCmnt = "\(dict["shortcomment"]!)"
+                                } else {
                                     shortCmnt = ""
                                 }
-                                
-                                let e = PopupViewData.init(courseID: "\(dict["institution_course_id"]!)" ,courseName: "\(dict["course_name"]!)", logo: "\(dict["institute_logo"]!)", shortComment: shortCmnt )
-                                popUpArray.append(e)
+                                var e: PopupViewData? = nil
+                                if self.buttonIndex == 1 {
+                                    var searchWord = ""
+                                    if let searchText = dict["course_name"] as? String {
+                                        if !searchText.isBlank {
+                                            searchWord = searchText
+                                            shortCmnt = "By Course"
+                                        }
+                                    } else if let searchText = dict["university_name"] as? String {
+                                        if !searchText.isBlank {
+                                            searchWord = searchText
+                                            shortCmnt = "By University"
+                                        }
+                                    } else if let searchText = dict["country_state"] as? String {
+                                        if !searchText.isBlank {
+                                            searchWord = searchText
+                                            shortCmnt = "By Location"
+                                        }
+                                    } else if let searchText = dict["search_text"] as? String {
+                                        if !searchText.isBlank {
+                                            searchWord = searchText
+                                            shortCmnt = "All results"
+                                        }
+                                    }
+                                    e = PopupViewData.init(courseID: "\(dict["favorite_search_id"]!)" ,courseName: searchWord, logo: "", shortComment: shortCmnt )
+                                } else {
+                                    e = PopupViewData.init(courseID: "\(dict["institution_course_id"]!)" ,courseName: "\(dict["course_name"]!)", logo: "\(dict["institute_logo"]!)", shortComment: shortCmnt )
+                                }
+                                popUpArray.append(e!)
                             }
                             
                             self.TableView.reloadData()
@@ -239,39 +256,98 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
         return popUpArray.count
     }
     
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if buttonIndex == 1 {
+            return 70
+        }
+        return 100
+    }
+
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         //SwiftMessages.hideAll()
         if buttonIndex == 3 {
-            
             let cell =  tableView.dequeueReusableCell(withIdentifier: "bookmark&wishlistid")! as! BookMark_WishTableViewCell
             //set the data here
             cell.courseNameLbl.text = popUpArray[indexPath.row].courseName
             cell.logoImageview.sd_setImage(with: URL.init(string: popUpArray[indexPath.row].logo), placeholderImage: #imageLiteral(resourceName: "placeholder"))
             return cell
-            
-            
-            
-            
-        }
-        else {
-            
+        } else {
             let cell =  tableView.dequeueReusableCell(withIdentifier: "enquiryid")! as! EnquiryTableViewCell
             
             cell.courseNameLbl.text = popUpArray[indexPath.row].courseName
-            
+            if buttonIndex == 1 {
+                cell.enquiryDetail.text = popUpArray[indexPath.row].shortComment
+                cell.itemID = popUpArray[indexPath.row].courseID
+                cell.deleteItemHandlerBlock = { [weak cell] in
+//                    print("Oi Chote", cell?.itemID)
+                    self.deleteFavoriteSearch(favSearchID: (cell?.itemID)!)
+                }
+                cell.deleteItemHandlerBlock = { [weak cell] in
+                    //                    print("Oi Chote", cell?.itemID)
+                    var searchOption: SearchOption = .All
+                    if popUpArray[indexPath.row].shortComment == "By Course" {
+                        searchOption = .Course
+                    } else if popUpArray[indexPath.row].shortComment == "By University" {
+                        searchOption = .University
+                    } else if popUpArray[indexPath.row].shortComment == "By Location" {
+                        searchOption = .Location
+                    }
+                    if let handlerBlock = self.showSearchResultHandlerBlock {                        
+                        handlerBlock(searchOption.rawValue, popUpArray[indexPath.row].courseName)
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+            }
             cell.logoImageView.sd_setImage(with: URL.init(string: popUpArray[indexPath.row].logo), placeholderImage: #imageLiteral(resourceName: "placeholder"))
             //set the data here
             return cell
         }
+    }
         
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("dsadasdas")
     }
     
-    
-    
+    // Delete Favorite Search By ID
+    func deleteFavoriteSearch(favSearchID: String) {
+        var accessToken = ""
+        let pref = UserDefaults.standard
+        if let decoded = pref.object(forKey: "userinfo") {
+            let decodedUserinfo = NSKeyedUnarchiver.unarchiveObject(with: decoded as! Data) as! UserInfo
+            if !decodedUserinfo.access_token.isBlank {
+                accessToken = decodedUserinfo.access_token
+            } else {
+                return
+            }
+        }
+        let url = baseUrl + "Processdata"
+        let accessKey = "bearer " + accessToken
+        let headers: HTTPHeaders = [
+            "Authorization":  accessKey,
+            "Content-Type": "application/json"
+        ]
+        let params : Parameters = [
+            "actionname": "favorite_search",
+            "data": [
+                ["flag": "D"],
+                ["favorite_search_id": favSearchID]
+            ]
+        ]
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+            switch response.result {
+            case .success(let value):
+                let data = JSON(value)
+                print("data == >", data)
+                self.fetchPopData(token: accessToken)
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
     
     
 }

@@ -199,6 +199,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     @IBAction func saveButtonClicked(_ sender: Any) {
         let searchText = searchController.searchBar.text
         viewModel?.saveSearch(searchword: searchText!, option: currentSearchOption(), accessToken: accessToken())
+//        viewModel?.getFavoriteSearch(accessToken: accessToken())
     }
     
     func currentSearchOption() -> SearchOption {
@@ -323,6 +324,12 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         }
         
         
+    }
+
+    func fetchSearchData(searchOption: Int, searchText : String) -> Void {
+        segmentControl.selectedSegmentIndex = searchOption
+        self.reloadMainTable = true
+        fetchSearchData(searchText: searchText)
     }
     
     func fetchSearchData(searchText : String) -> Void {
@@ -746,37 +753,21 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     //MARK: BUTTON TAPPED EVENTS
     
     func tappedWishlist(sender: DOFavoriteButton) {
-        
         SwiftMessages.hideAll()
-        
-        
         let statusHud = MessageView.viewFromNib(layout: .StatusLine)
-        
         statusHud.configureTheme(.success)
         statusHud.id = "statusHud"
-        
         var con = SwiftMessages.Config()
-        
         con.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
         con.duration = .seconds(seconds: 0.5)
         con.dimMode = .none
-        
-        
+                
         let id = String(courseArray[sender.tag].course_id)!
-        
         var token = ""
-        
-        
         let decodedUserinfo = self.getUserInfo()
         if !decodedUserinfo.access_token.isBlank
         {
-            
-            
-            
             token = "bearer " + decodedUserinfo.access_token
-            
-            
-            
         }
         
         let headers: HTTPHeaders = [
@@ -1168,6 +1159,12 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         popController.popoverPresentationController?.delegate = self
         popController.popoverPresentationController?.sourceView = sender // button
         popController.popoverPresentationController?.sourceRect = sender.bounds
+        popController.showSearchResultHandlerBlock = { [weak self] (selectedIndex, text) in
+            guard let weakself = self else {
+                return
+            }
+            weakself.fetchSearchData(searchOption: selectedIndex, searchText: text)
+        }
         
         // present the popover
         self.present(popController, animated: true, completion: nil)
