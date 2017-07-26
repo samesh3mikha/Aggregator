@@ -14,9 +14,14 @@
 		7DFCBD2F1F26CD4D00200E08 /* CourseCompareDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */; };
 		A195EFE9BB6794EA4B5BDAB6 /* Pods_Aggregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587899B53703051B849B9405 /* Pods_Aggregator.framework */; };
 		B812E7841F1CAE4900E87926 /* WebViewPopMoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */; };
-		B8EA2C501F1DCDE700C6E023 /* EnquiryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EA2C4F1F1DCDE700C6E023 /* EnquiryFormViewController.swift */; };
-		B8EA2C521F1F29AF00C6E023 /* UniversityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EA2C511F1F29AE00C6E023 /* UniversityViewController.swift */; };
-		B8EA2C541F1F470800C6E023 /* SearchDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8EA2C531F1F470800C6E023 /* SearchDetailModel.swift */; };
+		B860BEC81F275F1500A693D7 /* SearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BEC71F275F1500A693D7 /* SearchResultTableViewController.swift */; };
+		B860BECA1F275F2600A693D7 /* CourseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BEC91F275F2600A693D7 /* CourseDetailViewController.swift */; };
+		B860BECC1F275FAB00A693D7 /* EntryRequirementmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BECB1F275FAB00A693D7 /* EntryRequirementmodel.swift */; };
+		B860BED01F27602600A693D7 /* subjectModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BECF1F27602600A693D7 /* subjectModule.swift */; };
+		B860BED21F27616300A693D7 /* SearchDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BED11F27616300A693D7 /* SearchDetailModel.swift */; };
+		B860BED41F27620300A693D7 /* CourseDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BED31F27620300A693D7 /* CourseDetailTableViewCell.swift */; };
+		B860BED61F27644700A693D7 /* EnquiryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BED51F27644700A693D7 /* EnquiryFormViewController.swift */; };
+		B860BED81F276A2700A693D7 /* UniversityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BED71F276A2700A693D7 /* UniversityViewController.swift */; };
 		B8F3CAEE1F15E59F00E5B552 /* BasicCompreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F3CAED1F15E59F00E5B552 /* BasicCompreData.swift */; };
 		B8F3CAF01F18BD9C00E5B552 /* Cmodal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F3CAEF1F18BD9C00E5B552 /* Cmodal.swift */; };
 		C10128841E92097F00EE5F8F /* UserInfo .swift in Sources */ = {isa = PBXBuildFile; fileRef = C10128831E92097F00EE5F8F /* UserInfo .swift */; };
@@ -62,9 +67,7 @@
 		C1C76B7A1EFA3391008EE9CD /* LabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C76B781EFA3391008EE9CD /* LabelCollectionViewCell.swift */; };
 		C1C76B7C1EFA848E008EE9CD /* CenterAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C76B7B1EFA848E008EE9CD /* CenterAlignedCollectionViewFlowLayout.swift */; };
 		C1E3C7381E6980F000D30AF4 /* books.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C1E3C7371E6980F000D30AF4 /* books.jpg */; };
-		C1F210271EE9215700624040 /* CourseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F210261EE9215700624040 /* CourseDetailViewController.swift */; };
 		C1F210291EE928E700624040 /* college.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C1F210281EE928E700624040 /* college.jpg */; };
-		C1FF48641E8A546F00B774F9 /* SearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF48631E8A546F00B774F9 /* SearchResultTableViewController.swift */; };
 		C1FF48661E8A684600B774F9 /* Courses.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF48651E8A684600B774F9 /* Courses.swift */; };
 		C1FF822C1EFB7A8200B8EB18 /* EditConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF822B1EFB7A8200B8EB18 /* EditConfirmationView.swift */; };
 		C1FF822E1EFB7A9100B8EB18 /* EditConfirmationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1FF822D1EFB7A9100B8EB18 /* EditConfirmationView.xib */; };
@@ -97,9 +100,14 @@
 		7DC973141F24543900DC9037 /* BasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCell.swift; sourceTree = "<group>"; };
 		7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCompareDetailsModel.swift; sourceTree = "<group>"; };
 		B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewPopMoreController.swift; sourceTree = "<group>"; };
-		B8EA2C4F1F1DCDE700C6E023 /* EnquiryFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnquiryFormViewController.swift; sourceTree = "<group>"; };
-		B8EA2C511F1F29AE00C6E023 /* UniversityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversityViewController.swift; sourceTree = "<group>"; };
-		B8EA2C531F1F470800C6E023 /* SearchDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDetailModel.swift; sourceTree = "<group>"; };
+		B860BEC71F275F1500A693D7 /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
+		B860BEC91F275F2600A693D7 /* CourseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailViewController.swift; sourceTree = "<group>"; };
+		B860BECB1F275FAB00A693D7 /* EntryRequirementmodel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryRequirementmodel.swift; sourceTree = "<group>"; };
+		B860BECF1F27602600A693D7 /* subjectModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = subjectModule.swift; sourceTree = "<group>"; };
+		B860BED11F27616300A693D7 /* SearchDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDetailModel.swift; sourceTree = "<group>"; };
+		B860BED31F27620300A693D7 /* CourseDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailTableViewCell.swift; sourceTree = "<group>"; };
+		B860BED51F27644700A693D7 /* EnquiryFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnquiryFormViewController.swift; sourceTree = "<group>"; };
+		B860BED71F276A2700A693D7 /* UniversityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversityViewController.swift; sourceTree = "<group>"; };
 		B8F3CAED1F15E59F00E5B552 /* BasicCompreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCompreData.swift; sourceTree = "<group>"; };
 		B8F3CAEF1F18BD9C00E5B552 /* Cmodal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cmodal.swift; sourceTree = "<group>"; };
 		C10128831E92097F00EE5F8F /* UserInfo .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserInfo .swift"; sourceTree = "<group>"; };
@@ -154,9 +162,7 @@
 		C1C76B781EFA3391008EE9CD /* LabelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCollectionViewCell.swift; sourceTree = "<group>"; };
 		C1C76B7B1EFA848E008EE9CD /* CenterAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		C1E3C7371E6980F000D30AF4 /* books.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = books.jpg; sourceTree = "<group>"; };
-		C1F210261EE9215700624040 /* CourseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailViewController.swift; sourceTree = "<group>"; };
 		C1F210281EE928E700624040 /* college.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = college.jpg; sourceTree = "<group>"; };
-		C1FF48631E8A546F00B774F9 /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
 		C1FF48651E8A684600B774F9 /* Courses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Courses.swift; sourceTree = "<group>"; };
 		C1FF822B1EFB7A8200B8EB18 /* EditConfirmationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditConfirmationView.swift; sourceTree = "<group>"; };
 		C1FF822D1EFB7A9100B8EB18 /* EditConfirmationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditConfirmationView.xib; sourceTree = "<group>"; };
@@ -235,11 +241,14 @@
 			isa = PBXGroup;
 			children = (
 				C1551E391E95FB25002BE99B /* Style.swift */,
+				B860BECB1F275FAB00A693D7 /* EntryRequirementmodel.swift */,
 				C1FF48651E8A684600B774F9 /* Courses.swift */,
 				C10D220C1E8D0A0900ED268E /* Extensions.swift */,
 				C10D220E1E8D1C7200ED268E /* AreaOfInterest.swift */,
 				C10128831E92097F00EE5F8F /* UserInfo .swift */,
 				C107FA091E8B70E3008815FB /* CustomImageView.swift */,
+				B860BED11F27616300A693D7 /* SearchDetailModel.swift */,
+				B860BECF1F27602600A693D7 /* subjectModule.swift */,
 				C1B6C0891E8133EF0054BBA3 /* RoundButton.swift */,
 				C1B6C0871E812B690054BBA3 /* CustomTxtField.swift */,
 				C16372D21ECC070600E26691 /* roundView.swift */,
@@ -279,7 +288,6 @@
 		C15E9C0F1E67CF2E006D5B44 = {
 			isa = PBXGroup;
 			children = (
-				B8EA2C4F1F1DCDE700C6E023 /* EnquiryFormViewController.swift */,
 				C1A1B55D1EF2A0B40012435B /* Quicksand-Regular.ttf */,
 				C1A1B55B1EF2A0AF0012435B /* Quicksand-Medium.ttf */,
 				C1A1B5591EF2A0A90012435B /* Quicksand-Light.ttf */,
@@ -353,11 +361,12 @@
 			children = (
 				C161C5011EDEBDC30032F024 /* CustomTableViewCell */,
 				C1B6C0771E80E6700054BBA3 /* SearchViewController.swift */,
-				C1FF48631E8A546F00B774F9 /* SearchResultTableViewController.swift */,
+				B860BEC71F275F1500A693D7 /* SearchResultTableViewController.swift */,
+				B860BED51F27644700A693D7 /* EnquiryFormViewController.swift */,
 				C122FB871ED45AC80044A0F0 /* RecentSearchViewController.swift */,
 				C17788F71ED6D0A700F92BE9 /* PopPresentationViewController.swift */,
-				C1F210261EE9215700624040 /* CourseDetailViewController.swift */,
-				B8EA2C511F1F29AE00C6E023 /* UniversityViewController.swift */,
+				B860BEC91F275F2600A693D7 /* CourseDetailViewController.swift */,
+				B860BED31F27620300A693D7 /* CourseDetailTableViewCell.swift */,
 			);
 			name = "Search Module";
 			sourceTree = "<group>";
@@ -403,10 +412,10 @@
 				C1788C011EC07ABA00E2603D /* Search Module */,
 				C1B6C07F1E811FA50054BBA3 /* Login and Registration */,
 				C1B6C07D1E80F2140054BBA3 /* NotificationViewController.swift */,
+				B860BED71F276A2700A693D7 /* UniversityViewController.swift */,
 				C18791CC1E8543CC00E3F502 /* customTableViewCell.swift */,
 				C1B6C07B1E80F1B90054BBA3 /* ProfileViewController.swift */,
 				C19072F31EF7D5F9002E9B11 /* areaOfInterestViewController.swift */,
-				B8EA2C531F1F470800C6E023 /* SearchDetailModel.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -493,7 +502,7 @@
 				TargetAttributes = {
 					C15E9C171E67CF2E006D5B44 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = Z83ZNTZ5VZ;
+						DevelopmentTeam = J74M4S59XT;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -626,22 +635,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1B6C08A1E8133EF0054BBA3 /* RoundButton.swift in Sources */,
-				C1FF48641E8A546F00B774F9 /* SearchResultTableViewController.swift in Sources */,
 				C1FF48661E8A684600B774F9 /* Courses.swift in Sources */,
 				C1C76B7C1EFA848E008EE9CD /* CenterAlignedCollectionViewFlowLayout.swift in Sources */,
 				C107FA0A1E8B70E3008815FB /* CustomImageView.swift in Sources */,
 				C1968EAD1EEE732A002594E7 /* UserProfileDetails.swift in Sources */,
 				C1968EAB1EEE6362002594E7 /* CustomLabel.swift in Sources */,
+				B860BED61F27644700A693D7 /* EnquiryFormViewController.swift in Sources */,
 				C161C5091EE00F160032F024 /* searchTableViewCell.swift in Sources */,
 				C161C5071EDFCF860032F024 /* PopupViewData.swift in Sources */,
+				B860BED41F27620300A693D7 /* CourseDetailTableViewCell.swift in Sources */,
 				C1B6C0811E811FC20054BBA3 /* LoginViewController.swift in Sources */,
 				7DC973151F24543900DC9037 /* BasicCell.swift in Sources */,
 				7DFCBD2F1F26CD4D00200E08 /* CourseCompareDetailsModel.swift in Sources */,
 				C1B6C07E1E80F2140054BBA3 /* NotificationViewController.swift in Sources */,
 				7DC973111F24540900DC9037 /* MainViewController.swift in Sources */,
-				C1F210271EE9215700624040 /* CourseDetailViewController.swift in Sources */,
 				C1B6C07A1E80F1900054BBA3 /* CompareViewController.swift in Sources */,
-				B8EA2C521F1F29AF00C6E023 /* UniversityViewController.swift in Sources */,
 				C161C5051EDEBE090032F024 /* EnquiryTableViewCell.swift in Sources */,
 				C16372D31ECC070600E26691 /* roundView.swift in Sources */,
 				C1C76B7A1EFA3391008EE9CD /* LabelCollectionViewCell.swift in Sources */,
@@ -655,11 +663,11 @@
 				C15E9C1C1E67CF2E006D5B44 /* AppDelegate.swift in Sources */,
 				B812E7841F1CAE4900E87926 /* WebViewPopMoreController.swift in Sources */,
 				C1B6C0831E811FCF0054BBA3 /* RegistrationViewController.swift in Sources */,
+				B860BED01F27602600A693D7 /* subjectModule.swift in Sources */,
 				B8F3CAF01F18BD9C00E5B552 /* Cmodal.swift in Sources */,
 				C1FF822C1EFB7A8200B8EB18 /* EditConfirmationView.swift in Sources */,
+				B860BECA1F275F2600A693D7 /* CourseDetailViewController.swift in Sources */,
 				C1B6C07C1E80F1B90054BBA3 /* ProfileViewController.swift in Sources */,
-				B8EA2C501F1DCDE700C6E023 /* EnquiryFormViewController.swift in Sources */,
-				B8EA2C541F1F470800C6E023 /* SearchDetailModel.swift in Sources */,
 				C13A681F1ECF0F1F0039A72C /* GlobalVariables.swift in Sources */,
 				7DC973121F24540900DC9037 /* PageViewController.swift in Sources */,
 				C17788F81ED6D0A700F92BE9 /* PopPresentationViewController.swift in Sources */,
@@ -670,7 +678,11 @@
 				C19072F41EF7D5F9002E9B11 /* areaOfInterestViewController.swift in Sources */,
 				B8F3CAEE1F15E59F00E5B552 /* BasicCompreData.swift in Sources */,
 				7DC973131F24540900DC9037 /* CourseCompareDetailsTableVC.swift in Sources */,
+				B860BED21F27616300A693D7 /* SearchDetailModel.swift in Sources */,
 				C1551E3A1E95FB25002BE99B /* Style.swift in Sources */,
+				B860BECC1F275FAB00A693D7 /* EntryRequirementmodel.swift in Sources */,
+				B860BED81F276A2700A693D7 /* UniversityViewController.swift in Sources */,
+				B860BEC81F275F1500A693D7 /* SearchResultTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -829,7 +841,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Aggregator/Aggregator.entitlements;
-				DEVELOPMENT_TEAM = Z83ZNTZ5VZ;
+				DEVELOPMENT_TEAM = J74M4S59XT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -854,7 +866,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Aggregator/Aggregator.entitlements;
-				DEVELOPMENT_TEAM = Z83ZNTZ5VZ;
+				DEVELOPMENT_TEAM = J74M4S59XT;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

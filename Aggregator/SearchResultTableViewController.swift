@@ -19,7 +19,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     @IBOutlet var wishlistCountLbl: UILabel!
     
     @IBOutlet var mapImageView: UIImageView!
-    
+   
     
     @IBOutlet var closeView: UIView!
     
@@ -27,8 +27,9 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     
     
     
-    var detailArray = [SearchDeatils]()
-    var data = [String]()
+      var detailArray = [SearchDeatils]()
+     var  unidata = [String]()
+   
     @IBOutlet var popViewHolder: UIView!
     @IBOutlet var loginViewBtnHolder: UIView!
     var searchViewController: SearchViewController?
@@ -66,7 +67,8 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         
         self.navigationController?.navigationBar.isHidden = true
         
-        
+        unidata = [unidata.joined(separator: ",")]
+        print(unidata)
         
         courseArray.removeAll()
         
@@ -120,6 +122,9 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         let closeTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SearchResultTableViewController.closeViewClicked))
         self.closeView.addGestureRecognizer(closeTap)
         
+        
+       
+        
     }
     
     
@@ -135,7 +140,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         super.viewWillAppear(animated)
         
         
-        
+        self.navigationController?.navigationBar.isHidden = true
         self.view.backgroundColor = UIColor.white//UIColor(patternImage: #imageLiteral(resourceName: "patternBackground"))
         self.searchHolderView.backgroundColor =  UIColor.white// UIColor(patternImage: #imageLiteral(resourceName: "patternBackground"))
         tableView.isHidden = true
@@ -714,8 +719,27 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
             cell.bookmarkBtn.addTarget(self, action: #selector(self.tappedBookmark), for: .touchUpInside)
             cell.wishlistBtn.addTarget(self, action: #selector(self.tappedWishlist), for: .touchUpInside)
             
+            let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SearchResultTableViewController.lblUnivClick))
+            
+             let tapGesture2 : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SearchResultTableViewController.lblCourseClick))
+            
+            tapGesture.delegate = self as? UIGestureRecognizerDelegate
+            tapGesture.numberOfTapsRequired = 1
+            
+            cell.uniLbl.isUserInteractionEnabled = true
+            cell.uniLbl.addGestureRecognizer(tapGesture)
+            
+             unidata = [courseArray[indexPath.section].course_id]
+             unidata = [unidata.joined(separator: ",")]
+                       
+            
+            cell.mainLbl.isUserInteractionEnabled = true
+            cell.mainLbl.addGestureRecognizer(tapGesture2)
+
+            
             
             return cell
+            
             
         }
         else
@@ -768,6 +792,8 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
             
             return cell
             
+            
+            
         }
         
         
@@ -775,7 +801,48 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         
     }
     
+    
+    func lblUnivClick(tapGesture:UITapGestureRecognizer){
+        
+       
+        
+    let collegeDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "UniversityViewController") as! UniversityViewController
+        
+                    self.navigationController?.pushViewController(collegeDetailViewController, animated: true)
+                    collegeDetailViewController.myId = unidata
+                   
+        
+    }
+    
+    
+    
+    func lblCourseClick(tapGesture:UITapGestureRecognizer){
+        let courseViewController = self.storyboard?.instantiateViewController(withIdentifier: "CourseDetailViewController") as! CourseDetailViewController
+        
+        self.navigationController?.pushViewController(courseViewController, animated: true)
+        courseViewController.myId = unidata
+       
+        
+
+        
+    }
+
+        
+       
+        
+        
+
+       
+    
+
+    
+    
+    
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
         
         if tableView == suggestionTableView
         {
@@ -810,26 +877,28 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         
         else
         {
-            let collegeDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "UniversityViewController") as! UniversityViewController
+        
             
-            self.navigationController?.pushViewController(collegeDetailViewController, animated: true)
-           data = [courseArray[indexPath.row].course_id]
-            print(data)
-
-            collegeDetailViewController.myId = data
-            print(data)
-            collegeDetailViewController.detailArray = detailArray
-            print(detailArray)
-            
+//            let collegeDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "UniversityViewController") as! UniversityViewController
+//            
+//            self.navigationController?.pushViewController(collegeDetailViewController, animated: true)
+//           data = [courseArray[indexPath.row].course_id]
+//            print(data)
+//
+//            collegeDetailViewController.myId = data
+//            print(data)
+//            collegeDetailViewController.detailArray = detailArray
+//            print(detailArray)
+//            
             
             
         
         }
         
-        
-        
-        
     }
+    
+        
+    
     
     
     

@@ -11,6 +11,7 @@ import MapKit
 import Alamofire
 import SwiftyJSON
 import SwiftMessages
+import CoreLocation
 
 
 class UniversityViewController: UIViewController,MKMapViewDelegate {
@@ -34,6 +35,17 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
     @IBOutlet weak var uniLevelLbl: UILabel!
     @IBOutlet weak var uniAboutLbl: UILabel!
     @IBOutlet weak var UniMapView: MKMapView!
+    @IBAction func EnquiryNowBtn(_ sender: Any) {
+        
+        let EnquiryViewController = self.storyboard?.instantiateViewController(withIdentifier: "EnquiryFormViewController") as! EnquiryFormViewController
+        
+        self.navigationController?.pushViewController(EnquiryViewController, animated: true)
+        
+
+        
+        
+        
+    }
     
     
     
@@ -41,9 +53,10 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        UniMapView.delegate = self
         self.navigationController?.navigationBar.isHidden = false
-        print(myId)
+        myId = [myId.joined(separator: ",")]
+        
        
     }
     
@@ -62,7 +75,7 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
     func customizeUI(universityDetails : SearchDeatils)
     {
         
-      self.UniImageView.sd_setImage(with: URL.init(string: universityDetails.institute_logo))
+     self.UniImageView.sd_setImage(with: URL.init(string: universityDetails.institute_logo))
        self.BackGroundUniImage.sd_setImage(with: URL.init(string: universityDetails.institute_image))
       
         DispatchQueue.main.async {
@@ -79,30 +92,33 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
             self.globeurlLbl.text = universityDetails.website
             self.UniImageView.setShowActivityIndicator(true)
            
-            let lon = universityDetails.gps_longitude
-            let lat =  universityDetails.gps_lattitude
-            let tajLat:CLLocationDegrees = CLLocationDegrees(lon)
-            let tajLong:CLLocationDegrees = CLLocationDegrees(lat)
+            let lon = Double(universityDetails.gps_longitude)
+            let lat = Double(universityDetails.gps_lattitude)
+            if( lat > -89 && lat < 89 && lon > -179 && lon < 179 ){
+            let UniversityLat:CLLocationDegrees = CLLocationDegrees(Double(lat))
+            let universityLong:CLLocationDegrees = CLLocationDegrees(Double(lon))
             
-            let universityCoordinate = CLLocationCoordinate2D(latitude: tajLat, longitude: tajLong)
+            let universityCoordinate = CLLocationCoordinate2D(latitude: UniversityLat, longitude: universityLong)
             
             //**Span**//
-            let latDelta:CLLocationDegrees = 0.0
-            let longDelta:CLLocationDegrees = 0.0
+            let latDelta =  0.01
+            let longDelta =  0.01
             
             let universitySpan = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
             
-           let tajRegion = MKCoordinateRegion(center: universityCoordinate, span: universitySpan)
+           let universityRegion = MKCoordinateRegion(center: universityCoordinate, span: universitySpan)
             
-           self.UniMapView.setRegion(tajRegion, animated: true )
+           self.UniMapView.setRegion(universityRegion, animated: true )
             
             let UniversityAnnotation = MKPointAnnotation()
-            UniversityAnnotation.title = "University"
+            UniversityAnnotation.title = "UniversityLocation"
             
             UniversityAnnotation.coordinate = universityCoordinate
             self.UniMapView.addAnnotation(UniversityAnnotation)
+              
+                
             
-            
+            }
             
 
 
@@ -119,27 +135,27 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
             } else {
                 blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
             }
-            //  let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+             let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
             
             
             let effectView = UIVisualEffectView.init(effect: blurEffect)
-            effectView.frame = self.view.frame
+            effectView.frame = self.BackGroundUniImage.frame
             
-            for views in self.BackGroundUniImage.subviews
-            {
-                if views is UIVisualEffectView
-                {
-                    views.removeFromSuperview()
-                }
-            }
+//            for views in self.BackGroundUniImage.subviews
+//            {
+//                if views is UIVisualEffectView
+//                {
+//                    views.removeFromSuperview()
+//                }
+//            }
             self.BackGroundUniImage.insertSubview(effectView, at: 0)
             self.UniImageView.addSubview(effectView)
             
 
-            self.UniImageView.addSubview(effectView)
+            self.BackGroundUniImage.addSubview(effectView)
             
             
-        }
+     }
         
         }
         
@@ -165,8 +181,7 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
          //   let id = String(courseArray[sender.tag].course_id)!
             
             var token = ""
-            let universityID = myId
-            
+            var universityID = myId
             let decodedUserinfo = self.getUserInfo()
             if !decodedUserinfo.access_token.isBlank
             {
@@ -208,8 +223,7 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
                 
             case .success(let value):
                 let json = JSON(value)
-                print(json)
-                
+                                
                 
                 let data = JSON(response.result.value!)
                 print(data)

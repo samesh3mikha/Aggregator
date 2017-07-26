@@ -28,8 +28,7 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
-        compareBtn.isUserInteractionEnabled = true
+       compareBtn.isUserInteractionEnabled = true
         compareBtn.alpha = 1
     }
     
@@ -43,7 +42,7 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
     
     
     override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
+       
         self.checked.removeAll()
         self.selectedIDs.removeAll()
        
@@ -65,6 +64,7 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
     func addChildVC(){
         if let pageVC = self.storyboard?.instantiateViewController(withIdentifier: "pagecontrollerVCID") as? PageViewController {
             _ = UINavigationController(rootViewController: pageVC)
+            
             if self.TableView.indexPathsForSelectedRows != nil{
                 pageVC.bookmarkedCourseIDs = selectedIDs
             }

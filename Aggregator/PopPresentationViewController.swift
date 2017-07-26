@@ -208,8 +208,7 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
                 } else {
                     
                     
-                    // other failures
-                    
+                                      
                 }
                 print(error)
                 
