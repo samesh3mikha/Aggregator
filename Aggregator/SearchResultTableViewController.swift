@@ -37,7 +37,8 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     var detailArray = [SearchDeatils]()
     var data = [String]()
     var reloadMainTable = false
-    var  unidata = [String]()
+    var  unidata: String = ""
+    
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -53,7 +54,6 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         self.navigationController?.navigationBar.isHidden = true
         setupOverlay()
         
-        unidata = [unidata.joined(separator: ",")]
 
         courseArray.removeAll()
         
@@ -618,9 +618,8 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
             cell.uniLbl.isUserInteractionEnabled = true
             cell.uniLbl.addGestureRecognizer(tapGesture)
             
-             unidata = [courseArray[indexPath.section].course_id]
-             unidata = [unidata.joined(separator: ",")]
-                       
+             unidata = courseArray[indexPath.section].course_id
+            
             
             cell.mainLbl.isUserInteractionEnabled = true
             cell.mainLbl.addGestureRecognizer(tapGesture2)
@@ -696,10 +695,11 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
        
         
     let collegeDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "UniversityViewController") as! UniversityViewController
+        collegeDetailViewController.myId = unidata
+       
+
+       self.navigationController?.pushViewController(collegeDetailViewController, animated: true)
         
-                    self.navigationController?.pushViewController(collegeDetailViewController, animated: true)
-                    collegeDetailViewController.myId = unidata
-                   
         
     }
     
@@ -708,8 +708,8 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     func lblCourseClick(tapGesture:UITapGestureRecognizer){
         let courseViewController = self.storyboard?.instantiateViewController(withIdentifier: "CourseDetailViewController") as! CourseDetailViewController
         
-        self.navigationController?.pushViewController(courseViewController, animated: true)
         courseViewController.myId = unidata
+        self.navigationController?.pushViewController(courseViewController, animated: true)
        
         
 

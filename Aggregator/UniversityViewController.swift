@@ -16,9 +16,11 @@ import CoreLocation
 
 class UniversityViewController: UIViewController,MKMapViewDelegate {
     var detailArray = [SearchDeatils]()
-    var  myId = [String]()
-    var Ditems = [String]()
     
+    var  myId: String = ""
+    var Ditems = [String]()
+    var universityName: String = ""
+    var CourseName : String = ""
     
     
     @IBOutlet weak var BackGroundUniImage: UIImageView!
@@ -37,11 +39,14 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
     @IBOutlet weak var UniMapView: MKMapView!
     @IBAction func EnquiryNowBtn(_ sender: Any) {
         
+        
         let EnquiryViewController = self.storyboard?.instantiateViewController(withIdentifier: "EnquiryFormViewController") as! EnquiryFormViewController
         
         self.navigationController?.pushViewController(EnquiryViewController, animated: true)
-        
-
+      
+           EnquiryViewController.universityName = self.uniNameLabel.text!
+       
+           EnquiryViewController.CourseName = self.CourseName
         
         
         
@@ -55,7 +60,7 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
         
         UniMapView.delegate = self
         self.navigationController?.navigationBar.isHidden = false
-        myId = [myId.joined(separator: ",")]
+      
         
        
     }
@@ -63,6 +68,10 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         fetchUniversityDetail(token : "", universityID : ""  )
+        self.navigationController?.navigationBar.barTintColor = appGreenColor
+        self.navigationItem.title = "University Details"
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
+        self.navigationController?.navigationBar.tintColor = UIColor.white
         
     }
 
@@ -80,14 +89,13 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
       
         DispatchQueue.main.async {
             
+           self.CourseName = universityDetails.course_name
             self.uniNameLabel.text = universityDetails.institute_name
             self.addressNameLbl.text = universityDetails.institute_full_address + "" + universityDetails.country
             self.uniLevelLbl.text = universityDetails.study_level_name
              self.uniTypeLbl.text = universityDetails.institution_type
             self.uniEmailLbl.text =  universityDetails.email_address
             self.uniAboutLbl.text = universityDetails.about_us
-            
-            
             self.PhonenoLbl.text = universityDetails.phone
             self.globeurlLbl.text = universityDetails.website
             self.UniImageView.setShowActivityIndicator(true)
@@ -206,7 +214,7 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
             "data": [
                 
                 ["flag":"E",
-                 "Institution_course_id": 2,
+                 "Institution_course_id": universityID,
                  
                  
                 ]

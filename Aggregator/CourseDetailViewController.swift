@@ -20,7 +20,8 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var universityName: UILabel!
     @IBOutlet weak var CourseDetailTableview: UITableView!
     
-       var  myId = [String]()
+       var courseName: String = ""
+       var  myId: String = ""
        var detailArray = [SearchDeatils]()
        var subjectList = [SubjectDeatils]()
        var EntryReqLists = [EntryRequirementsDetails]()
@@ -28,7 +29,8 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
+
         CourseDetailTableview.delegate = self
         CourseDetailTableview.dataSource = self
         fetchCourseDetail(token: "", CourseID: "")
@@ -48,12 +50,17 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
         
         let EnquiryViewController = self.storyboard?.instantiateViewController(withIdentifier: "EnquiryFormViewController") as! EnquiryFormViewController
         self.navigationController?.pushViewController(EnquiryViewController, animated: true)
+         EnquiryViewController.CourseName = self.courseNameLbl.text!
+         EnquiryViewController.universityName = self.universityName.text!
           }
     
     
     override func viewWillAppear(_ animated: Bool) {
     CourseDetailTableview.reloadData()
-        
+   self.navigationController?.navigationBar.barTintColor = appGreenColor
+        self.navigationItem.title = "CourseDetails"
+        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
+        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     
     
@@ -85,11 +92,9 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
             
             "actionname": "institution_course",
             "data": [
-                
-                ["flag":"E",
-                 "Institution_course_id": 2,
-                 
-                 ]]]
+                [ "flag":"E", "Institution_course_id": courseId]
+             ]
+        ]
         
         Alamofire.request(baseUrl + "Unauthorizedata", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
             
@@ -99,6 +104,7 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
             case .success(let value):
                 let json = JSON(value)
                  var data = JSON(response.result.value!)
+                print("data ==", data)
                 
                 if let responseArray = data["rto-form"].arrayObject
                 {
@@ -120,6 +126,7 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
                         self.courseNameLbl.text = detail.course_name
                         self.courseDetailLbl.text = detail.course_description
                         self.universityName.text = detail.institute_name
+                        self.universityName.text = detail.course_name
                         
                         
                     }

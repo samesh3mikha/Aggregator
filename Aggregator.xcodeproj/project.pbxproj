@@ -23,6 +23,7 @@
 		B860BED21F27616300A693D7 /* SearchDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BED11F27616300A693D7 /* SearchDetailModel.swift */; };
 		B860BED61F27644700A693D7 /* EnquiryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BED51F27644700A693D7 /* EnquiryFormViewController.swift */; };
 		B860BED81F276A2700A693D7 /* UniversityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BED71F276A2700A693D7 /* UniversityViewController.swift */; };
+		B8E7E0831F29B0240025FF53 /* EnquiryBasicInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E7E0821F29B0240025FF53 /* EnquiryBasicInfoModel.swift */; };
 		B8F3CAEE1F15E59F00E5B552 /* BasicCompreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F3CAED1F15E59F00E5B552 /* BasicCompreData.swift */; };
 		B8F3CAF01F18BD9C00E5B552 /* Cmodal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F3CAEF1F18BD9C00E5B552 /* Cmodal.swift */; };
 		C10128841E92097F00EE5F8F /* UserInfo .swift in Sources */ = {isa = PBXBuildFile; fileRef = C10128831E92097F00EE5F8F /* UserInfo .swift */; };
@@ -110,6 +111,7 @@
 		B860BED11F27616300A693D7 /* SearchDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDetailModel.swift; sourceTree = "<group>"; };
 		B860BED51F27644700A693D7 /* EnquiryFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnquiryFormViewController.swift; sourceTree = "<group>"; };
 		B860BED71F276A2700A693D7 /* UniversityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversityViewController.swift; sourceTree = "<group>"; };
+		B8E7E0821F29B0240025FF53 /* EnquiryBasicInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnquiryBasicInfoModel.swift; sourceTree = "<group>"; };
 		B8F3CAED1F15E59F00E5B552 /* BasicCompreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCompreData.swift; sourceTree = "<group>"; };
 		B8F3CAEF1F18BD9C00E5B552 /* Cmodal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cmodal.swift; sourceTree = "<group>"; };
 		C10128831E92097F00EE5F8F /* UserInfo .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserInfo .swift"; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 				C13A681E1ECF0F1F0039A72C /* GlobalVariables.swift */,
 				C161C5061EDFCF860032F024 /* PopupViewData.swift */,
 				C1968EAA1EEE6362002594E7 /* CustomLabel.swift */,
+				B8E7E0821F29B0240025FF53 /* EnquiryBasicInfoModel.swift */,
 				C1968EAC1EEE732A002594E7 /* UserProfileDetails.swift */,
 			);
 			name = HelperClasses;
@@ -663,6 +666,7 @@
 				C18791CD1E8543CC00E3F502 /* customTableViewCell.swift in Sources */,
 				C10D220D1E8D0A0900ED268E /* Extensions.swift in Sources */,
 				C15E9C1C1E67CF2E006D5B44 /* AppDelegate.swift in Sources */,
+				B8E7E0831F29B0240025FF53 /* EnquiryBasicInfoModel.swift in Sources */,
 				B812E7841F1CAE4900E87926 /* WebViewPopMoreController.swift in Sources */,
 				7D633A491F28A2CE00B78041 /* CourseDetailTableViewCell.swift in Sources */,
 				C1B6C0831E811FCF0054BBA3 /* RegistrationViewController.swift in Sources */,
