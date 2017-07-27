@@ -8,7 +8,6 @@
 
 import UIKit
 
-public typealias SearchResultHandler = () -> Void
 public typealias DeleteItemHandler = () -> Void
 
 class EnquiryTableViewCell: UITableViewCell {
@@ -19,7 +18,6 @@ class EnquiryTableViewCell: UITableViewCell {
     @IBOutlet var courseNameLbl: UILabel!
 
     var itemID: String = "0"
-    var searchResultHandlerBlock: SearchResultHandler?
     var deleteItemHandlerBlock: DeleteItemHandler?
 
     override func awakeFromNib() {
@@ -30,15 +28,12 @@ class EnquiryTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         // Configure the view for the selected state
-        if let handlerBlock = searchResultHandlerBlock {
-            handlerBlock()
-        }
     }
     
     
     @IBAction func closeBtnClicked(_ sender: Any) {
-        if let handlerBlock = deleteItemHandlerBlock {
-            handlerBlock()
+        if deleteItemHandlerBlock !=  nil{
+            deleteItemHandlerBlock!()
         }
     }
 }

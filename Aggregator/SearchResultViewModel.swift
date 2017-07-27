@@ -14,9 +14,11 @@ enum SearchOption: Int {
     case All = 0, Course, University, Location
 }
 
-class SearchResultViewModel: NSObject {
-    
-    func saveSearch(searchword: String, option: SearchOption, accessToken: String) {
+public typealias SaveSearchResultHandler = (Bool, String) -> Void
+
+class SearchResultViewModel: NSObject {    
+
+    func saveSearch(searchword: String, option: SearchOption, accessToken: String, completionBlock: @escaping SaveSearchResultHandler) {
         if accessToken.isBlank || searchword.isBlank {
             return
         }
@@ -51,44 +53,24 @@ class SearchResultViewModel: NSObject {
             "actionname": "favorite_search",
             "data": data
         ]
-
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
+            var isSaved = false
+            var responseMessage = "An unidentified error occured!" 
             switch response.result {
-                case .success(let value):
-                    let data = JSON(value)
-                    print("data == >", data)
-                case .failure(let error):
-                    print(error)
-            }
-        }
-    }
-    
-    func getFavoriteSearch(accessToken: String) -> [Any] {
-        if accessToken.isBlank {
-            return []
-        }
-        let url = baseUrl + "Processdata"
-        let accessKey = "bearer " + accessToken
-        let headers: HTTPHeaders = [
-            "Authorization":  accessKey,
-            "Content-Type": "application/json"
-        ]
-        let params : Parameters = [
-            "actionname": "favorite_search",
-            "data": [
-                ["flag": "S"]
-            ]
-        ]
-        
-        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
-            switch response.result {
-            case .success(let value):
+            case .success(let value):                
                 let data = JSON(value)
-                print("data == >", data)
+                if let responseStatus = data["STATUS"].arrayObject {
+                    let status = responseStatus[0] as! [String: AnyObject]
+                    let s = status["STATUS"] as! String                    
+                    if s == "SUCCESS" {
+                        isSaved = true
+                        responseMessage = "Search saved successfully!"
+                    }
+                }
             case .failure(let error):
-                print(error)
+                responseMessage = error.localizedDescription 
             }
+            completionBlock(isSaved, responseMessage)
         }
-        return []
     }
 }

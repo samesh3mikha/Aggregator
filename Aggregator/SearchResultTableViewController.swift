@@ -16,7 +16,6 @@ import SwiftMessages
 class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISearchBarDelegate,UISearchControllerDelegate,UITableViewDataSource,UIPopoverPresentationControllerDelegate {
     @IBOutlet var bookmarkCountLbl: UILabel!
     @IBOutlet var enquiryCountLbl: UILabel!
-    @IBOutlet var wishlistCountLbl: UILabel!
     @IBOutlet var mapImageView: UIImageView!
     @IBOutlet var closeView: UIView!
    
@@ -31,7 +30,9 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     var searchViewController: SearchViewController?
     var searchbarInstance = UISearchBar()
     let searchController = UISearchController(searchResultsController: nil)
-
+    var messageHud: MessageView!
+    var hudConfiguration = SwiftMessages.Config()
+    
     var viewModel: SearchResultViewModel? = nil
     var detailArray = [SearchDeatils]()
     var data = [String]()
@@ -50,6 +51,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         viewModel = SearchResultViewModel.init()
         
         self.navigationController?.navigationBar.isHidden = true
+        setupOverlay()
         
         unidata = [unidata.joined(separator: ",")]
 
@@ -103,9 +105,14 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         let closeTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SearchResultTableViewController.closeViewClicked))
         self.closeView.addGestureRecognizer(closeTap)
         
+        messageHud = MessageView.viewFromNib(layout: .StatusLine)
+        messageHud.configureTheme(.success)
+        messageHud.id = "statusHud"
         
-       
-        
+        hudConfiguration = SwiftMessages.Config()        
+        hudConfiguration.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+        hudConfiguration.duration = .automatic
+        hudConfiguration.dimMode = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -206,10 +213,31 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     
     @IBAction func saveButtonClicked(_ sender: Any) {
         let searchText = searchController.searchBar.text
-        viewModel?.saveSearch(searchword: searchText!, option: currentSearchOption(), accessToken: accessToken())
-//        viewModel?.getFavoriteSearch(accessToken: accessToken())
+        addOverlay()
+        SwiftMessages.hideAll()
+        messageHud.configureTheme(.success)
+        messageHud.configureContent(title: "Saving Search", body: "Please wait...")
+        hudConfiguration.duration = .automatic
+        SwiftMessages.show(config: hudConfiguration, view: messageHud)
+
+        viewModel?.saveSearch(searchword: searchText!, option: currentSearchOption(), accessToken: accessToken(), completionBlock: { [weak self] (isSaveCompleted, message) in
+            guard let weakself = self else {
+                return
+            }
+            if isSaveCompleted {
+                weakself.messageHud.configureTheme(.success)
+            } else {
+                weakself.messageHud.configureTheme(.error)
+            }
+            weakself.saveButton.isEnabled = !isSaveCompleted
+            weakself.removeOverlay()
+            SwiftMessages.hideAll()
+            weakself.messageHud.configureContent(title: "", body: message)
+            weakself.hudConfiguration.duration = .automatic
+            SwiftMessages.show(config: weakself.hudConfiguration, view: weakself.messageHud)
+        })
     }
-    
+
     func currentSearchOption() -> SearchOption {
         switch segmentControl.selectedSegmentIndex {
             case SearchOption.All.rawValue:
@@ -228,19 +256,14 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     //MARK: Network
     
     
+    
+    
     func FetchUserInfo(token : String) -> Void {
         SwiftMessages.hideAll()
-        let statusHud = MessageView.viewFromNib(layout: .StatusLine)
-        
-        statusHud.configureTheme(.success)
-        statusHud.id = "statusHud"
-        
-        var con = SwiftMessages.Config()
-        
-        con.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
-        con.duration = .automatic
-        con.dimMode = .none
-        
+        messageHud.configureTheme(.success)
+        messageHud.configureContent(title: "", body: "")
+        hudConfiguration.duration = .automatic
+
         let headers: HTTPHeaders = [
             "Authorization": "bearer " + token,
             "Content-Type": "application/json"
@@ -253,91 +276,54 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         ]
         Alamofire.request(baseUrl + "ProcessData", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
             
-            switch response.result
-            {
-                
+            switch response.result {
             case .success(let value):
-                
-                
                 let data = JSON(value)
                 
-                if let responseStatus = data["STATUS"].arrayObject
-                {
+                if let responseStatus = data["STATUS"].arrayObject {
                     let status = responseStatus[0] as! [String: AnyObject]
                     let s = status["STATUS"] as! String
                     
-                    if s == "SUCCESS"
-                    {
-                        //self.dismiss(animated: false, completion: nil)
-                        
-                        if let ui = data["USER_INFO"].arrayObject
-                        {
+                    if s == "SUCCESS" {
+                        if let ui = data["USER_INFO"].arrayObject {
                             let userInfo = ui[0] as! [String: AnyObject]
                             let bookmarkCount =  "\(userInfo["bookmark_count"]!)"
                             
                             let enquiryCount = "\(userInfo["enquiry_count"]!)"
                             let wishlistCount = "\(userInfo["wish_count"]!)"
                             
-                            self.wishlistCountLbl.text = wishlistCount
                             self.enquiryCountLbl.text = enquiryCount
                             self.bookmarkCountLbl.text = bookmarkCount
-                            
-                            statusHud.configureContent(title: "", body: "Fetching complete")
+                            self.messageHud.configureContent(title: "", body: "Fetching complete")
                         }
-                        
-                    }
-                        
-                    else
-                    {
-                        if status["MESSAGE"] as! String == "SESSION EXPIRED"
-                        {
-                        self.catchSessionExpire()
-                        statusHud.configureTheme(.error)
-                        statusHud.configureContent(title: "", body: status["MESSAGE"] as! String + ". PLEASE LOGIN")
-                          self.loginViewBtnHolder.isHidden = false
+                    } else {
+                        self.messageHud.configureTheme(.error)
+                        if status["MESSAGE"] as! String == "SESSION EXPIRED" {
+                            self.catchSessionExpire()
+                            self.messageHud.configureContent(title: "", body: status["MESSAGE"] as! String + ". PLEASE LOGIN")
+                            self.loginViewBtnHolder.isHidden = false
+                        } else {
+                            self.messageHud.configureContent(title: "", body: status["MESSAGE"] as! String + ". PLEASE LOGIN")
                         }
-                        
-                        else
-                        {
-                            statusHud.configureTheme(.error)
-                            statusHud.configureContent(title: "", body: status["MESSAGE"] as! String)
-                        }
-                        
-                        
-                        
                     }
                 }
-                
-                
             case .failure(let error):
                 print(error)
+                self.messageHud.configureTheme(.error)
                 if let err = error as? URLError, err.code == .notConnectedToInternet{
                     // no internet connection
-                    
-                    statusHud.configureTheme(.error)
-                    statusHud.configureContent(title: "" , body: error.localizedDescription)
-                    
-                    
+                    self.messageHud.configureContent(title: "", body: error.localizedDescription)
                 }
-                
-                
-                
-            }
-            
-            SwiftMessages.show(config: con, view: statusHud)
-            
-            
-            
-            
+            }            
+            SwiftMessages.show(config: self.hudConfiguration, view: self.messageHud)
         }
-        
-        
     }
 
-    func fetchSearchData(searchOption: Int, searchText : String) -> Void {
-        segmentControl.selectedSegmentIndex = searchOption
+    func triggerFetchSearchData(searchOption: Int, searchText : String) -> Void {
+        removeOverlay()
+        self.segmentControl.selectedSegmentIndex = searchOption
         self.reloadMainTable = true
-        fetchSearchData(searchText: searchText)
+        self.fetchSearchData(searchText: searchText)
     }
     
     func fetchSearchData(searchText : String) -> Void {
@@ -775,95 +761,35 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
             
             reloadMainTable = true
             self.fetchSearchData(searchText: selectedText)
-            
         }
-        
-        else
-        {
-        
-            
-//            let collegeDetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "UniversityViewController") as! UniversityViewController
-//            
-//            self.navigationController?.pushViewController(collegeDetailViewController, animated: true)
-//           data = [courseArray[indexPath.row].course_id]
-//            print(data)
-//
-//            collegeDetailViewController.myId = data
-//            print(data)
-//            collegeDetailViewController.detailArray = detailArray
-//            print(detailArray)
-//            
-            
-            
-        
+        else {
         }
-        
     }
     
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        
-//        if segue.identifier == "detail" { // Make sure you name the segue to match
-//            
-//            let controller = segue.destination as! UniversityViewController
-//           
-//            controller.myId = data
-//        }
-//    }
-    
     //MARK: BUTTON TAPPED EVENTS
-    
     func tappedWishlist(sender: DOFavoriteButton) {
         SwiftMessages.hideAll()
-        let statusHud = MessageView.viewFromNib(layout: .StatusLine)
-        statusHud.configureTheme(.success)
-        statusHud.id = "statusHud"
-        var con = SwiftMessages.Config()
-        con.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
-        con.duration = .seconds(seconds: 0.5)
-        con.dimMode = .none
+        messageHud.configureTheme(.success)
+        hudConfiguration.duration = .seconds(seconds: 0.5)
                 
         let id = String(courseArray[sender.tag].course_id)!
         var token = ""
         let decodedUserinfo = self.getUserInfo()
-        if !decodedUserinfo.access_token.isBlank
-        {
+        if !decodedUserinfo.access_token.isBlank {
             token = "bearer " + decodedUserinfo.access_token
-        }
-        
+        }        
         let headers: HTTPHeaders = [
             "Authorization":  token,
             "Content-Type": "application/json"
-        ]
-        
+        ]        
         let params : Parameters = [
-            
             "actionname": "user_course_wish",
             "data": [
-                
                 ["flag":"I",
                  "institution_course_id": id
                 ]
-                
-                
             ]
         ]
-        
-        
-        
-        
-        
         Alamofire.request(baseUrl + "ProcessData", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
             
             switch response.result
@@ -891,11 +817,8 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
                             let wishCount =  "\(userInfo["wish_count"]!)"
                             
                             
-                            self.wishlistCountLbl.text = wishCount
                             
-                            statusHud.configureContent(title: "", body: status["MESSAGE"] as! String)
-                            
-                            
+                            self.messageHud.configureContent(title: "", body: status["MESSAGE"] as! String)
                             if sender.isSelected {
                                 // deselect
                                 sender.deselect()
@@ -905,73 +828,37 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
                             }
                             
                             self.fetchSearchData(searchText: self.searchController.searchBar.text!)
-                            SwiftMessages.show(config: con, view: statusHud)
+                            SwiftMessages.show(config: self.hudConfiguration, view: self.messageHud)
                         }
-                        
-                        
-                        
                     }
-                        
-                    else
-                    {
+                    else {
                         let alertString = "Only members are allowed to use this feature. Login or Signup to continue."
-                        var con = SwiftMessages.Config()
-                        
                         let alertView = MessageView.viewFromNib(layout: .CardView)
-                        
-                        
-                     
-                        
                         alertView.configureTheme(.warning)
-                        con.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
                         
-                        con.duration = .seconds(seconds: 4)
-                        con.dimMode = .none
-                        con.interactiveHide = true
-                    
-                        
+                        self.hudConfiguration.duration = .seconds(seconds: 4)
+                        self.hudConfiguration.interactiveHide = true
                         alertView.configureContent(title: "", body: alertString, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "JOIN NOW", buttonTapHandler: { _ in
-                            
-                            
                             self.loginClicked(alertView.button!)
-                        })
-                        
-                        SwiftMessages.show(config: con, view: alertView)
-                        
-                       
+                        })                        
+                        SwiftMessages.show(config: self.hudConfiguration, view: alertView)
                     }
                 }
-                
-                
             case .failure(let error):
                 print(error)
                 if let err = error as? URLError, err.code == .notConnectedToInternet{
-                    // no internet connection
-                    
-                    statusHud.configureTheme(.error)
-                    statusHud.configureContent(title: "" , body: error.localizedDescription)
-                    SwiftMessages.show(config: con, view: statusHud)
+                    // no internet connection                    
+                    self.messageHud.configureTheme(.error)
+                    self.messageHud.configureContent(title: "" , body: error.localizedDescription)
+                    SwiftMessages.show(config: self.hudConfiguration, view: self.messageHud)
                 }
-                
-                
             }
-            
-            
-           
-
-            
-            
-            
         }
-        
-        
     }
     
     
     func tappedBookmark(sender: DOFavoriteButton) {
-        
         SwiftMessages.hideAll()
-        
         
         let statusHud = MessageView.viewFromNib(layout: .StatusLine)
         
@@ -1186,37 +1073,20 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         
         switch sender.tag {
         case 1:
-            
-            
-            if self.wishlistCountLbl.text == "0"
-            {
-                showEmptyView(popUpText: "wish")
-                return
-            }
-            
-            
+            print("Wishlist removed")
         case 2:
-            
-            if self.enquiryCountLbl.text == "0/0"
-            {
+            if self.enquiryCountLbl.text == "0/0" {
                 showEmptyView(popUpText: "enquiry")
                 return
             }
-            
-            
-        case 3:
-            
-            if self.bookmarkCountLbl.text == "0"
-            {
+        case 3: 
+            if self.bookmarkCountLbl.text == "0" {
                 showEmptyView(popUpText: "bookmark")
                 return
             }
-            
-            
         default:
             return
         }
-        
         
         
         let popController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "pop") as! PopPresentationViewController
@@ -1235,7 +1105,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
             guard let weakself = self else {
                 return
             }
-            weakself.fetchSearchData(searchOption: selectedIndex, searchText: text)
+            weakself.triggerFetchSearchData(searchOption: selectedIndex, searchText: text)
         }
         
         // present the popover
@@ -1248,12 +1118,22 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         return UIModalPresentationStyle.none
     }
     
-    
-    
     func presentationController(_ presentationController: UIPresentationController, willPresentWithAdaptiveStyle style: UIModalPresentationStyle, transitionCoordinator: UIViewControllerTransitionCoordinator?) {
         // add a semi-transparent view to parent view when presenting the popover
-        let parentView = presentationController.presentingViewController.view
-        
+        guard let overlay = overlay else {
+            return
+        }
+        transitionCoordinator?.animate(alongsideTransition: { _ in
+            overlay.alpha = 1.0
+        }, completion: nil)
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        removeOverlay()
+    }
+    
+    func setupOverlay() {
+        let parentView = self.view
         let overlay = UIView(frame: (parentView?.bounds)!)
         overlay.backgroundColor = UIColor(white: 0.0, alpha: 0.4)
         parentView?.addSubview(overlay)
@@ -1262,31 +1142,33 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         
         parentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[overlay]|", options: [], metrics: nil, views: views))
         parentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[overlay]|", options: [], metrics: nil, views: views))
-        
         overlay.alpha = 0.0
-        
-        transitionCoordinator?.animate(alongsideTransition: { _ in
-            overlay.alpha = 1.0
-        }, completion: nil)
-        
         self.overlay = overlay
     }
     
-    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+    func addOverlay() {
         guard let overlay = overlay else {
             return
         }
-        
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.1, animations: {
+                overlay.alpha = 1.0
+            }, completion: nil)
+        }
+    }
+    
+    func removeOverlay() {
+        guard let overlay = overlay else {
+            return
+        }
         DispatchQueue.main.async {
             UIView.animate(withDuration: 0.1, animations: {
                 overlay.alpha = 0.0
             }, completion: { _ in
-                overlay.removeFromSuperview()
-            })}
-        
+            })
+        }
     }
     
-  
     
 }
 

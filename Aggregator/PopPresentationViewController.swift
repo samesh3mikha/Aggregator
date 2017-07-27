@@ -1,4 +1,4 @@
-//
+ //
 //  PopPresentationViewController.swift
 //  Aggregator
 //
@@ -16,14 +16,14 @@ public typealias ShowSearchResultHandler = (Int, String) -> Void
 var popUpArray = [PopupViewData]()
 class PopPresentationViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
-    @IBOutlet var TableView: UITableView!
+    @IBOutlet var tableView: UITableView!
     var buttonIndex = 1
     var showSearchResultHandlerBlock: ShowSearchResultHandler?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.TableView.delegate = self
-        self.TableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         
         // Do any additional setup after loading the view.
     }
@@ -142,8 +142,6 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
                     if s == "SUCCESS"
                     {
                         //self.dismiss(animated: false, completion: nil)
-                        
-                        
                         if let responseArray = data[expectedKey].arrayObject {
                             let popData = responseArray as! [[String:AnyObject]]
                             for dict in popData {
@@ -183,11 +181,7 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
                                 }
                                 popUpArray.append(e!)
                             }
-                            
-                            self.TableView.reloadData()
-                            
-                            
-                            
+                            self.tableView.reloadData()
                         }
                         
                     }
@@ -280,34 +274,33 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
                 cell.enquiryDetail.text = popUpArray[indexPath.row].shortComment
                 cell.itemID = popUpArray[indexPath.row].courseID
                 cell.deleteItemHandlerBlock = { [weak cell] in
-//                    print("Oi Chote", cell?.itemID)
                     self.deleteFavoriteSearch(favSearchID: (cell?.itemID)!)
-                }
-                cell.deleteItemHandlerBlock = { [weak cell] in
-                    //                    print("Oi Chote", cell?.itemID)
-                    var searchOption: SearchOption = .All
-                    if popUpArray[indexPath.row].shortComment == "By Course" {
-                        searchOption = .Course
-                    } else if popUpArray[indexPath.row].shortComment == "By University" {
-                        searchOption = .University
-                    } else if popUpArray[indexPath.row].shortComment == "By Location" {
-                        searchOption = .Location
-                    }
-                    if let handlerBlock = self.showSearchResultHandlerBlock {                        
-                        handlerBlock(searchOption.rawValue, popUpArray[indexPath.row].courseName)
-                        self.dismiss(animated: true, completion: nil)
-                    }
                 }
             }
             cell.logoImageView.sd_setImage(with: URL.init(string: popUpArray[indexPath.row].logo), placeholderImage: #imageLiteral(resourceName: "placeholder"))
+            cell.selectionStyle = .none
             //set the data here
             return cell
         }
     }
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("dsadasdas")
+            if buttonIndex == 1 {
+                var searchOption: SearchOption = .All
+                if popUpArray[indexPath.row].shortComment == "By Course" {
+                    searchOption = .Course
+                } else if popUpArray[indexPath.row].shortComment == "By University" {
+                    searchOption = .University
+                } else if popUpArray[indexPath.row].shortComment == "By Location" {
+                    searchOption = .Location
+                }
+                if let handlerBlock = self.showSearchResultHandlerBlock {                        
+                    handlerBlock(searchOption.rawValue, popUpArray[indexPath.row].courseName)
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }
     }
+    
     
     // Delete Favorite Search By ID
     func deleteFavoriteSearch(favSearchID: String) {
@@ -337,10 +330,15 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
             switch response.result {
-            case .success(let value):
+            case .success(let value):                
                 let data = JSON(value)
-                print("data == >", data)
-                self.fetchPopData(token: accessToken)
+                if let responseStatus = data["STATUS"].arrayObject {
+                    let status = responseStatus[0] as! [String: AnyObject]
+                    let s = status["STATUS"] as! String                    
+                    if s == "SUCCESS" {
+                        self.fetchPopData(token: accessToken)
+                    }
+                }
             case .failure(let error):
                 print(error)
             }
