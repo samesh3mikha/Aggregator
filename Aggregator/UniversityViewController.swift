@@ -37,6 +37,9 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
     @IBOutlet weak var uniLevelLbl: UILabel!
     @IBOutlet weak var uniAboutLbl: UILabel!
     @IBOutlet weak var UniMapView: MKMapView!
+    
+    
+    
     @IBAction func EnquiryNowBtn(_ sender: Any) {
         
         
@@ -72,6 +75,9 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
         self.navigationItem.title = "University Details"
         self.navigationController?.navigationBar.barStyle = UIBarStyle.black
         self.navigationController?.navigationBar.tintColor = UIColor.white
+        
+        
+        
         
     }
 
@@ -249,14 +255,8 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
                     for dict in resultDicts
                     {
                         let detail =  SearchDeatils.init(institution_course_id: dict["institution_course_id"]! as! Int , course_id: dict["course_id"]! as! Int , course_name: dict["course_name"]! as! String , institute_id: dict["institute_id"]! as! Int , institute_name: dict["institute_name"]! as! String , phone: dict["phone"]! as! String , institute_image: dict["institute_image"]! as! String , institute_logo: dict["institute_logo"]! as! String , gps_lattitude: dict["gps_lattitude"]! as! Int , gps_longitude: dict["gps_longitude"]! as! Int , email_address: dict["email_address"]! as! String , website: dict["website"]! as! String , about_us: dict["about_us"]! as! String , course_description: dict["course_description"]! as! String , faculty_name: dict["faculty_name"]! as! String , course_code: dict["course_code"]! as! String , active: dict["active"]! as! Bool, institute_full_address: dict["institute_full_address"]! as! String , study_level_name: dict["study_level_name"]! as! String , country: dict["country"]! as! String , institution_type: dict["institution_type"]! as! String )
-                        
-                       
-
-                        
-                        
-                       self.customizeUI(universityDetails: detail)
-
-                        self.detailArray.append(detail)
+                            self.customizeUI(universityDetails: detail)
+                             self.detailArray.append(detail)
                         
                     }
 //                    
