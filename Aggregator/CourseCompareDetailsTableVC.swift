@@ -141,7 +141,7 @@ class CourseCompareDetailsTableVC: UIViewController,UITableViewDelegate,UITableV
         
         let heightOfVC = self.tableView.frame.height
       
-        let heightOfRow = heightOfVC / CGFloat(self.courses.count) - 10
+        let heightOfRow = heightOfVC / CGFloat(self.courses.count) - 20
         
         return heightOfRow
    

@@ -45,7 +45,7 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
        
         self.checked.removeAll()
         self.selectedIDs.removeAll()
-       
+       self.navigationController?.navigationBar.isHidden = true
         compareBtn.isUserInteractionEnabled = true
         compareBtn.alpha = 0.5
         
