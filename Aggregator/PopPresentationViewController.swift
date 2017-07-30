@@ -11,7 +11,8 @@ import Alamofire
 import SwiftyJSON
 import SwiftMessages
 
-public typealias ShowSearchResultHandler = (Int, String) -> Void
+ public typealias ShowSearchResultHandler = (Int, String) -> Void
+ public typealias ShowEnquiryDetailsHandler = (String) -> Void
 
 var popUpArray = [PopupViewData]()
 class PopPresentationViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
@@ -19,6 +20,7 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
     @IBOutlet var tableView: UITableView!
     var buttonIndex = 1
     var showSearchResultHandlerBlock: ShowSearchResultHandler?
+    var showEnquiryDetailsHandlerBlock: ShowEnquiryDetailsHandler?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,14 +145,10 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
                     {
                         //self.dismiss(animated: false, completion: nil)
                         if let responseArray = data[expectedKey].arrayObject {
+                            print("responseArray --> ", responseArray)
                             let popData = responseArray as! [[String:AnyObject]]
                             for dict in popData {
                                 var shortCmnt = ""
-                                if self.buttonIndex == 2 {
-                                    shortCmnt = "\(dict["shortcomment"]!)"
-                                } else {
-                                    shortCmnt = ""
-                                }
                                 var e: PopupViewData? = nil
                                 if self.buttonIndex == 1 {
                                     var searchWord = ""
@@ -176,7 +174,10 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
                                         }
                                     }
                                     e = PopupViewData.init(courseID: "\(dict["favorite_search_id"]!)" ,courseName: searchWord, logo: "", shortComment: shortCmnt )
-                                } else {
+                                } else if self.buttonIndex == 2 {
+                                    shortCmnt = "\(dict["shortcomment"]!)"
+                                    e = PopupViewData.init(courseID: "\(dict["enquiry_id"]!)" ,courseName: "\(dict["course_name"]!)", logo: "\(dict["institute_logo"]!)", shortComment: shortCmnt )
+                                } else if self.buttonIndex == 3 {
                                     e = PopupViewData.init(courseID: "\(dict["institution_course_id"]!)" ,courseName: "\(dict["course_name"]!)", logo: "\(dict["institute_logo"]!)", shortComment: shortCmnt )
                                 }
                                 popUpArray.append(e!)
@@ -251,7 +252,7 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if buttonIndex == 1 {
-            return 70
+            return 80
         }
         return 100
     }
@@ -270,8 +271,9 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
             let cell =  tableView.dequeueReusableCell(withIdentifier: "enquiryid")! as! EnquiryTableViewCell
             
             cell.courseNameLbl.text = popUpArray[indexPath.row].courseName
+            cell.enquiryDetail.text = popUpArray[indexPath.row].shortComment
+            print("COmment ==", popUpArray[indexPath.row].shortComment)
             if buttonIndex == 1 {
-                cell.enquiryDetail.text = popUpArray[indexPath.row].shortComment
                 cell.itemID = popUpArray[indexPath.row].courseID
                 cell.deleteItemHandlerBlock = { [weak cell] in
                     self.deleteFavoriteSearch(favSearchID: (cell?.itemID)!)
@@ -298,6 +300,13 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
                     handlerBlock(searchOption.rawValue, popUpArray[indexPath.row].courseName)
                     self.dismiss(animated: true, completion: nil)
                 }
+            } else if buttonIndex == 2 {
+                if let handlerBlock = self.showEnquiryDetailsHandlerBlock {                        
+                    self.dismiss(animated: true, completion: {
+                        handlerBlock(popUpArray[indexPath.row].courseID)
+                    })
+                }
+                
             }
     }
     

@@ -1107,11 +1107,25 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
             }
             weakself.triggerFetchSearchData(searchOption: selectedIndex, searchText: text)
         }
-        
+        popController.showEnquiryDetailsHandlerBlock = { [weak self] (enquiryID) in
+            guard let weakself = self else {
+                return
+            }
+            weakself.removeOverlay()
+            weakself.loadEnquiryDetailsView(enquiryID: enquiryID)
+        }        
         // present the popover
         self.present(popController, animated: true, completion: nil)
     }
     
+    func loadEnquiryDetailsView(enquiryID: String) {
+        if let enquiryDetailsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EnquiryDetailsVC")
+            as? EnquiryDetailsVC {
+            enquiryDetailsVC.enquiryID = enquiryID
+            self.navigationController?.pushViewController(enquiryDetailsVC, animated: true)
+        }
+    }
+
     
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
