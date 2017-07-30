@@ -123,10 +123,9 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         suggestionTableView.isHidden = true
         
         let decodedUserinfo = self.getUserInfo()
-        if !decodedUserinfo.access_token.isBlank
-        {
+        if !decodedUserinfo.access_token.isBlank {
             loginViewBtnHolder.isHidden = true
-            self.FetchUserInfo(token: decodedUserinfo.access_token)
+            self.FetchUserInfo()
         }
         else
         {
@@ -241,69 +240,33 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     }
     
     //MARK: Network
-    
-    
-    
-    
-    func FetchUserInfo(token : String) -> Void {
-        SwiftMessages.hideAll()
-        messageHud.configureTheme(.success)
-        messageHud.configureContent(title: "", body: "")
-        hudConfiguration.duration = .automatic
-
-        let headers: HTTPHeaders = [
-            "Authorization": "bearer " + token,
-            "Content-Type": "application/json"
-        ]
+    func FetchUserInfo() -> Void {
         let params : Parameters = [
             "actionname": "user_info_list",
             "data": [
                 ["":""]
             ]
         ]
-        Alamofire.request(baseUrl + "ProcessData", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
-            
-            switch response.result {
-            case .success(let value):
-                let data = JSON(value)
-                
-                if let responseStatus = data["STATUS"].arrayObject {
-                    let status = responseStatus[0] as! [String: AnyObject]
-                    let s = status["STATUS"] as! String
-                    
-                    if s == "SUCCESS" {
-                        if let ui = data["USER_INFO"].arrayObject {
-                            let userInfo = ui[0] as! [String: AnyObject]
-                            let bookmarkCount =  "\(userInfo["bookmark_count"]!)"
-                            
-                            let enquiryCount = "\(userInfo["enquiry_count"]!)"
-                            let wishlistCount = "\(userInfo["wish_count"]!)"
-                            
-                            self.enquiryCountLbl.text = enquiryCount
-                            self.bookmarkCountLbl.text = bookmarkCount
-                            self.messageHud.configureContent(title: "", body: "Fetching complete")
-                        }
-                    } else {
-                        self.messageHud.configureTheme(.error)
-                        if status["MESSAGE"] as! String == "SESSION EXPIRED" {
-                            self.catchSessionExpire()
-                            self.messageHud.configureContent(title: "", body: status["MESSAGE"] as! String + ". PLEASE LOGIN")
-                            self.loginViewBtnHolder.isHidden = false
-                        } else {
-                            self.messageHud.configureContent(title: "", body: status["MESSAGE"] as! String + ". PLEASE LOGIN")
-                        }
-                    }
+        DataSynchronizer.syncData(params: params, completionBlock: { [weak self] (isRequestASuccess, message, data) in
+            guard let weakself = self else {
+                return
+            }
+            if isRequestASuccess {
+                let responseKey = "USER_INFO"
+                if let responseArray = data[responseKey].arrayObject as? [[String:AnyObject]] {
+                    let userInfo = responseArray[0]
+                    let bookmarkCount =  "\(userInfo["bookmark_count"]!)"
+                    let enquiryCount = "\(userInfo["enquiry_count"]!)"
+                    weakself.enquiryCountLbl.text = enquiryCount
+                    weakself.bookmarkCountLbl.text = bookmarkCount
+                    weakself.messageHud.configureContent(title: "", body: "Fetching complete")
+                } else {
+                    weakself.showStatusHUD(title: "Error", details: message, theme: .error, duration: .automatic)
                 }
-            case .failure(let error):
-                print(error)
-                self.messageHud.configureTheme(.error)
-                if let err = error as? URLError, err.code == .notConnectedToInternet{
-                    // no internet connection
-                    self.messageHud.configureContent(title: "", body: error.localizedDescription)
-                }
-            }            
-            SwiftMessages.show(config: self.hudConfiguration, view: self.messageHud)
-        }
+            } else {
+                weakself.showStatusHUD(title: "Error", details: message, theme: .error, duration: .automatic)
+            }
+        })
     }
 
     func triggerFetchSearchData(searchOption: Int, searchText : String) -> Void {
