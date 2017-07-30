@@ -33,16 +33,34 @@ class EnquiryDetailsVC: UIViewController, UITableViewDataSource, UITableViewDele
         logoImageView.sd_setImage(with: URL.init(string: "dsa"), placeholderImage: #imageLiteral(resourceName: "placeholder"))
     }
     
+    // MARK: DATA DOWNLOAD
     func fetchEnquiryDetails() {
+        if enquiryID.isBlank {
+            return
+        }
         showStatusHUD(title: "Fetching details.", details: "Please wait...", theme: .info, duration: .automatic)
         addOverlay()
-        fetchEnquiryDetails(accessToken: accessToken(), completionBlock: { [weak self] (isRequestASuccess, message) in
+        
+        let params : Parameters = [
+            "actionname": "enquiry_reply ",
+            "data": [
+                ["enquiry_id": enquiryID],
+                ["flag": "S"]
+            ]
+        ]
+        DataSynchronizer.syncData(params: params, completionBlock: { [weak self] (isRequestASuccess, message, data) in
             guard let weakself = self else {
                 return
             }
             weakself.removeOverlay()
             let hudTheme: Theme = (isRequestASuccess) ? .success : .error
             weakself.showStatusHUD(title: "Data sync", details: message, theme: hudTheme, duration: .seconds(seconds: 10))
+            if isRequestASuccess {
+                let responseKey = "rto-form"
+                if let responseArray = data[responseKey].arrayObject as? [[String:AnyObject]] {
+                    print("responseArray ==> ", responseArray)
+                }
+            }
         })
     }
 
@@ -66,51 +84,5 @@ class EnquiryDetailsVC: UIViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
-    
-    
-    // MARK: DATA DOWNLOAD
-    func fetchEnquiryDetails(accessToken: String, completionBlock: @escaping SaveSearchResultHandler) {
-        if enquiryID.isBlank {
-            return
-        }
-        let url = baseUrl + "Processdata"
-        let accessKey = "bearer " + accessToken
-        let headers: HTTPHeaders = [
-            "Authorization":  accessKey,
-            "Content-Type": "application/json"
-        ]
-        let params : Parameters = [
-            "actionname": "enquiry_reply ",
-            "data": [
-                ["enquiry_id": enquiryID],
-                ["flag": "S"]
-            ]
-        ]
-        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
-            var isRequestSuccess = false
-            var responseMessage = "An unidentified error occured!" 
-            switch response.result {
-            case .success(let value):                
-                let data = JSON(value)
-                if let responseStatus = data["STATUS"].arrayObject {
-                    let status = responseStatus[0] as! [String: AnyObject]
-                    let s = status["STATUS"] as! String                    
-                    if s == "SUCCESS" {
-                        isRequestSuccess = true
-                        responseMessage = "Data synced successfully!"
-                    }
-                }
-            case .failure(let error):
-                responseMessage = error.localizedDescription 
-            }
-            completionBlock(isRequestSuccess, responseMessage)
-        }
-    }
-    
-    func accessToken() -> String {
-        let decodedUserinfo = self.getUserInfo()
-        return decodedUserinfo.access_token
-    }
-
 }
 

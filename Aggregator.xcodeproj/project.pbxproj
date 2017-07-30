@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7D0C6EEA1F2DD4C000C7ADBF /* EnquiryDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0C6EE91F2DD4C000C7ADBF /* EnquiryDetailsVC.swift */; };
 		7D0C6EEC1F2DD69C00C7ADBF /* SimpleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0C6EEB1F2DD69C00C7ADBF /* SimpleTableViewCell.swift */; };
+		7D0C6EF11F2E30A700C7ADBF /* DataSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0C6EF01F2E30A700C7ADBF /* DataSynchronizer.swift */; };
 		7D22DE051F27AA2E000E3875 /* SearchResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D22DE041F27AA2E000E3875 /* SearchResultViewModel.swift */; };
 		7D633A491F28A2CE00B78041 /* CourseDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D633A471F28A2CE00B78041 /* CourseDetailTableViewCell.swift */; };
 		7D633A4A1F28A2CE00B78041 /* CourseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D633A481F28A2CE00B78041 /* CourseDetailViewController.swift */; };
@@ -100,6 +101,7 @@
 		6345348F314BE3DE8E87AFED /* Pods_AggregatorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AggregatorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D0C6EE91F2DD4C000C7ADBF /* EnquiryDetailsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnquiryDetailsVC.swift; sourceTree = "<group>"; };
 		7D0C6EEB1F2DD69C00C7ADBF /* SimpleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTableViewCell.swift; sourceTree = "<group>"; };
+		7D0C6EF01F2E30A700C7ADBF /* DataSynchronizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataSynchronizer.swift; path = DataSync/DataSynchronizer.swift; sourceTree = "<group>"; };
 		7D22DE041F27AA2E000E3875 /* SearchResultViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultViewModel.swift; sourceTree = "<group>"; };
 		7D633A471F28A2CE00B78041 /* CourseDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailTableViewCell.swift; sourceTree = "<group>"; };
 		7D633A481F28A2CE00B78041 /* CourseDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseDetailViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +206,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D0C6EED1F2E27F800C7ADBF /* DataSync */ = {
+			isa = PBXGroup;
+			children = (
+				7D0C6EF01F2E30A700C7ADBF /* DataSynchronizer.swift */,
+			);
+			name = DataSync;
+			sourceTree = "<group>";
+		};
 		7FBA239EF5CA6DCA3534B277 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -323,6 +333,7 @@
 		C15E9C1A1E67CF2E006D5B44 /* Aggregator */ = {
 			isa = PBXGroup;
 			children = (
+				7D0C6EED1F2E27F800C7ADBF /* DataSync */,
 				C1FF822A1EFB79D500B8EB18 /* CustomsViews */,
 				C16798BA1E826FB3002E29C7 /* Aggregator.entitlements */,
 				C1B6C0841E81277C0054BBA3 /* 3rd party Library */,
@@ -693,6 +704,7 @@
 				C108E0A01E936422000834E8 /* ChooseAreaOfInterestViewController.swift in Sources */,
 				C19072F41EF7D5F9002E9B11 /* areaOfInterestViewController.swift in Sources */,
 				B8F3CAEE1F15E59F00E5B552 /* BasicCompreData.swift in Sources */,
+				7D0C6EF11F2E30A700C7ADBF /* DataSynchronizer.swift in Sources */,
 				7DC973131F24540900DC9037 /* CourseCompareDetailsTableVC.swift in Sources */,
 				B860BED21F27616300A693D7 /* SearchDetailModel.swift in Sources */,
 				C1551E3A1E95FB25002BE99B /* Style.swift in Sources */,
