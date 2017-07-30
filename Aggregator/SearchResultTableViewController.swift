@@ -214,7 +214,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         addOverlay()
         showStatusHUD(title: "Saving Search", details: "Please wait...", theme: .info, duration: .automatic)
 
-        viewModel?.saveSearch(searchword: searchText!, option: currentSearchOption(), accessToken: accessToken(), completionBlock: { [weak self] (isSaveCompleted, message) in
+        viewModel?.saveSearch(searchword: searchText!, option: currentSearchOption(), completionBlock: { [weak self] (isSaveCompleted, message) in
             guard let weakself = self else {
                 return
             }

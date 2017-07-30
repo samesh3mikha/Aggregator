@@ -47,8 +47,9 @@ class DataSynchronizer: NSObject {
                 let data = JSON(value)
                 if let responseStatus = data["STATUS"].arrayObject {
                     let status = responseStatus[0] as! [String: AnyObject]
-                    let s = status["STATUS"] as! String                    
-                    if s == "SUCCESS" {
+                    let statusMessage = status["STATUS"] as! String
+                    responseMessage = statusMessage
+                    if statusMessage == "SUCCESS" {
                         isRequestSuccessful = true
                         responseMessage = "Data synced successfully!"
                     }

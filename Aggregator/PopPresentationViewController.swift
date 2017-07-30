@@ -28,6 +28,7 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
         self.tableView.dataSource = self
         
         // Do any additional setup after loading the view.
+        fetchPopData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -35,57 +36,14 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let pref = UserDefaults.standard
-        if let decoded = pref.object(forKey: "userinfo")
-            
-        {
-            let decodedUserinfo = NSKeyedUnarchiver.unarchiveObject(with: decoded as! Data) as! UserInfo
-            if !decodedUserinfo.access_token.isBlank
-            {
-                
-                
-                
-                fetchPopData(token: decodedUserinfo.access_token)
-                
-                
-                
-            }
-        }
-        
-        
-        
-        
-    }
-    
     //MARK: Network
-    
-    
-    func fetchPopData(token : String) -> Void {
-        
-        popUpArray.removeAll()
-        let statusHud = MessageView.viewFromNib(layout: .StatusLine)
-        statusHud.configureContent(title: "", body: "Fetching your data! Please wait..")
-        statusHud.id = "statusHud"
-        
-        var con = SwiftMessages.Config()
-        
-        con.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
-        con.duration = .seconds(seconds: 1)
-        con.dimMode = .none
-        
-        
-        
-        SwiftMessages.show(config: con, view: statusHud)
-        
-        
+    func fetchPopData() {
+        showStatusHUD(title: "", details: "Fetching your data! Please wait..", theme: .info, duration: .seconds(seconds: 1))
+
         var actionName = ""
         var flag = ""
         var expectedKey = ""
         switch buttonIndex {
-            
         case 1:
             actionName = "favorite_search"
             expectedKey = "FAVORITE_SEARCH"
@@ -95,152 +53,93 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
             expectedKey = "ENQUIRYLIST"
             flag = "P"
         case 3:
-            
             actionName = "user_course_bookmark"
             expectedKey = "BOOKMARKLIST"
             flag = "S"
-            
         default:
-            
             actionName = ""
         }
-        
-        
-        let headers: HTTPHeaders = [
-            "Authorization": "bearer " + token,
-            "Content-Type": "application/json"
-        ]
-        
         let params : Parameters = [
-            
             "actionname": actionName,
             "data": [
-                
                 ["flag": flag]
-                
-                
             ]
         ]
-        
-        
-        Alamofire.request(baseUrl + "ProcessData", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
-            
-            switch response.result
-            {
-                
-            case .success(let value):
-                let json = JSON(value)
-                print(json)
-                
-                
-                
-                let data = JSON(response.result.value!)
-                
-                if let responseStatus = data["STATUS"].arrayObject
-                {
-                    let status = responseStatus[0] as! [String: AnyObject]
-                    let s = status["STATUS"] as! String
-                    
-                    if s == "SUCCESS"
-                    {
-                        //self.dismiss(animated: false, completion: nil)
-                        if let responseArray = data[expectedKey].arrayObject {
-                            print("responseArray --> ", responseArray)
-                            let popData = responseArray as! [[String:AnyObject]]
-                            for dict in popData {
-                                var shortCmnt = ""
-                                var e: PopupViewData? = nil
-                                if self.buttonIndex == 1 {
-                                    var searchWord = ""
-                                    if let searchText = dict["course_name"] as? String {
-                                        if !searchText.isBlank {
-                                            searchWord = searchText
-                                            shortCmnt = "By Course"
-                                        }
-                                    } else if let searchText = dict["university_name"] as? String {
-                                        if !searchText.isBlank {
-                                            searchWord = searchText
-                                            shortCmnt = "By University"
-                                        }
-                                    } else if let searchText = dict["country_state"] as? String {
-                                        if !searchText.isBlank {
-                                            searchWord = searchText
-                                            shortCmnt = "By Location"
-                                        }
-                                    } else if let searchText = dict["search_text"] as? String {
-                                        if !searchText.isBlank {
-                                            searchWord = searchText
-                                            shortCmnt = "All results"
-                                        }
-                                    }
-                                    e = PopupViewData.init(courseID: "\(dict["favorite_search_id"]!)" ,courseName: searchWord, logo: "", shortComment: shortCmnt )
-                                } else if self.buttonIndex == 2 {
-                                    shortCmnt = "\(dict["shortcomment"]!)"
-                                    e = PopupViewData.init(courseID: "\(dict["enquiry_id"]!)" ,courseName: "\(dict["course_name"]!)", logo: "\(dict["institute_logo"]!)", shortComment: shortCmnt )
-                                } else if self.buttonIndex == 3 {
-                                    e = PopupViewData.init(courseID: "\(dict["institution_course_id"]!)" ,courseName: "\(dict["course_name"]!)", logo: "\(dict["institute_logo"]!)", shortComment: shortCmnt )
-                                }
-                                popUpArray.append(e!)
-                            }
-                            self.tableView.reloadData()
-                        }
-                        
-                    }
-                        
-                    else
-                    {
-                        
-                        if status["MESSAGE"] as! String == "SESSION EXPIRED"
-                        {
-                            self.catchSessionExpire()
-                            statusHud.configureTheme(.error)
-                            statusHud.configureContent(title: "", body: status["MESSAGE"] as! String + ". PLEASE LOGIN")
-                            self.dismissModalStack(animated: true, completion: nil)
-                            
-                        }
-                        
-                        else {
-                        statusHud.configureTheme(.error)
-                        statusHud.configureContent(title: "" , body: status["MESSAGE"] as! String)
-                        
-                        }
-                    }
-                }
-                
-                
-            case .failure(let error):
-                if let err = error as? URLError, err.code == .notConnectedToInternet{
-                    // no internet connection
-                    
-                    statusHud.configureTheme(.error)
-                    statusHud.configureContent(title: "" , body: error.localizedDescription)
-                    self.removeFromParentViewController()
-                    
-                    
-                } else {
-                    
-                    
-                                      
-                }
-                print(error)
-                
+        DataSynchronizer.syncData(params: params, completionBlock: { [weak self] (isRequestASuccess, message, data) in
+            guard let weakself = self else {
+                return
             }
-            
-            
-            
-            
-            
-            
-        }
-        
-        
-        
+            if isRequestASuccess {
+                if let responseArray = data[expectedKey].arrayObject {
+                    print("responseArray --> ", responseArray)
+                    let popData = responseArray as! [[String:AnyObject]]
+                    for dict in popData {
+                        var shortCmnt = ""
+                        var e: PopupViewData? = nil
+                        if weakself.buttonIndex == 1 {
+                            var searchWord = ""
+                            if let searchText = dict["course_name"] as? String {
+                                if !searchText.isBlank {
+                                    searchWord = searchText
+                                    shortCmnt = "By Course"
+                                }
+                            } else if let searchText = dict["university_name"] as? String {
+                                if !searchText.isBlank {
+                                    searchWord = searchText
+                                    shortCmnt = "By University"
+                                }
+                            } else if let searchText = dict["country_state"] as? String {
+                                if !searchText.isBlank {
+                                    searchWord = searchText
+                                    shortCmnt = "By Location"
+                                }
+                            } else if let searchText = dict["search_text"] as? String {
+                                if !searchText.isBlank {
+                                    searchWord = searchText
+                                    shortCmnt = "All results"
+                                }
+                            }
+                            e = PopupViewData.init(courseID: "\(dict["favorite_search_id"]!)" ,courseName: searchWord, logo: "", shortComment: shortCmnt )
+                        } else if weakself.buttonIndex == 2 {
+                            shortCmnt = "\(dict["shortcomment"]!)"
+                            e = PopupViewData.init(courseID: "\(dict["enquiry_id"]!)" ,courseName: "\(dict["course_name"]!)", logo: "\(dict["institute_logo"]!)", shortComment: shortCmnt )
+                        } else if weakself.buttonIndex == 3 {
+                            e = PopupViewData.init(courseID: "\(dict["institution_course_id"]!)" ,courseName: "\(dict["course_name"]!)", logo: "\(dict["institute_logo"]!)", shortComment: shortCmnt )
+                        }
+                        popUpArray.append(e!)
+                    }
+                    weakself.tableView.reloadData()
+                }
+            } else {
+                weakself.showStatusHUD(title: "Error", details: message, theme: .error, duration: .automatic)
+            }
+        })
     }
     
+    // Delete Favorite Search By ID
+    func deleteFavoriteSearch(favSearchID: String) {
+        let params : Parameters = [
+            "actionname": "favorite_search",
+            "data": [
+                ["flag": "D"],
+                ["favorite_search_id": favSearchID]
+            ]
+        ]
+        DataSynchronizer.syncData(params: params, completionBlock: { [weak self] (isRequestASuccess, message, data) in
+            guard let weakself = self else {
+                return
+            }
+            if isRequestASuccess {
+                weakself.fetchPopData()
+            } else {
+                weakself.showStatusHUD(title: "Action failed", details: "Couldn't delete the item", theme: .info, duration: .automatic)
+            }
+        })
+    }
+
     
     
     //MARK: TABLEVIEW DELEGATE AND DATASOURCE
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -256,14 +155,10 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
         }
         return 100
     }
-
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //SwiftMessages.hideAll()
         if buttonIndex == 3 {
             let cell =  tableView.dequeueReusableCell(withIdentifier: "bookmark&wishlistid")! as! BookMark_WishTableViewCell
-            //set the data here
             cell.courseNameLbl.text = popUpArray[indexPath.row].courseName
             cell.logoImageview.sd_setImage(with: URL.init(string: popUpArray[indexPath.row].logo), placeholderImage: #imageLiteral(resourceName: "placeholder"))
             return cell
@@ -287,73 +182,26 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
     }
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            if buttonIndex == 1 {
-                var searchOption: SearchOption = .All
-                if popUpArray[indexPath.row].shortComment == "By Course" {
-                    searchOption = .Course
-                } else if popUpArray[indexPath.row].shortComment == "By University" {
-                    searchOption = .University
-                } else if popUpArray[indexPath.row].shortComment == "By Location" {
-                    searchOption = .Location
-                }
-                if let handlerBlock = self.showSearchResultHandlerBlock {                        
-                    handlerBlock(searchOption.rawValue, popUpArray[indexPath.row].courseName)
-                    self.dismiss(animated: true, completion: nil)
-                }
-            } else if buttonIndex == 2 {
-                if let handlerBlock = self.showEnquiryDetailsHandlerBlock {                        
-                    self.dismiss(animated: true, completion: {
-                        handlerBlock(popUpArray[indexPath.row].courseID)
-                    })
-                }
-                
+        if buttonIndex == 1 {
+            var searchOption: SearchOption = .All
+            if popUpArray[indexPath.row].shortComment == "By Course" {
+                searchOption = .Course
+            } else if popUpArray[indexPath.row].shortComment == "By University" {
+                searchOption = .University
+            } else if popUpArray[indexPath.row].shortComment == "By Location" {
+                searchOption = .Location
             }
-    }
-    
-    
-    // Delete Favorite Search By ID
-    func deleteFavoriteSearch(favSearchID: String) {
-        var accessToken = ""
-        let pref = UserDefaults.standard
-        if let decoded = pref.object(forKey: "userinfo") {
-            let decodedUserinfo = NSKeyedUnarchiver.unarchiveObject(with: decoded as! Data) as! UserInfo
-            if !decodedUserinfo.access_token.isBlank {
-                accessToken = decodedUserinfo.access_token
-            } else {
-                return
+            if let handlerBlock = self.showSearchResultHandlerBlock {                        
+                handlerBlock(searchOption.rawValue, popUpArray[indexPath.row].courseName)
+                self.dismiss(animated: true, completion: nil)
             }
-        }
-        let url = baseUrl + "Processdata"
-        let accessKey = "bearer " + accessToken
-        let headers: HTTPHeaders = [
-            "Authorization":  accessKey,
-            "Content-Type": "application/json"
-        ]
-        let params : Parameters = [
-            "actionname": "favorite_search",
-            "data": [
-                ["flag": "D"],
-                ["favorite_search_id": favSearchID]
-            ]
-        ]
-        
-        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
-            switch response.result {
-            case .success(let value):                
-                let data = JSON(value)
-                if let responseStatus = data["STATUS"].arrayObject {
-                    let status = responseStatus[0] as! [String: AnyObject]
-                    let s = status["STATUS"] as! String                    
-                    if s == "SUCCESS" {
-                        self.fetchPopData(token: accessToken)
-                    }
-                }
-            case .failure(let error):
-                print(error)
+        } else if buttonIndex == 2 {
+            if let handlerBlock = self.showEnquiryDetailsHandlerBlock {                        
+                self.dismiss(animated: true, completion: {
+                    handlerBlock(popUpArray[indexPath.row].courseID)
+                })
             }
+            
         }
     }
-
-    
-    
 }
