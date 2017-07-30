@@ -49,12 +49,10 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = SearchResultViewModel.init()
-        
-        self.navigationController?.navigationBar.isHidden = true
         setupOverlay()
-        
+        self.navigationController?.navigationBar.isHidden = true
 
+        viewModel = SearchResultViewModel.init()
         courseArray.removeAll()
         
         searchController.searchBar.delegate = self
@@ -214,27 +212,16 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     @IBAction func saveButtonClicked(_ sender: Any) {
         let searchText = searchController.searchBar.text
         addOverlay()
-        SwiftMessages.hideAll()
-        messageHud.configureTheme(.success)
-        messageHud.configureContent(title: "Saving Search", body: "Please wait...")
-        hudConfiguration.duration = .automatic
-        SwiftMessages.show(config: hudConfiguration, view: messageHud)
+        showStatusHUD(title: "Saving Search", details: "Please wait...", theme: .info, duration: .automatic)
 
         viewModel?.saveSearch(searchword: searchText!, option: currentSearchOption(), accessToken: accessToken(), completionBlock: { [weak self] (isSaveCompleted, message) in
             guard let weakself = self else {
                 return
             }
-            if isSaveCompleted {
-                weakself.messageHud.configureTheme(.success)
-            } else {
-                weakself.messageHud.configureTheme(.error)
-            }
             weakself.saveButton.isEnabled = !isSaveCompleted
             weakself.removeOverlay()
-            SwiftMessages.hideAll()
-            weakself.messageHud.configureContent(title: "", body: message)
-            weakself.hudConfiguration.duration = .automatic
-            SwiftMessages.show(config: weakself.hudConfiguration, view: weakself.messageHud)
+            let hudTheme: Theme = (isSaveCompleted) ? .success : .error
+            weakself.showStatusHUD(title: "", details: message, theme: hudTheme, duration: .automatic)
         })
     }
 
@@ -1045,8 +1032,6 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     
     //MARK: POPOVERVIEW EVENTS
     
-    var overlay: UIView?
-    
     func  showEmptyView(popUpText : String) -> Void {
         
         let emptyView = MessageView.viewFromNib(layout: .TabView)
@@ -1134,7 +1119,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     
     func presentationController(_ presentationController: UIPresentationController, willPresentWithAdaptiveStyle style: UIModalPresentationStyle, transitionCoordinator: UIViewControllerTransitionCoordinator?) {
         // add a semi-transparent view to parent view when presenting the popover
-        guard let overlay = overlay else {
+        guard let overlay = overlayView else {
             return
         }
         transitionCoordinator?.animate(alongsideTransition: { _ in
@@ -1145,44 +1130,6 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         removeOverlay()
     }
-    
-    func setupOverlay() {
-        let parentView = self.view
-        let overlay = UIView(frame: (parentView?.bounds)!)
-        overlay.backgroundColor = UIColor(white: 0.0, alpha: 0.4)
-        parentView?.addSubview(overlay)
-        
-        let views: [String: UIView] = ["parentView": parentView!, "overlay": overlay]
-        
-        parentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[overlay]|", options: [], metrics: nil, views: views))
-        parentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[overlay]|", options: [], metrics: nil, views: views))
-        overlay.alpha = 0.0
-        self.overlay = overlay
-    }
-    
-    func addOverlay() {
-        guard let overlay = overlay else {
-            return
-        }
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.1, animations: {
-                overlay.alpha = 1.0
-            }, completion: nil)
-        }
-    }
-    
-    func removeOverlay() {
-        guard let overlay = overlay else {
-            return
-        }
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.1, animations: {
-                overlay.alpha = 0.0
-            }, completion: { _ in
-            })
-        }
-    }
-    
     
 }
 

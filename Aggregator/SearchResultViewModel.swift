@@ -16,7 +16,7 @@ enum SearchOption: Int {
 
 public typealias SaveSearchResultHandler = (Bool, String) -> Void
 
-class SearchResultViewModel: NSObject {    
+class SearchResultViewModel: NSObject {
 
     func saveSearch(searchword: String, option: SearchOption, accessToken: String, completionBlock: @escaping SaveSearchResultHandler) {
         if accessToken.isBlank || searchword.isBlank {

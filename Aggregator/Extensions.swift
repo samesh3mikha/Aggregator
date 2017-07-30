@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwiftMessages
 
 extension UIView {
     
@@ -121,10 +122,73 @@ extension UISearchBar
     }
 }
 
+// MARK:- UIViewController Extension
 
-extension UIViewController
+private var vcExtionsionAssociationKey: UInt8 = 0
 
-{
+extension UIViewController {
+    var overlayView: UIView! {
+        get {
+            return objc_getAssociatedObject(self, &vcExtionsionAssociationKey) as? UIView
+        }
+        set(newValue) {
+            objc_setAssociatedObject(self, &vcExtionsionAssociationKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+    
+    func setupOverlay() {
+        let parentView = self.view
+        let overlay = UIView(frame: (parentView?.bounds)!)
+        overlay.backgroundColor = UIColor(white: 0.0, alpha: 0.4)
+        parentView?.addSubview(overlay)
+        
+        let views: [String: UIView] = ["parentView": parentView!, "overlay": overlay]
+        
+        parentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[overlay]|", options: [], metrics: nil, views: views))
+        parentView?.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[overlay]|", options: [], metrics: nil, views: views))
+        overlay.alpha = 0.0
+        self.overlayView = overlay
+    }
+    
+    func addOverlay() {
+        guard let overlay = overlayView else {
+            return
+        }
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.1, animations: {
+                overlay.alpha = 1.0
+            }, completion: nil)
+        }
+    }
+    
+    func removeOverlay() {
+        guard let overlay = overlayView else {
+            return
+        }
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.1, animations: {
+                overlay.alpha = 0.0
+            }, completion: { _ in
+            })
+        }
+    }
+
+    //Helper for HUDs
+    func showStatusHUD(title: String, details: String, theme: Theme, duration: SwiftMessages.Duration) {
+        let messageHud = MessageView.viewFromNib(layout: .CardView)
+        messageHud.id = "statusHud"
+        messageHud.configureContent(title: title, body: details)
+        messageHud.configureTheme(theme)
+
+        var hudConfiguration = SwiftMessages.Config()
+        hudConfiguration.presentationContext = .window(windowLevel: UIWindowLevelAlert)
+        hudConfiguration.dimMode = .none
+        hudConfiguration.duration = duration
+        
+        SwiftMessages.hideAll()
+        SwiftMessages.show(config: hudConfiguration, view: messageHud)
+    }
+    
     func getUserInfo() -> UserInfo {
         
         let pref = UserDefaults.standard
@@ -176,6 +240,8 @@ extension UIViewController
                 })
             }
         }
+    
+        
     }
     
     
