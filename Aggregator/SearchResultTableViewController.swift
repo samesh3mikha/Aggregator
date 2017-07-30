@@ -516,11 +516,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        
-        if tableView == self.tableView
-        {
+        if tableView == self.tableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ResultCellID")! as! customTableViewCell
             
             cell.mainLbl.text = courseArray[indexPath.section].courseName
@@ -532,56 +528,26 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
             
             if courseArray[indexPath.section].isBookmarked == true {
                 cell.bookmarkBtn.isSelected = true
-            }
-                
-            else
-            {
+            } else {
                 cell.bookmarkBtn.isSelected = false
             }
-            
-            if courseArray[indexPath.section].isWishlisted == true {
-                cell.wishlistBtn.isSelected = true
-            }
-                
-            else
-            {
-                cell.wishlistBtn.isSelected = false
-            }
-            
-            
             cell.bookmarkBtn.tag = indexPath.section
-            cell.wishlistBtn.tag = indexPath.section
-            
-            
-            
-            
             cell.bookmarkBtn.addTarget(self, action: #selector(self.tappedBookmark), for: .touchUpInside)
-            cell.wishlistBtn.addTarget(self, action: #selector(self.tappedWishlist), for: .touchUpInside)
             
             let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SearchResultTableViewController.lblUnivClick))
-            
              let tapGesture2 : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(SearchResultTableViewController.lblCourseClick))
-            
             tapGesture.delegate = self as? UIGestureRecognizerDelegate
             tapGesture.numberOfTapsRequired = 1
             
             cell.uniLbl.isUserInteractionEnabled = true
             cell.uniLbl.addGestureRecognizer(tapGesture)
-            
              unidata = courseArray[indexPath.section].course_id
-            
             
             cell.mainLbl.isUserInteractionEnabled = true
             cell.mainLbl.addGestureRecognizer(tapGesture2)
 
-            
-            
             return cell
-            
-            
-        }
-        else
-        {
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "suggestionTableViewCellID")!
             
             let lbl = cell.viewWithTag(11) as! UILabel
@@ -716,97 +682,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         }
     }
     
-    //MARK: BUTTON TAPPED EVENTS
-    func tappedWishlist(sender: DOFavoriteButton) {
-        SwiftMessages.hideAll()
-        messageHud.configureTheme(.success)
-        hudConfiguration.duration = .seconds(seconds: 0.5)
-                
-        let id = String(courseArray[sender.tag].course_id)!
-        var token = ""
-        let decodedUserinfo = self.getUserInfo()
-        if !decodedUserinfo.access_token.isBlank {
-            token = "bearer " + decodedUserinfo.access_token
-        }        
-        let headers: HTTPHeaders = [
-            "Authorization":  token,
-            "Content-Type": "application/json"
-        ]        
-        let params : Parameters = [
-            "actionname": "user_course_wish",
-            "data": [
-                ["flag":"I",
-                 "institution_course_id": id
-                ]
-            ]
-        ]
-        Alamofire.request(baseUrl + "ProcessData", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
-            
-            switch response.result
-            {
-                
-            case .success(let value):
-                
-                print(value)
-                let data = JSON(response.result.value!)
-                
-                if let responseStatus = data["STATUS"].arrayObject
-                {
-                    let status = responseStatus[0] as! [String: AnyObject]
-                    let s = status["STATUS"] as! String
-                    
-                    if s == "SUCCESS"
-                    {
-                        //self.dismiss(animated: false, completion: nil)
-                        
-                        
-                        
-                        if let ui = data["WISHCOUNT"].arrayObject
-                        {
-                            let userInfo = ui[0] as! [String: AnyObject]
-                            let wishCount =  "\(userInfo["wish_count"]!)"
-                            
-                            
-                            
-                            self.messageHud.configureContent(title: "", body: status["MESSAGE"] as! String)
-                            if sender.isSelected {
-                                // deselect
-                                sender.deselect()
-                            } else {
-                                // select with animation
-                                sender.select()
-                            }
-                            
-                            self.fetchSearchData(searchText: self.searchController.searchBar.text!)
-                            SwiftMessages.show(config: self.hudConfiguration, view: self.messageHud)
-                        }
-                    }
-                    else {
-                        let alertString = "Only members are allowed to use this feature. Login or Signup to continue."
-                        let alertView = MessageView.viewFromNib(layout: .CardView)
-                        alertView.configureTheme(.warning)
-                        
-                        self.hudConfiguration.duration = .seconds(seconds: 4)
-                        self.hudConfiguration.interactiveHide = true
-                        alertView.configureContent(title: "", body: alertString, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: "JOIN NOW", buttonTapHandler: { _ in
-                            self.loginClicked(alertView.button!)
-                        })                        
-                        SwiftMessages.show(config: self.hudConfiguration, view: alertView)
-                    }
-                }
-            case .failure(let error):
-                print(error)
-                if let err = error as? URLError, err.code == .notConnectedToInternet{
-                    // no internet connection                    
-                    self.messageHud.configureTheme(.error)
-                    self.messageHud.configureContent(title: "" , body: error.localizedDescription)
-                    SwiftMessages.show(config: self.hudConfiguration, view: self.messageHud)
-                }
-            }
-        }
-    }
-    
-    
+    //MARK: BUTTON TAPPED EVENTS    
     func tappedBookmark(sender: DOFavoriteButton) {
         SwiftMessages.hideAll()
         

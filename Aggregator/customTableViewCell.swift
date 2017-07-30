@@ -14,7 +14,6 @@ class customTableViewCell: UITableViewCell {
     @IBOutlet var bookmarkBtn: DOFavoriteButton!
     
     
-    @IBOutlet var wishlistBtn: DOFavoriteButton!
     @IBOutlet var mainImageView: UIImageView!
     
     @IBOutlet var mainLbl: UILabel!
