@@ -19,6 +19,7 @@ class Courses: NSObject{
     let image : String
     let isWishlisted : Bool
     
+    
    
     
     

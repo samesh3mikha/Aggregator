@@ -623,7 +623,6 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     
     func lblCourseClick(tapGesture:UITapGestureRecognizer){
         let courseViewController = self.storyboard?.instantiateViewController(withIdentifier: "CourseDetailViewController") as! CourseDetailViewController
-        
         courseViewController.myId = unidata
         self.navigationController?.pushViewController(courseViewController, animated: true)
        

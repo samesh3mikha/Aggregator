@@ -103,9 +103,10 @@ class CourseCompareDetailsTableVC: UIViewController,UITableViewDelegate,UITableV
           let newVC = storyboard.instantiateViewController(withIdentifier: "ReadmoreVC") as! WebViewPopMoreController
       
                 newVC.isWebContent = true
-        newVC.arrayOfCourses = courses
-             svc = newVC
-         self.present(newVC, animated: true, completion: nil)
+                newVC.arrayOfCourses = courses
+                svc = newVC
+                self.present(newVC, animated: true, completion: nil)
+        
         
         func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
             

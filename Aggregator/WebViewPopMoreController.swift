@@ -66,11 +66,8 @@ class WebViewPopMoreController: UIViewController {
         @IBAction func crossBtnClicked(_ sender: AnyObject)
         {
            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "CourseCompareDetails") as! CourseCompareDetailsTableVC
-            
-           // self.present(vc, animated: false, completion: nil)
-            vc.courses = self.arrayOfCourses
+            self.dismiss(animated: true, completion: nil)
+
             
             }
             

@@ -270,7 +270,7 @@ class MainViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {        
         if segue.identifier == "segueToPageVC"{
-            if let destVC = segue.destination as? PageViewController {
+            if segue.destination is PageViewController {
 //                destVC.compareListId = [self.compareListId]
 //                destVC.arrayOfCourses = self.arrayOfCourses           
             }

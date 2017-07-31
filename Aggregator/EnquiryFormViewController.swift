@@ -13,6 +13,7 @@ import SwiftMessages
 
 class EnquiryFormViewController: UIViewController {
 
+    @IBOutlet weak var emquiryText: UITextView!
     @IBOutlet weak var firstNameLbl: UILabel!
    
     @IBOutlet weak var lastNameLbl: UILabel!
@@ -60,16 +61,108 @@ class EnquiryFormViewController: UIViewController {
     
     @IBAction func SubmitEnquiryFormBtn(_ sender: Any) {
         
-        
+        sendEnquiryToServer()
         
         
           }
     
+    func sendEnquiryToServer()-> Void{
     
+    let statusHud = MessageView.viewFromNib(layout: .CardView)
+    
+    statusHud.configureTheme(.success)
+    statusHud.id = "statusHud"
+    statusHud.button?.isHidden = true
+    var con = SwiftMessages.Config()
+    
+    con.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
+    con.duration = .automatic
+    con.dimMode = .gray(interactive: false)
+    con.eventListeners.append() { event in
+    
+    if case .willShow = event { self.view.endEditing(true)}
+    
+    
+    }
+    
+    
+        let enquiry = self.emquiryText.text
+        let firstname  =  self.firstNameLbl.text
+        let lastname = self.lastNameLbl.text
+        let email = self.lastNameLbl.text
+        let phone = self.lastNameLbl.text
+    
+    
+    
+    let params : Parameters = [
+    
+    "actionname": "enquiry",
+    "data": [
+    
+    ["flag": "I",
+    "institute_id": "1",
+    "instution_course_id":"2",
+        "first_name": firstname,
+        "last_name": lastname,
+        "email_address": email,
+        "phone_number" : phone,
+        "comments" : enquiry,
+        "phone_call":"1",
+        "update_received": "1"
+]
+    
+    ]
+    ]
+    
+    
+    Alamofire.request(baseUrl + "Unauthorizedata", method: .post, parameters: params, encoding: JSONEncoding.default, headers: nil).responseJSON { (response) in
+    
+    
+    
+    
+    switch response.result
+    {
+    
+    case .success(let value):
+    let json = JSON(value)
+    print(json)
+    case .failure(let error):
+    print(error)
+    
+    }
+    
+    let data = JSON(response.result.value!)
+    
+    if let responseStatus = data["STATUS"].arrayObject
+    {
+    let status = responseStatus[0] as! [String: AnyObject]
+    let s = status["STATUS"] as! String
+    
+    if s == "SUCCESS"
+    {
+    statusHud.configureContent(title: "Thanks For Enquiry ", body: "You will shortly receive email soon!")
+    let _ = self.navigationController?.popViewController(animated: true)
+    }
+    
+    else
+    {
+    let errorMsg = status["MESSAGE"] as! String
+    statusHud.configureTheme(.error)
+    statusHud.configureContent(title: "", body: errorMsg )
+    
+    }
+    
+    }
+    SwiftMessages.show(config: con, view: statusHud)
+    
+    }
+    
+    
+    }
     
     func fetchEnquiryInfo(token : String ) -> Void {
         
-                    
+        
         var token = ""
         let decodedUserinfo = self.getUserInfo()
         
@@ -79,12 +172,12 @@ class EnquiryFormViewController: UIViewController {
         }
 
                     let statusHud = MessageView.viewFromNib(layout: .StatusLine)
-                    
+        
                     statusHud.configureTheme(.success)
                     statusHud.id = "statusHud"
                     statusHud.configureContent(title: "", body: "PROCESSING YOUR DATA")
                     var con = SwiftMessages.Config()
-                    
+        
                     con.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
                     con.duration = .automatic
                     con.dimMode = .gray(interactive: false)
