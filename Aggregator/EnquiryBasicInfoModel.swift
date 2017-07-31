@@ -8,21 +8,29 @@
 
 import Foundation
 
-class UserEnquiryDetails : NSObject
-{
+class EnquiryDetailsModel : NSObject {
     
-    let first_name : String
-    let last_name : String
-    let phone : String
-    let email_address : String
-
-    init(firstName : String , lastName : String, phone : String, email_address : String)
-
- {
+    var first_name = ""
+    var last_name = ""
+    var phone = ""
+    var email_address = ""
+    var comment = ""
+    var reply = ""
+    var course_name = ""
+    var institute_logo_url = ""
     
-    self.first_name = firstName
-    self.last_name = lastName
-    self.email_address = email_address
-    self.phone = phone
-}
+    var full_name : String {
+        return first_name + " " + last_name
+    }
+    
+    init(firstName : String , lastName : String, phone : String, email_address : String, comment: String, reply: String, courseName: String, instituteLogoUrl: String) {
+        self.first_name = firstName
+        self.last_name = lastName
+        self.email_address = email_address
+        self.phone = phone
+        self.comment = comment
+        self.reply = reply
+        self.course_name = courseName
+        self.institute_logo_url = instituteLogoUrl
+    }
 }

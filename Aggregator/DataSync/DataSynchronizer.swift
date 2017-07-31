@@ -12,6 +12,7 @@ import Alamofire
 import SwiftyJSON
 
 public typealias DataSyncHandler = (Bool, String, JSON) -> Void
+public typealias DataSyncedSignal = (Bool, String) -> Void
 
 class DataSynchronizer: NSObject {
     

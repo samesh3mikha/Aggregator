@@ -943,9 +943,10 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     }
     
     func loadEnquiryDetailsView(enquiryID: String) {
+        let enquiryDetailsVM = EnquiryDetailsVM(enquiryID: enquiryID)
         if let enquiryDetailsVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EnquiryDetailsVC")
             as? EnquiryDetailsVC {
-            enquiryDetailsVC.enquiryID = enquiryID
+            enquiryDetailsVC.viewModel = enquiryDetailsVM
             self.navigationController?.pushViewController(enquiryDetailsVC, animated: true)
         }
     }

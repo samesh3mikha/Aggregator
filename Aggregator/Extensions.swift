@@ -175,13 +175,13 @@ extension UIViewController {
 
     //Helper for HUDs
     func showStatusHUD(title: String, details: String, theme: Theme, duration: SwiftMessages.Duration) {
-        let messageHud = MessageView.viewFromNib(layout: .CardView)
+        let messageHud = MessageView.viewFromNib(layout: .StatusLine)
         messageHud.id = "statusHud"
         messageHud.configureContent(title: title, body: details)
         messageHud.configureTheme(theme)
 
         var hudConfiguration = SwiftMessages.Config()
-        hudConfiguration.presentationContext = .window(windowLevel: UIWindowLevelAlert)
+        hudConfiguration.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
         hudConfiguration.dimMode = .none
         hudConfiguration.duration = duration
         

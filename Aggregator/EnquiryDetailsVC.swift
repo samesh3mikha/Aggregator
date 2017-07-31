@@ -7,17 +7,15 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 import SwiftMessages
 
 class EnquiryDetailsVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet weak var logoImageView: UIImageView!
-    @IBOutlet weak var instituteNameLabel: UILabel!
+    @IBOutlet weak var logoImageView: CustomImageView!
+    @IBOutlet weak var courseNameLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var enquiryID: String! = ""
+    var viewModel: EnquiryDetailsVM? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,46 +25,37 @@ class EnquiryDetailsVC: UIViewController, UITableViewDataSource, UITableViewDele
     }
     
     func setupViews() {
-        logoImageView.layer.shadowOffset = CGSize.zero
-        logoImageView.layer.shadowOpacity = 1.0
-        logoImageView.layer.cornerRadius = 5
-        logoImageView.sd_setImage(with: URL.init(string: "dsa"), placeholderImage: #imageLiteral(resourceName: "placeholder"))
+        navigationItem.title = "Enquiry Details"
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.navigationBar.tintColor = UIColor.black
+        logoImageView.sd_setImage(with: URL.init(string: ""), placeholderImage: #imageLiteral(resourceName: "placeholder"))
     }
     
-    // MARK: DATA DOWNLOAD
     func fetchEnquiryDetails() {
-        if enquiryID.isBlank {
-            return
-        }
-        showStatusHUD(title: "Fetching details.", details: "Please wait...", theme: .info, duration: .automatic)
         addOverlay()
+        showStatusHUD(title: "Fetching details!", details: "Please wait...", theme: .info, duration: .seconds(seconds: 10))
         
-        let params : Parameters = [
-            "actionname": "enquiry_reply ",
-            "data": [
-                ["enquiry_id": enquiryID],
-                ["flag": "S"]
-            ]
-        ]
-        DataSynchronizer.syncData(params: params, completionBlock: { [weak self] (isRequestASuccess, message, data) in
+        viewModel?.fetchEnquiryDetails(completionBlock: { [weak self] (isFetchSuccess, message) in
             guard let weakself = self else {
                 return
             }
             weakself.removeOverlay()
-            let hudTheme: Theme = (isRequestASuccess) ? .success : .error
+            let hudTheme: Theme = (isFetchSuccess) ? .success : .error
             weakself.showStatusHUD(title: "Data sync", details: message, theme: hudTheme, duration: .seconds(seconds: 10))
-            if isRequestASuccess {
-                let responseKey = "rto-form"
-                if let responseArray = data[responseKey].arrayObject as? [[String:AnyObject]] {
-                    print("responseArray ==> ", responseArray)
-                }
+            if isFetchSuccess {
+                weakself.courseNameLabel.text = weakself.viewModel?.courseName
+                weakself.logoImageView.sd_setImage(with: URL.init(string: (weakself.viewModel?.instituteLogoUrl)!), placeholderImage: #imageLiteral(resourceName: "placeholder"))
+                weakself.tableView.reloadData()
             }
         })
-    }
+        
 
+    }
+    
     // MARK: - UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 5
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -75,8 +64,8 @@ class EnquiryDetailsVC: UIViewController, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell =  tableView.dequeueReusableCell(withIdentifier: "SimpleTableViewCell")! as! SimpleTableViewCell
-        cell.titleLabel.text = "Title"
-        cell.descriptionLabel.text = "Description"
+        cell.titleLabel.text = viewModel?.titleForIndex(index: indexPath.row)
+        cell.descriptionLabel.text = viewModel?.dataForIndex(index: indexPath.row)
 
         return cell
     }

@@ -38,7 +38,7 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
     
     //MARK: Network
     func fetchPopData() {
-        showStatusHUD(title: "", details: "Fetching your data! Please wait..", theme: .info, duration: .seconds(seconds: 1))
+        showStatusHUD(title: "Syncing Data!", details: "Please wait..", theme: .success, duration: .automatic)
 
         var actionName = ""
         var flag = ""
