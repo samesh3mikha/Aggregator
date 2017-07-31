@@ -18,6 +18,7 @@
 		7DC973121F24540900DC9037 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC9730F1F24540900DC9037 /* PageViewController.swift */; };
 		7DC973131F24540900DC9037 /* CourseCompareDetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC973101F24540900DC9037 /* CourseCompareDetailsTableVC.swift */; };
 		7DC973151F24543900DC9037 /* BasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC973141F24543900DC9037 /* BasicCell.swift */; };
+		7DDE93EA1F2F2F28001B9C9D /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE93E91F2F2F28001B9C9D /* DataParser.swift */; };
 		7DFCBD2F1F26CD4D00200E08 /* CourseCompareDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */; };
 		A195EFE9BB6794EA4B5BDAB6 /* Pods_Aggregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587899B53703051B849B9405 /* Pods_Aggregator.framework */; };
 		B812E7841F1CAE4900E87926 /* WebViewPopMoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */; };
@@ -111,6 +112,7 @@
 		7DC9730F1F24540900DC9037 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		7DC973101F24540900DC9037 /* CourseCompareDetailsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCompareDetailsTableVC.swift; sourceTree = "<group>"; };
 		7DC973141F24543900DC9037 /* BasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCell.swift; sourceTree = "<group>"; };
+		7DDE93E91F2F2F28001B9C9D /* DataParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataParser.swift; path = DataSync/DataParser.swift; sourceTree = "<group>"; };
 		7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCompareDetailsModel.swift; sourceTree = "<group>"; };
 		B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewPopMoreController.swift; sourceTree = "<group>"; };
 		B860BEC71F275F1500A693D7 /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			isa = PBXGroup;
 			children = (
 				7D0C6EF01F2E30A700C7ADBF /* DataSynchronizer.swift */,
+				7DDE93E91F2F2F28001B9C9D /* DataParser.swift */,
 			);
 			name = DataSync;
 			sourceTree = "<group>";
@@ -686,6 +689,7 @@
 				C18777E81F0A3BBD00EF84A1 /* campareTableViewCell.swift in Sources */,
 				C122FB881ED45AC90044A0F0 /* RecentSearchViewController.swift in Sources */,
 				C18791CD1E8543CC00E3F502 /* customTableViewCell.swift in Sources */,
+				7DDE93EA1F2F2F28001B9C9D /* DataParser.swift in Sources */,
 				C10D220D1E8D0A0900ED268E /* Extensions.swift in Sources */,
 				C15E9C1C1E67CF2E006D5B44 /* AppDelegate.swift in Sources */,
 				B8E7E0831F29B0240025FF53 /* EnquiryBasicInfoModel.swift in Sources */,

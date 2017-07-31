@@ -227,12 +227,9 @@ class EnquiryFormViewController: UIViewController {
                                         for dict in userInfo
                                         {
 
-                                            let enquiryUserDetail = EnquiryDetailsModel.init(firstName: dict["first_name"]! as! String, lastName: dict["last_name"]! as! String, phone: dict["phone_number"]! as! String ,email_address: dict["email_address"]! as! String, comment: dict["comments"]! as! String, reply: dict["enquiry_reply_date"]! as! String, courseName: dict["course_name"]! as! String, instituteLogoUrl: dict["institute_logo"]! as! String)
+                                            let enquiryUserDetail = EnquiryDetailsModel.init(firstName: dict["first_name"]! as! String, lastName: dict["last_name"]! as! String, phone: dict["phone_number"]! as! String ,email_address: dict["email_address"]! as! String)
                                             
                                             self.enquiryFormUserdetail.append(enquiryUserDetail)
-                                          
-                                            
-                                            
                                             self.firstNameLbl.text = enquiryUserDetail.first_name
                                             self.lastNameLbl.text = enquiryUserDetail.last_name
                                             self.phoneLbl.text = enquiryUserDetail.phone

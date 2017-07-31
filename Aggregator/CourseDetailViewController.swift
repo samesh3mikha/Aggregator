@@ -115,20 +115,37 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
                     
                     let resultDicts = responseArray as! [[String:AnyObject]]
                     
-                    for dict in resultDicts
-                    {
-                        
-                            let detail =  SearchDeatils.init(institution_course_id: dict["institution_course_id"]! as! Int , course_id: dict["course_id"]! as! Int , course_name: dict["course_name"]! as! String , institute_id: dict["institute_id"]! as! Int , institute_name: dict["institute_name"]! as! String , phone: dict["phone"]! as! String , institute_image: dict["institute_image"]! as! String , institute_logo: dict["institute_logo"]! as! String , gps_lattitude: dict["gps_lattitude"]! as! Int , gps_longitude: dict["gps_longitude"]! as! Int , email_address: dict["email_address"]! as! String , website: dict["website"]! as! String , about_us: dict["about_us"]! as! String , course_description: dict["course_description"]! as! String , faculty_name: dict["faculty_name"]! as! String , course_code: dict["course_code"]! as! String , active: dict["active"]! as! Bool, institute_full_address: dict["institute_full_address"]! as! String , study_level_name: dict["study_level_name"]! as! String , country: dict["country"]! as! String , institution_type: dict["institution_type"]! as! String )
-                        
-                            self.detailArray.append(detail)
-                      
+                    for dict in resultDicts {
+                        let dataParser = DataParser(dataDictionary: dict)                        
+                        let detail =  SearchDeatils.init(
+                            institution_course_id:  dataParser.intFor(key: "institution_course_id"), 
+                            course_id:              dataParser.intFor(key: "course_id"), 
+                            course_name:            dataParser.stringFor(key: "course_name"),
+                            institute_id:           dataParser.intFor(key: "institute_id"),
+                            institute_name:         dataParser.stringFor(key: "institute_name"),
+                            phone:                  dataParser.stringFor(key: "phone"),
+                            institute_image:        dataParser.stringFor(key: "institute_image"),
+                            institute_logo:         dataParser.stringFor(key: "institute_logo"),
+                            gps_lattitude:          dataParser.intFor(key: "gps_lattitude"),
+                            gps_longitude:          dataParser.intFor(key: "gps_longitude"),
+                            email_address:          dataParser.stringFor(key: "email_address"), 
+                            website:                dataParser.stringFor(key: "website"),
+                            about_us:               dataParser.stringFor(key: "about_us"),
+                            course_description:     dataParser.stringFor(key: "course_description"),
+                            faculty_name:           dataParser.stringFor(key: "faculty_name"),
+                            course_code:            dataParser.stringFor(key: "course_code"),
+                            active:                 dataParser.boolFor(key: "active"), 
+                            institute_full_address: dataParser.stringFor(key: "institute_full_address"),
+                            study_level_name:       dataParser.stringFor(key: "study_level_name"),
+                            country:                dataParser.stringFor(key: "country"),
+                            institution_type:       dataParser.stringFor(key: "institution_type") 
+                        )
+                        self.detailArray.append(detail)
                             
                         self.courseNameLbl.text = detail.course_name
                         self.courseDetailLbl.text = detail.course_description
                         self.universityName.text = detail.institute_name
                         self.universityName.text = detail.course_name
-                        
-                        
                     }
                     
                     

@@ -39,7 +39,9 @@ class EnquiryDetailsVM: NSObject {
             if isRequestASuccess {
                 let responseKey = "rto-form"
                 if let responseArray = data[responseKey].arrayObject as? [[String:AnyObject]] {
-                    weakself.parseData(data: responseArray[0])
+                    if responseArray.count > 0 {
+                        weakself.parseData(data: responseArray[0])
+                    }
                 }
             }
             completionBlock(isRequestASuccess, message)
@@ -52,12 +54,12 @@ class EnquiryDetailsVM: NSObject {
             firstName: dataForKey(key: "first_name", data: data), 
             lastName: dataForKey(key: "last_name", data: data), 
             phone: dataForKey(key: "phone_number", data: data), 
-            email_address: dataForKey(key: "email_address", data: data), 
-            comment: dataForKey(key: "comments", data: data), 
-            reply: dataForKey(key: "enquiry_reply_date", data: data), 
-            courseName: dataForKey(key: "course_name", data: data), 
-            instituteLogoUrl: dataForKey(key: "institute_logo", data: data)
+            email_address: dataForKey(key: "email_address", data: data)
         )
+        enquiryDetailsModel?.comment = dataForKey(key: "comments", data: data)
+        enquiryDetailsModel?.reply = dataForKey(key: "enquiry_reply_date", data: data)
+        enquiryDetailsModel?.course_name = dataForKey(key: "course_name", data: data)
+        enquiryDetailsModel?.institute_logo_url = dataForKey(key: "institute_logo", data: data)
     }
     
     func dataForKey(key: String, data: [String: AnyObject]) -> String {
