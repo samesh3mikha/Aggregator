@@ -14,20 +14,21 @@ import SwiftMessages
 class EnquiryFormViewController: UIViewController {
 
     @IBOutlet weak var emquiryText: UITextView!
-    @IBOutlet weak var firstNameLbl: UILabel!
+    @IBOutlet weak var firstNameLbl: CustomBorderLabel!
    
-    @IBOutlet weak var lastNameLbl: UILabel!
+    @IBOutlet weak var lastNameLbl: CustomBorderLabel!
     
-    @IBOutlet weak var emailLbl: UILabel!
+    @IBOutlet weak var emailLbl: CustomBorderLabel!
     
-    @IBOutlet weak var phoneLbl: UILabel!
+    @IBOutlet weak var phoneLbl: CustomBorderLabel!
     
-    @IBOutlet weak var courseLbl: UILabel!
-    @IBOutlet weak var universityLbl: UILabel!
+    @IBOutlet weak var courseLbl: CustomBorderLabel!
+    @IBOutlet weak var universityLbl: CustomBorderLabel!
     
-    @IBOutlet weak var radioBtnImage1: UIImageView!
-    @IBOutlet weak var radiobtnImage2call: UIImageView!
+    @IBOutlet weak var radioBtnReceivecall: UIButton!
+   
     @IBOutlet weak var submitBtn: RoundButton!
+    @IBOutlet weak var radioBtnReceiveUpdates: UIButton!
     
     
     
@@ -53,9 +54,37 @@ class EnquiryFormViewController: UIViewController {
         self.navigationItem.title = "Enquiry Form"
         self.navigationController?.navigationBar.isHidden = false
         navigationItem.backBarButtonItem?.title = "Back"
+       self.navigationController?.navigationBar.topItem?.title = "Back"
         
         
     }
+    
+    
+    
+    
+    
+    
+    @IBAction func receivecallRadioBtn(_ sender: Any) {
+        
+        
+        
+        
+    }
+    
+    @IBAction func receivecallRadioBtnAction(_ sender: Any) {
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
     
     
     
