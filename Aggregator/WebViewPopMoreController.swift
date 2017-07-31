@@ -8,71 +8,29 @@
 
 import UIKit
 
-class WebViewPopMoreController: UIViewController {
-   
-        @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-        @IBOutlet var popupView: UIView!
-        @IBOutlet var webview: UIWebView!
-         var isWebContent: Bool!
-        var arrayOfCourses = [BasicComparedatas]()
-         var compareListId = [String]()
-    
-        @IBOutlet var crossBtn: UIButton!
-        
-        
-        override func viewDidLoad() {
-            
-            
-            super.viewDidLoad()
-            
-            
-            webview.scrollView.isScrollEnabled=false
-            heightConstraint.constant = webview.scrollView.contentSize.height
+class WebViewPopMoreController: UIViewController {   
+    @IBOutlet var webview: UIWebView!
+    @IBOutlet var crossBtn: UIButton!
 
-            
-           // let cdetail = arrayOfCourses[indexPath.section].entry_requirements
-           
-            
-            popupView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.70)
-            
-                self.navigationController?.navigationBar.isHidden = true
-                webview.isHidden = false
-                
-                let imageview = UIImageView(frame: CGRect(x: webview.frame.origin.x, y: webview.frame.origin.y, width: webview.frame.size.width, height: webview.frame.size.height))
-                
-                imageview.contentMode = .scaleAspectFill
-                
-                self.view.addSubview(imageview)
-                
-                let defaults = UserDefaults.standard
-                 
-            
-         
-            
-
+    var htmlString: String = ""
         
-                
-            
-            }
-    
-    func loadWebView(request : NSURLRequest) {
-    webview.loadRequest(request as URLRequest)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationController?.navigationBar.isHidden = true
+        
+        view.backgroundColor = UIColor.clear
+        view.isOpaque = false
+        webview.layer.borderColor = UIColor.gray.cgColor
+        webview.layer.borderWidth = 1
+        webview.layer.cornerRadius = 8
+        webview.layer.masksToBounds = true
+        webview.loadHTMLString(htmlString, baseURL: nil)
     }
-            
-            
-    
-        
-        
-        @IBAction func crossBtnClicked(_ sender: AnyObject)
-        {
-           
-            self.dismiss(animated: true, completion: nil)
-
-            
-            }
-            
-            
-                }
+                
+    @IBAction func crossBtnClicked(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
     
     
     

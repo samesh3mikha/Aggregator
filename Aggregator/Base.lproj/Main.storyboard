@@ -546,58 +546,48 @@
                         <viewControllerLayoutGuide type="top" id="yaW-Tu-kt5"/>
                         <viewControllerLayoutGuide type="bottom" id="YHC-q0-Jri"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="3Zu-yI-jMP">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="3Zu-yI-jMP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nkc-b1-Wnc">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="en9-kh-0It">
-                                        <rect key="frame" x="14" y="64" width="344" height="492"/>
-                                        <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="492" id="7o8-V5-QWg"/>
-                                        </constraints>
-                                    </webView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMo-Vp-9gv">
-                                        <rect key="frame" x="322" y="30" width="30" height="30"/>
-                                        <state key="normal" image="close"/>
-                                        <connections>
-                                            <action selector="crossBtnClicked:" destination="HHz-B9-p6q" eventType="touchUpInside" id="qkE-pc-saN"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="en9-kh-0It" firstAttribute="leading" secondItem="Nkc-b1-Wnc" secondAttribute="leading" constant="14" id="9Wg-El-SrK"/>
-                                    <constraint firstItem="uMo-Vp-9gv" firstAttribute="top" secondItem="Nkc-b1-Wnc" secondAttribute="top" constant="30" id="Hkx-qU-snk"/>
-                                    <constraint firstItem="en9-kh-0It" firstAttribute="top" secondItem="uMo-Vp-9gv" secondAttribute="bottom" constant="4" id="Kwz-hS-OhB"/>
-                                    <constraint firstItem="en9-kh-0It" firstAttribute="top" secondItem="Nkc-b1-Wnc" secondAttribute="top" constant="64" id="Lw7-EE-nkq"/>
-                                    <constraint firstAttribute="trailing" secondItem="uMo-Vp-9gv" secondAttribute="trailing" constant="23" id="REm-1g-PNG"/>
-                                    <constraint firstAttribute="bottom" secondItem="en9-kh-0It" secondAttribute="bottom" constant="12" id="rRW-bo-p2V"/>
-                                    <constraint firstAttribute="trailing" secondItem="en9-kh-0It" secondAttribute="trailing" constant="17" id="sfg-rY-d2e"/>
-                                </constraints>
+                            <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jgs-5Q-htj">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="en9-kh-0It">
+                                <rect key="frame" x="26" y="60" width="323" height="587"/>
+                                <color key="backgroundColor" red="0.36078431372549019" green="0.38823529411764707" blue="0.40392156862745099" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMo-Vp-9gv">
+                                <rect key="frame" x="319" y="30" width="30" height="30"/>
+                                <state key="normal" image="close"/>
+                                <connections>
+                                    <action selector="crossBtnClicked:" destination="HHz-B9-p6q" eventType="touchUpInside" id="qkE-pc-saN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Nkc-b1-Wnc" firstAttribute="leading" secondItem="3Zu-yI-jMP" secondAttribute="leading" id="9qX-kS-c8v"/>
-                            <constraint firstItem="Nkc-b1-Wnc" firstAttribute="top" secondItem="3Zu-yI-jMP" secondAttribute="top" id="PGh-no-tPa"/>
-                            <constraint firstItem="Nkc-b1-Wnc" firstAttribute="bottom" secondItem="YHC-q0-Jri" secondAttribute="top" id="agZ-D1-Fn2"/>
-                            <constraint firstAttribute="trailing" secondItem="Nkc-b1-Wnc" secondAttribute="trailing" id="zs1-UL-AAS"/>
+                            <constraint firstItem="uMo-Vp-9gv" firstAttribute="trailing" secondItem="en9-kh-0It" secondAttribute="trailing" id="Ekt-qn-UJF"/>
+                            <constraint firstItem="en9-kh-0It" firstAttribute="leading" secondItem="3Zu-yI-jMP" secondAttribute="leadingMargin" constant="10" id="Sew-nz-ot1"/>
+                            <constraint firstItem="jgs-5Q-htj" firstAttribute="leading" secondItem="3Zu-yI-jMP" secondAttribute="leading" id="SoV-99-fbu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="en9-kh-0It" secondAttribute="trailing" constant="10" id="Zf2-hw-knH"/>
+                            <constraint firstItem="en9-kh-0It" firstAttribute="top" secondItem="uMo-Vp-9gv" secondAttribute="bottom" id="mhU-73-p68"/>
+                            <constraint firstItem="en9-kh-0It" firstAttribute="top" secondItem="yaW-Tu-kt5" secondAttribute="bottom" constant="40" id="nZY-gh-C0T"/>
+                            <constraint firstAttribute="trailing" secondItem="jgs-5Q-htj" secondAttribute="trailing" id="pJj-Su-PKm"/>
+                            <constraint firstItem="YHC-q0-Jri" firstAttribute="top" secondItem="jgs-5Q-htj" secondAttribute="bottom" id="r1Q-ke-dVx"/>
+                            <constraint firstItem="YHC-q0-Jri" firstAttribute="top" secondItem="en9-kh-0It" secondAttribute="bottom" constant="20" id="uz2-ES-DTe"/>
+                            <constraint firstItem="jgs-5Q-htj" firstAttribute="top" secondItem="yaW-Tu-kt5" secondAttribute="bottom" id="w4s-EO-XEK"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="crossBtn" destination="uMo-Vp-9gv" id="9CV-3X-EfI"/>
-                        <outlet property="heightConstraint" destination="7o8-V5-QWg" id="JUq-OD-Qn2"/>
-                        <outlet property="popupView" destination="Nkc-b1-Wnc" id="BDo-YK-gwM"/>
                         <outlet property="webview" destination="en9-kh-0It" id="igs-fp-pyr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GyN-VW-TxJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3511.875" y="-1469.3661971830986"/>
+            <point key="canvasLocation" x="3511.1999999999998" y="-1469.4152923538231"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="0PF-V7-JLV">

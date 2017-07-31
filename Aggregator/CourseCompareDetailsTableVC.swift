@@ -98,28 +98,29 @@ class CourseCompareDetailsTableVC: UIViewController,UITableViewDelegate,UITableV
         return cell
     }
     
-    func ReadmoreActn(_ sender: Any) {
-          let storyboard = UIStoryboard(name: "Main", bundle: nil)
-          let newVC = storyboard.instantiateViewController(withIdentifier: "ReadmoreVC") as! WebViewPopMoreController
-      
-                newVC.isWebContent = true
-                newVC.arrayOfCourses = courses
-                svc = newVC
-                self.present(newVC, animated: true, completion: nil)
+    func ReadmoreActn(_ sender: UIButton) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let newVC = storyboard.instantiateViewController(withIdentifier: "ReadmoreVC") as! WebViewPopMoreController
+        svc = newVC
+        let cdetail = viewModel?.detailsForSection(section: sender.tag)
+        newVC.htmlString = cdetail!
+        newVC.modalPresentationStyle = .overCurrentContext
+        self.present(newVC, animated: true, completion: nil)
+//        self.pre
         
         
-        func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-            
-            if (navigationType == UIWebViewNavigationType.formSubmitted) {
-                let VC = self.storyboard?.instantiateViewController(withIdentifier: "ReadmoreVC") as? WebViewPopMoreController
-                
-                let navigationController = UINavigationController(rootViewController: VC!)
-                self.navigationController?.present(navigationController, animated: true, completion:nil)
-                
-                
-            }
-            return true
-        }
+//        func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+//            
+//            if (navigationType == UIWebViewNavigationType.formSubmitted) {
+//                let VC = self.storyboard?.instantiateViewController(withIdentifier: "ReadmoreVC") as? WebViewPopMoreController
+//                
+//                let navigationController = UINavigationController(rootViewController: VC!)
+//                self.navigationController?.present(navigationController, animated: true, completion:nil)
+//                
+//                
+//            }
+//            return true
+//        }
 
     }
     
