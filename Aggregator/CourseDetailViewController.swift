@@ -113,46 +113,44 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
                     allAutosuggestionArray.removeAll()
                     countryAutosuggestionArray.removeAll()
                     
-                    let resultDicts = responseArray as! [[String:AnyObject]]
-                    
-                    for dict in resultDicts {
-                        let dataParser = DataParser(dataDictionary: dict)                        
-                        let detail =  SearchDeatils.init(
-                            institution_course_id:  dataParser.intFor(key: "institution_course_id"), 
-                            course_id:              dataParser.intFor(key: "course_id"), 
-                            course_name:            dataParser.stringFor(key: "course_name"),
-                            institute_id:           dataParser.intFor(key: "institute_id"),
-                            institute_name:         dataParser.stringFor(key: "institute_name"),
-                            phone:                  dataParser.stringFor(key: "phone"),
-                            institute_image:        dataParser.stringFor(key: "institute_image"),
-                            institute_logo:         dataParser.stringFor(key: "institute_logo"),
-                            gps_lattitude:          dataParser.intFor(key: "gps_lattitude"),
-                            gps_longitude:          dataParser.intFor(key: "gps_longitude"),
-                            email_address:          dataParser.stringFor(key: "email_address"), 
-                            website:                dataParser.stringFor(key: "website"),
-                            about_us:               dataParser.stringFor(key: "about_us"),
-                            course_description:     dataParser.stringFor(key: "course_description"),
-                            faculty_name:           dataParser.stringFor(key: "faculty_name"),
-                            course_code:            dataParser.stringFor(key: "course_code"),
-                            active:                 dataParser.boolFor(key: "active"), 
-                            institute_full_address: dataParser.stringFor(key: "institute_full_address"),
-                            study_level_name:       dataParser.stringFor(key: "study_level_name"),
-                            country:                dataParser.stringFor(key: "country"),
-                            institution_type:       dataParser.stringFor(key: "institution_type") 
-                        )
-                        self.detailArray.append(detail)
+                    if let resultDicts = responseArray as? [[String:AnyObject]] {
+                        if resultDicts.count > 0 {
+                            let dict = resultDicts.first 
+                            let dataParser = DataParser(dataDictionary: dict!)                        
+                            let detail =  SearchDeatils.init(
+                                institution_course_id:  dataParser.intFor(key: "institution_course_id"), 
+                                course_id:              dataParser.intFor(key: "course_id"), 
+                                course_name:            dataParser.stringFor(key: "course_name"),
+                                institute_id:           dataParser.intFor(key: "institute_id"),
+                                institute_name:         dataParser.stringFor(key: "institute_name"),
+                                phone:                  dataParser.stringFor(key: "phone"),
+                                institute_image:        dataParser.stringFor(key: "institute_image"),
+                                institute_logo:         dataParser.stringFor(key: "institute_logo"),
+                                gps_lattitude:          dataParser.intFor(key: "gps_lattitude"),
+                                gps_longitude:          dataParser.intFor(key: "gps_longitude"),
+                                email_address:          dataParser.stringFor(key: "email_address"), 
+                                website:                dataParser.stringFor(key: "website"),
+                                about_us:               dataParser.stringFor(key: "about_us"),
+                                course_description:     dataParser.stringFor(key: "course_description"),
+                                faculty_name:           dataParser.stringFor(key: "faculty_name"),
+                                course_code:            dataParser.stringFor(key: "course_code"),
+                                active:                 dataParser.boolFor(key: "active"), 
+                                institute_full_address: dataParser.stringFor(key: "institute_full_address"),
+                                study_level_name:       dataParser.stringFor(key: "study_level_name"),
+                                country:                dataParser.stringFor(key: "country"),
+                                institution_type:       dataParser.stringFor(key: "institution_type") 
+                            )
+                            self.detailArray.append(detail)
                             
-                        self.courseNameLbl.text = detail.course_name
-                        self.courseDetailLbl.text = detail.course_description
-                        self.universityName.text = detail.institute_name
-                        self.universityName.text = detail.course_name
+                            self.courseNameLbl.text = detail.course_name
+                            self.courseDetailLbl.text = detail.course_description
+                            self.universityName.text = detail.institute_name
+                            self.universityName.text = detail.course_name
+                        }
                     }
                     
-                    
-                    
                 }
-                
-                
+                    
                     
                 if let responseArray = data["INSTITUTION_COURSE_SUBJECT"].arrayObject
                      {
