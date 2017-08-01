@@ -46,13 +46,14 @@ class DataSynchronizer: NSObject {
             switch response.result {
             case .success(let value):                
                 let data = JSON(value)
+//                print("Data --", data)
                 if let responseStatus = data["STATUS"].arrayObject {
                     let status = responseStatus[0] as! [String: AnyObject]
                     let statusMessage = status["STATUS"] as! String
                     responseMessage = statusMessage
                     if statusMessage == "SUCCESS" {
                         isRequestSuccessful = true
-                        responseMessage = "Data synced successfully!"
+                        responseMessage = status["MESSAGE"] as! String //"Data synced successfully!"
                     }
                 }
                 completionBlock(true, responseMessage, data)

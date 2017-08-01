@@ -11,8 +11,9 @@ import SwiftyJSON
 import SwiftMessages
 import Alamofire
 
-//let baseUrl = "http://202.129.251.174:8089/api/main/"
-let baseUrl = "http://192.168.1.11:8089/api/main/"
+let baseUrl = "http://202.129.251.174:8089/api/main/"
+//let baseUrl = "http://192.168.1.11:8089/api/main/"
+//let baseUrl = "https://educonnect.online/"
 //let baseUrl = "https://educonnect.meshed.online/api/main/"
 
 
@@ -23,14 +24,14 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
    var bookMarkArray = [Courses]()
     
     var selectedIDs = [String]()
-   
     
-    var checked = [Bool]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       compareBtn.isUserInteractionEnabled = true
-        compareBtn.alpha = 1
+        
+        self.selectedIDs.removeAll()
+        compareBtn.isUserInteractionEnabled = false
+        compareBtn.alpha = 0.5
     }
     
     
@@ -43,12 +44,8 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
     
     
     override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.isHidden = true
        
-        self.checked.removeAll()
-        self.selectedIDs.removeAll()
-       self.navigationController?.navigationBar.isHidden = true
-        compareBtn.isUserInteractionEnabled = true
-        compareBtn.alpha = 0.5
         
         let pref = UserDefaults.standard
         if let decoded = pref.object(forKey: "userinfo")
@@ -65,19 +62,16 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
     func addChildVC(){
         if let pageVC = self.storyboard?.instantiateViewController(withIdentifier: "pagecontrollerVCID") as? PageViewController {
             _ = UINavigationController(rootViewController: pageVC)
-            
-            if self.TableView.indexPathsForSelectedRows != nil{
+            if selectedIDs.count > 0 {
                 pageVC.bookmarkedCourseIDs = selectedIDs
+                self.navigationController?.pushViewController(pageVC, animated: false)
             }
-            self.navigationController?.pushViewController(pageVC, animated: false)
-            
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {        
         if segue.identifier == "segueToPageVC"{
             if let destVC = segue.destination as? PageViewController{
-                //                destVC.compareListId = [self.compareListId]
                 destVC.bookmarkedCourseIDs = selectedIDs           
             }
         }
@@ -88,8 +82,6 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
     //MARK: Network
     
     func fetchBookmark(token : String) -> Void {
-        
-        popUpArray.removeAll()
         let statusHud = MessageView.viewFromNib(layout: .StatusLine)
         statusHud.configureContent(title: "", body: "Fetching your data! Please wait..")
         statusHud.id = "statusHud"
@@ -160,16 +152,7 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
                                 let d = Courses.init(course_id: "\(dict["institution_course_id"]!)", courseName: "\(dict["course_name"]!)", instituteName: "\(dict["institute_name"]!)", studyLevel: "", country: "", institutionType: "", image: "\(dict["institute_logo"]!)", isWishlisted: false, isEnquired: false, isBookmarked: false)
                                 self.bookMarkArray.append(d)
                             }
-                            
-                            
-                            for  i in  0...self.bookMarkArray.count - 1
-                            {
-                                self.checked.insert(false, at: i)
-                            }
                            self.TableView.reloadData()
-                            
-                            
-                            
                         }
                         
                     }
@@ -257,31 +240,21 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
-        
-      
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ResultCellID")! as! campareTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ResultCellID")! as! campareTableViewCell
         
         //CHECK FOR TICK MARK
-        
-        if !checked[indexPath.section] && checked.count > 0 {
-            cell.tickImage.isHidden = true
-        } else  {
+        if selectedIDs.contains(bookMarkArray[indexPath.section].course_id) {
             cell.tickImage.isHidden = false
+        } else {
+            cell.tickImage.isHidden = true
         }
 
-        
         cell.courseName.text = bookMarkArray[indexPath.section].courseName
         cell.uniName.text = bookMarkArray[indexPath.section].instituteName
         cell.locationName.text = bookMarkArray[indexPath.section].instituteName
         cell.uniLogoImageview.sd_setImage(with: URL.init(string: bookMarkArray[indexPath.section].image), placeholderImage: #imageLiteral(resourceName: "placeholder"))
         
-        
-            return cell
-            
-        
-        
+        return cell
     }
 
     
@@ -305,30 +278,17 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
         let cell = tableView.cellForRow(at: indexPath) as! campareTableViewCell
         
       
-                if let index = selectedIDs.index(of: bookMarkArray[indexPath.section].course_id)
-                {
-                    cell.tickImage.isHidden = true
-                    selectedIDs.remove(at: index)
-                    checked[indexPath.section] = false
-                    
-                }
-                
-            
-            else if (selectedIDs.count < selectionLimit){
-                cell.tickImage.isHidden = false
-                checked[indexPath.section] = true
-                selectedIDs.append(bookMarkArray[indexPath.section].course_id)
-            }
-        
-        else
-        
-                {
-                    statusHud.configureTheme(.warning)
-                    statusHud.configureContent(title: "", body: "Please select three or less courses to compare")
-                    SwiftMessages.show(config: con, view: statusHud)
-        
+        if let index = selectedIDs.index(of: bookMarkArray[indexPath.section].course_id) {
+            cell.tickImage.isHidden = true
+            selectedIDs.remove(at: index)
+        } else if (selectedIDs.count < selectionLimit) {
+            cell.tickImage.isHidden = false
+            selectedIDs.append(bookMarkArray[indexPath.section].course_id)
+        } else {
+            statusHud.configureTheme(.warning)
+            statusHud.configureContent(title: "", body: "Please select three or less courses to compare")
+            SwiftMessages.show(config: con, view: statusHud)
         }
-        
         
         if (selectedIDs.count <= selectionLimit && selectedIDs.count > 1)
         {
@@ -341,6 +301,8 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
             compareBtn.isUserInteractionEnabled = false
             compareBtn.alpha = 0.5
         }    
+        print("selectedIDs ---", selectedIDs)
+        
     }
 
     

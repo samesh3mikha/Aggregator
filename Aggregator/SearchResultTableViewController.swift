@@ -42,7 +42,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        popViewHolder.roundCorners([.topLeft,.topRight], radius: 6)
+//        popViewHolder.roundCorners([.topLeft,.topRight], radius: 6)
         loginViewBtnHolder.roundCorners([.topLeft,.topRight], radius: 6)
         
     }
@@ -51,6 +51,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         super.viewDidLoad()
         setupOverlay()
         self.navigationController?.navigationBar.isHidden = true
+        self.view.backgroundColor = UIColor.white//UIColor(patternImage: #imageLiteral(resourceName: "patternBackground"))
 
         viewModel = SearchResultViewModel.init()
         courseArray.removeAll()
@@ -77,9 +78,11 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.isHidden = true
         suggestionTableView.delegate = self
         suggestionTableView.dataSource = self
-        
+        suggestionTableView.isHidden = true
+
         
         //tableView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "patternBackground"))
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -117,21 +120,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-
-        self.view.backgroundColor = UIColor.white//UIColor(patternImage: #imageLiteral(resourceName: "patternBackground"))
-        self.searchHolderView.backgroundColor =  UIColor.white// UIColor(patternImage: #imageLiteral(resourceName: "patternBackground"))
-        tableView.isHidden = true
-        suggestionTableView.isHidden = true
-        
-        let decodedUserinfo = self.getUserInfo()
-        if !decodedUserinfo.access_token.isBlank {
-            loginViewBtnHolder.isHidden = true
-            self.FetchUserInfo()
-        }
-        else
-        {
-            loginViewBtnHolder.isHidden = true
-        }
+        prepareUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -139,11 +128,17 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         searchController.isActive = true
     }
     
-    func accessToken() -> String {
-        let decodedUserinfo = self.getUserInfo()
-        return decodedUserinfo.access_token
+    func prepareUI() {
+        if !DataSynchronizer.getAccessToken().isBlank {
+            loginViewBtnHolder.isHidden = true
+            popViewHolder.isHidden = false
+            self.FetchUserInfo()
+        } else {
+            loginViewBtnHolder.isHidden = false
+            popViewHolder.isHidden = true
+        }
     }
-    
+        
     //MARK: Search bar delegates
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
     }
@@ -212,7 +207,6 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     @IBAction func saveButtonClicked(_ sender: Any) {
         let searchText = searchController.searchBar.text
         addOverlay()
-        showStatusHUD(title: "Saving Search", details: "Please wait...", theme: .info, duration: .automatic)
 
         viewModel?.saveSearch(searchword: searchText!, option: currentSearchOption(), completionBlock: { [weak self] (isSaveCompleted, message) in
             guard let weakself = self else {
@@ -260,7 +254,6 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
                     let enquiryCount = "\(userInfo["enquiry_count"]!)"
                     weakself.enquiryCountLbl.text = enquiryCount
                     weakself.bookmarkCountLbl.text = bookmarkCount
-                    weakself.messageHud.configureContent(title: "", body: "Fetching complete")
                 } else {
                     weakself.showStatusHUD(title: "Error", details: message, theme: .error, duration: .automatic)
                 }

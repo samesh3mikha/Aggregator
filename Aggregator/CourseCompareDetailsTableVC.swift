@@ -40,10 +40,6 @@ class CourseCompareDetailsTableVC: UIViewController,UITableViewDelegate,UITableV
         self.navigationController?.navigationBar.isHidden = true
         let closeTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CourseCompareDetailsTableVC.closeViewClicked))
          self.closeView.addGestureRecognizer(closeTap)
-        
-        for course in self.courses{
-            print("course_name ----> ", course.course_name)
-        }
     }
 
     func closeViewClicked() {
@@ -83,19 +79,26 @@ class CourseCompareDetailsTableVC: UIViewController,UITableViewDelegate,UITableV
         cell.setSomething(label: name)
 
         cell.webView.tag = indexPath.row
-       cell.webView.isUserInteractionEnabled = true
+        cell.webView.isUserInteractionEnabled = true
         cell.webView.backgroundColor = UIColor.white
-        
         cell.webView.delegate = self as UIWebViewDelegate
-//        let cdetail = courses[indexPath.row].entry_requirements
         let cdetail = viewModel?.detailsForSection(section: indexPath.row)
         cell.webView.loadHTMLString(cdetail!, baseURL: nil)
         cell.selectionStyle = .none
        
-         cell.readmoreBtn.tag = indexPath.row
+        cell.readmoreBtn.isEnabled = false
+        cell.readmoreBtn.tag = indexPath.row
         cell.readmoreBtn.addTarget(self, action: #selector(CourseCompareDetailsTableVC.ReadmoreActn(_:)), for: .touchUpInside)
         
         return cell
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        if let cell = self.tableView.cellForRow(at: IndexPath(row: webView.tag, section: 0)) as? BasicCell {
+            if webView.scrollView.contentSize.height > webView.frame.size.height {
+                cell.readmoreBtn.isEnabled = true
+            }
+        }
     }
     
     func ReadmoreActn(_ sender: UIButton) {

@@ -47,6 +47,7 @@ class SearchResultViewModel: NSObject {
             "actionname": "favorite_search",
             "data": data
         ]
+        print("params ", params)
         DataSynchronizer.syncData(params: params, completionBlock: { (isRequestASuccess, message, data) in
             completionBlock(isRequestASuccess, message)
         })

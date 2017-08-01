@@ -14,10 +14,11 @@ import SwiftMessages
  public typealias ShowSearchResultHandler = (Int, String) -> Void
  public typealias ShowEnquiryDetailsHandler = (String) -> Void
 
-var popUpArray = [PopupViewData]()
 class PopPresentationViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
     @IBOutlet var tableView: UITableView!
+    
+    var popUpArray = [PopupViewData]()
     var buttonIndex = 1
     var showSearchResultHandlerBlock: ShowSearchResultHandler?
     var showEnquiryDetailsHandlerBlock: ShowEnquiryDetailsHandler?
@@ -38,7 +39,8 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
     
     //MARK: Network
     func fetchPopData() {
-        showStatusHUD(title: "Syncing Data!", details: "Please wait..", theme: .success, duration: .automatic)
+        popUpArray = []
+        showStatusHUD(title: "Syncing Data!", details: "Please wait..", theme: .success, duration: .seconds(seconds: 0.2))
 
         var actionName = ""
         var flag = ""
@@ -71,7 +73,6 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
             }
             if isRequestASuccess {
                 if let responseArray = data[expectedKey].arrayObject {
-                    print("responseArray --> ", responseArray)
                     let popData = responseArray as! [[String:AnyObject]]
                     for dict in popData {
                         var shortCmnt = ""
@@ -106,12 +107,12 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
                         } else if weakself.buttonIndex == 3 {
                             e = PopupViewData.init(courseID: "\(dict["institution_course_id"]!)" ,courseName: "\(dict["course_name"]!)", logo: "\(dict["institute_logo"]!)", shortComment: shortCmnt )
                         }
-                        popUpArray.append(e!)
+                        weakself.popUpArray.append(e!)
                     }
                     weakself.tableView.reloadData()
                 }
             } else {
-                weakself.showStatusHUD(title: "Error", details: message, theme: .error, duration: .automatic)
+                weakself.showStatusHUD(title: "Error", details: message, theme: .error, duration: .seconds(seconds: 0.3))
             }
         })
     }
@@ -198,7 +199,7 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
         } else if buttonIndex == 2 {
             if let handlerBlock = self.showEnquiryDetailsHandlerBlock {                        
                 self.dismiss(animated: true, completion: {
-                    handlerBlock(popUpArray[indexPath.row].courseID)
+                    handlerBlock(self.popUpArray[indexPath.row].courseID)
                 })
             }
             
