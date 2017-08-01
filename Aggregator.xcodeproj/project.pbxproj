@@ -22,6 +22,7 @@
 		7DFCBD2F1F26CD4D00200E08 /* CourseCompareDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */; };
 		A195EFE9BB6794EA4B5BDAB6 /* Pods_Aggregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587899B53703051B849B9405 /* Pods_Aggregator.framework */; };
 		B812E7841F1CAE4900E87926 /* WebViewPopMoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */; };
+		B83A782E1F3030DC002753AE /* RadioButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83A782D1F3030DC002753AE /* RadioButton.swift */; };
 		B83BFB501F2F41030006529D /* CustomBorderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B83BFB4F1F2F41030006529D /* CustomBorderLabel.swift */; };
 		B860BEC81F275F1500A693D7 /* SearchResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BEC71F275F1500A693D7 /* SearchResultTableViewController.swift */; };
 		B860BECC1F275FAB00A693D7 /* EntryRequirementmodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BECB1F275FAB00A693D7 /* EntryRequirementmodel.swift */; };
@@ -29,6 +30,7 @@
 		B860BED21F27616300A693D7 /* SearchDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BED11F27616300A693D7 /* SearchDetailModel.swift */; };
 		B860BED61F27644700A693D7 /* EnquiryFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BED51F27644700A693D7 /* EnquiryFormViewController.swift */; };
 		B860BED81F276A2700A693D7 /* UniversityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B860BED71F276A2700A693D7 /* UniversityViewController.swift */; };
+		B8C14DD21F30713C00EC7467 /* customTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8C14DD11F30713C00EC7467 /* customTextView.swift */; };
 		B8E7E0831F29B0240025FF53 /* EnquiryBasicInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8E7E0821F29B0240025FF53 /* EnquiryBasicInfoModel.swift */; };
 		B8F3CAEE1F15E59F00E5B552 /* BasicCompreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F3CAED1F15E59F00E5B552 /* BasicCompreData.swift */; };
 		B8F3CAF01F18BD9C00E5B552 /* Cmodal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8F3CAEF1F18BD9C00E5B552 /* Cmodal.swift */; };
@@ -116,6 +118,7 @@
 		7DDE93E91F2F2F28001B9C9D /* DataParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataParser.swift; path = DataSync/DataParser.swift; sourceTree = "<group>"; };
 		7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCompareDetailsModel.swift; sourceTree = "<group>"; };
 		B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewPopMoreController.swift; sourceTree = "<group>"; };
+		B83A782D1F3030DC002753AE /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
 		B83BFB4F1F2F41030006529D /* CustomBorderLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBorderLabel.swift; sourceTree = "<group>"; };
 		B860BEC71F275F1500A693D7 /* SearchResultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultTableViewController.swift; sourceTree = "<group>"; };
 		B860BECB1F275FAB00A693D7 /* EntryRequirementmodel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntryRequirementmodel.swift; sourceTree = "<group>"; };
@@ -123,6 +126,7 @@
 		B860BED11F27616300A693D7 /* SearchDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchDetailModel.swift; sourceTree = "<group>"; };
 		B860BED51F27644700A693D7 /* EnquiryFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnquiryFormViewController.swift; sourceTree = "<group>"; };
 		B860BED71F276A2700A693D7 /* UniversityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UniversityViewController.swift; sourceTree = "<group>"; };
+		B8C14DD11F30713C00EC7467 /* customTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customTextView.swift; sourceTree = "<group>"; };
 		B8E7E0821F29B0240025FF53 /* EnquiryBasicInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnquiryBasicInfoModel.swift; sourceTree = "<group>"; };
 		B8F3CAED1F15E59F00E5B552 /* BasicCompreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCompreData.swift; sourceTree = "<group>"; };
 		B8F3CAEF1F18BD9C00E5B552 /* Cmodal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cmodal.swift; sourceTree = "<group>"; };
@@ -283,6 +287,8 @@
 				B8E7E0821F29B0240025FF53 /* EnquiryBasicInfoModel.swift */,
 				C1968EAC1EEE732A002594E7 /* UserProfileDetails.swift */,
 				B83BFB4F1F2F41030006529D /* CustomBorderLabel.swift */,
+				B83A782D1F3030DC002753AE /* RadioButton.swift */,
+				B8C14DD11F30713C00EC7467 /* customTextView.swift */,
 			);
 			name = HelperClasses;
 			sourceTree = "<group>";
@@ -685,6 +691,7 @@
 				7DC973111F24540900DC9037 /* MainViewController.swift in Sources */,
 				C1B6C07A1E80F1900054BBA3 /* CompareViewController.swift in Sources */,
 				C161C5051EDEBE090032F024 /* EnquiryTableViewCell.swift in Sources */,
+				B83A782E1F3030DC002753AE /* RadioButton.swift in Sources */,
 				C16372D31ECC070600E26691 /* roundView.swift in Sources */,
 				C1C76B7A1EFA3391008EE9CD /* LabelCollectionViewCell.swift in Sources */,
 				C1B6C0881E812B690054BBA3 /* CustomTxtField.swift in Sources */,
@@ -702,6 +709,7 @@
 				C1B6C0831E811FCF0054BBA3 /* RegistrationViewController.swift in Sources */,
 				B860BED01F27602600A693D7 /* subjectModule.swift in Sources */,
 				B8F3CAF01F18BD9C00E5B552 /* Cmodal.swift in Sources */,
+				B8C14DD21F30713C00EC7467 /* customTextView.swift in Sources */,
 				C1FF822C1EFB7A8200B8EB18 /* EditConfirmationView.swift in Sources */,
 				C1B6C07C1E80F1B90054BBA3 /* ProfileViewController.swift in Sources */,
 				C13A681F1ECF0F1F0039A72C /* GlobalVariables.swift in Sources */,

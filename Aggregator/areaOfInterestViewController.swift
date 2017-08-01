@@ -152,6 +152,7 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
             "data": [
                 
                 ["flag": "I"],
+                 ["checked_only": "Y"],
                 ["area_of_interest": id],
                 
             ]

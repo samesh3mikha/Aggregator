@@ -21,7 +21,8 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
     var Ditems = [String]()
     var universityName: String = ""
     var CourseName : String = ""
-    
+    var collegeid: String = ""
+    var courseid: String = ""
     
     @IBOutlet weak var BackGroundUniImage: UIImageView!
     
@@ -75,7 +76,7 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
         self.navigationItem.title = "University Details"
         self.navigationController?.navigationBar.barStyle = UIBarStyle.black
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        
+        BackGroundUniImage.sd_setImage(with: URL.init(string: ""), placeholderImage: #imageLiteral(resourceName: "placeholder"))
         
         
         

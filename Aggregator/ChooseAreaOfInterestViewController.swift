@@ -70,6 +70,8 @@ class ChooseAreaOfInterestViewController: UIViewController,UITableViewDelegate,U
             "data": [
                 
                 ["flag": "I"],
+                 ["checked_only": "Y"],
+                
                 ["area_of_interest": IdtoPost],
                 
             ]

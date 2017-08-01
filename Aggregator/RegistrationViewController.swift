@@ -45,7 +45,8 @@ class RegistrationViewController: UIViewController {
             
             else if((passwordLbl.text?.isValidPassword)! && passwordLbl.text != confirmPasswordLbl.text)
             {
-                print("Password and Confirm password doesn't match")
+               
+
             }
             
             else if(!(passwordLbl.text?.isValidPassword)! )

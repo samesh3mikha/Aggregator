@@ -20,6 +20,8 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet weak var universityName: UILabel!
     @IBOutlet weak var CourseDetailTableview: UITableView!
     
+    
+       var collegeid: String = ""
        var courseName: String = ""
        var  myId: String = ""
        var detailArray = [SearchDeatils]()
@@ -52,6 +54,7 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
         self.navigationController?.pushViewController(EnquiryViewController, animated: true)
          EnquiryViewController.CourseName = self.courseNameLbl.text!
          EnquiryViewController.universityName = self.universityName.text!
+        
           }
     
     
