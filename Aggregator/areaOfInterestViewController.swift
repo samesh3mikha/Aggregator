@@ -28,7 +28,7 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
         super.viewWillDisappear(animated)
         self.dismiss(animated: true, completion: nil)
     }
-  
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -65,6 +65,7 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         collectionView?.collectionViewLayout.invalidateLayout()
+        collectionView?.reloadData()
     }
     
     
@@ -123,8 +124,6 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
         if !decodedUserinfo.access_token.isBlank
         {
             
-            
-            
             self.updateAOI(id: String(id), token: decodedUserinfo.access_token, indexpath: indexPath)
             
             
@@ -134,7 +133,7 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
                     }
         
         
-
+  
                 
         
     }

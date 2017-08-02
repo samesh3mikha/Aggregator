@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="850.394px" height="850.394px" viewBox="0 0 850.394 850.394" enable-background="new 0 0 850.394 850.394"
+	 xml:space="preserve">
+<g>
+	<path fill="#28B67A" d="M705.595,836.22H144.799c-72.143,0-130.626-58.483-130.626-130.626V144.799
+		c0-72.143,58.483-130.626,130.626-130.626h560.796c72.143,0,130.626,58.483,130.626,130.626v560.796
+		C836.22,777.737,777.737,836.22,705.595,836.22z"/>
+	<g>
+		<path fill="#FFFFFF" d="M481.983,303.512L303.511,481.983c-31.311,31.311-82.26,31.312-113.572-0.001
+			c-31.312-31.312-31.312-82.261-0.001-113.572s82.26-31.311,113.572,0.001l0,0l64.899-64.899l0,0
+			c-67.205-67.205-176.165-67.205-243.369,0s-67.204,176.165,0,243.37l0,0c67.205,67.205,176.165,67.205,243.369,0l56.787-56.787
+			l64.899-64.899l56.786-56.786c31.311-31.311,82.26-31.311,113.572,0.001s31.312,82.26,0,113.572s-82.26,31.312-113.572-0.001
+			l-64.899,64.899c67.205,67.205,176.165,67.205,243.37,0s67.205-176.165,0-243.369l0,0
+			C658.148,236.307,549.188,236.307,481.983,303.512z"/>
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="514.3232" y1="519.7452" x2="457.7568" y2="452.332">
+			<stop  offset="0" style="stop-color:#FFFFFF"/>
+			<stop  offset="0.2552" style="stop-color:#FCFCFC"/>
+			<stop  offset="0.4273" style="stop-color:#F3F3F4"/>
+			<stop  offset="0.5749" style="stop-color:#E4E4E5"/>
+			<stop  offset="0.7087" style="stop-color:#CFCFD0"/>
+			<stop  offset="0.8332" style="stop-color:#B3B3B5"/>
+			<stop  offset="0.9492" style="stop-color:#919295"/>
+			<stop  offset="1" style="stop-color:#808184"/>
+		</linearGradient>
+		<polygon fill="url(#SVGID_1_)" points="490.096,425.196 425.197,490.095 481.984,546.881 546.883,481.982 		"/>
+	</g>
+</g>
+<rect x="0" fill="none" width="850.394" height="850.394"/>
+</svg>

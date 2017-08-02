@@ -75,7 +75,7 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
         con.dimMode = .none
         //   let id = String(courseArray[sender.tag].course_id)!
         var token = ""
-        var courseId = myId
+        let courseId = myId
         let decodedUserinfo = self.getUserInfo()
         if !decodedUserinfo.access_token.isBlank
         {

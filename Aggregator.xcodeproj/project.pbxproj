@@ -891,6 +891,7 @@
 			baseConfigurationReference = E16A137FB6D19379B4E0DDA5 /* Pods-Aggregator.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Aggregator/Aggregator.entitlements;
 				DEVELOPMENT_TEAM = Z83ZNTZ5VZ;
@@ -916,6 +917,7 @@
 			baseConfigurationReference = 28B740BAE84F5133CF7A97C1 /* Pods-Aggregator.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Aggregator/Aggregator.entitlements;
 				DEVELOPMENT_TEAM = Z83ZNTZ5VZ;

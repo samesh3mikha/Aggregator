@@ -87,7 +87,7 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
         
      self.UniImageView.sd_setImage(with: URL.init(string: universityDetails.institute_logo))
        self.BackGroundUniImage.sd_setImage(with: URL.init(string: universityDetails.institute_image))
-      
+       
         DispatchQueue.main.async {
             
            self.CourseName = universityDetails.course_name
@@ -144,7 +144,7 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
             } else {
                 blurEffect = UIBlurEffect(style: UIBlurEffectStyle.light)
             }
-             let vibrancyEffect = UIVibrancyEffect(blurEffect: blurEffect)
+             _ = UIVibrancyEffect(blurEffect: blurEffect)
             
             
             let effectView = UIVisualEffectView.init(effect: blurEffect)
@@ -164,7 +164,9 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
             self.BackGroundUniImage.addSubview(effectView)
             
             
+            
      }
+        
         
         }
         
@@ -190,7 +192,7 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
          //   let id = String(courseArray[sender.tag].course_id)!
             
             var token = ""
-            var universityID = myId
+            let universityID = myId
             let decodedUserinfo = self.getUserInfo()
             if !decodedUserinfo.access_token.isBlank
             {
@@ -266,7 +268,11 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
                             institution_type:       dataParser.stringFor(key: "institution_type") 
                         )
                         self.customizeUI(universityDetails: detail)
-                        self.detailArray.append(detail)                        
+                        self.detailArray.append(detail)
+                        
+                        
+                        
+                        
                     }
 //                    
                    
