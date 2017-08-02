@@ -27,8 +27,6 @@ class EnquiryDetailsVC: UIViewController, UITableViewDataSource, UITableViewDele
     func setupViews() {
         navigationItem.title = "Enquiry Details"
         navigationController?.navigationBar.isHidden = false
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.navigationBar.tintColor = UIColor.black
         logoImageView.sd_setImage(with: URL.init(string: ""), placeholderImage: #imageLiteral(resourceName: "placeholder"))
     }
     

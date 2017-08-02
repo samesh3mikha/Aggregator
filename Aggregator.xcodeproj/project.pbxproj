@@ -18,6 +18,7 @@
 		7DC973121F24540900DC9037 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC9730F1F24540900DC9037 /* PageViewController.swift */; };
 		7DC973131F24540900DC9037 /* CourseCompareDetailsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC973101F24540900DC9037 /* CourseCompareDetailsTableVC.swift */; };
 		7DC973151F24543900DC9037 /* BasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC973141F24543900DC9037 /* BasicCell.swift */; };
+		7DCAA1471F3169C0005CEC4A /* UIViewBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCAA1461F3169C0005CEC4A /* UIViewBorder.swift */; };
 		7DDE93EA1F2F2F28001B9C9D /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE93E91F2F2F28001B9C9D /* DataParser.swift */; };
 		7DFCBD2F1F26CD4D00200E08 /* CourseCompareDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */; };
 		A195EFE9BB6794EA4B5BDAB6 /* Pods_Aggregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587899B53703051B849B9405 /* Pods_Aggregator.framework */; };
@@ -115,6 +116,7 @@
 		7DC9730F1F24540900DC9037 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		7DC973101F24540900DC9037 /* CourseCompareDetailsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCompareDetailsTableVC.swift; sourceTree = "<group>"; };
 		7DC973141F24543900DC9037 /* BasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCell.swift; sourceTree = "<group>"; };
+		7DCAA1461F3169C0005CEC4A /* UIViewBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewBorder.swift; sourceTree = "<group>"; };
 		7DDE93E91F2F2F28001B9C9D /* DataParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataParser.swift; path = DataSync/DataParser.swift; sourceTree = "<group>"; };
 		7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCompareDetailsModel.swift; sourceTree = "<group>"; };
 		B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewPopMoreController.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				B83BFB4F1F2F41030006529D /* CustomBorderLabel.swift */,
 				B83A782D1F3030DC002753AE /* RadioButton.swift */,
 				B8C14DD11F30713C00EC7467 /* customTextView.swift */,
+				7DCAA1461F3169C0005CEC4A /* UIViewBorder.swift */,
 			);
 			name = HelperClasses;
 			sourceTree = "<group>";
@@ -726,6 +729,7 @@
 				B8F3CAEE1F15E59F00E5B552 /* BasicCompreData.swift in Sources */,
 				7D0C6EF11F2E30A700C7ADBF /* DataSynchronizer.swift in Sources */,
 				7DC973131F24540900DC9037 /* CourseCompareDetailsTableVC.swift in Sources */,
+				7DCAA1471F3169C0005CEC4A /* UIViewBorder.swift in Sources */,
 				B860BED21F27616300A693D7 /* SearchDetailModel.swift in Sources */,
 				C1551E3A1E95FB25002BE99B /* Style.swift in Sources */,
 				B860BECC1F275FAB00A693D7 /* EntryRequirementmodel.swift in Sources */,

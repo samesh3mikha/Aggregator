@@ -72,14 +72,8 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         fetchUniversityDetail(token : "", universityID : ""  )
-        self.navigationController?.navigationBar.barTintColor = appGreenColor
         self.navigationItem.title = "University Details"
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
-        self.navigationController?.navigationBar.tintColor = UIColor.white
         BackGroundUniImage.sd_setImage(with: URL.init(string: ""), placeholderImage: #imageLiteral(resourceName: "placeholder"))
-        
-        
-        
     }
 
     override func didReceiveMemoryWarning() {

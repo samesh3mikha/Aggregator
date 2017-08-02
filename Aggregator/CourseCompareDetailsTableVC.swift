@@ -11,7 +11,8 @@ import Alamofire
 import SwiftMessages
 import SwiftyJSON
 
-let appGreenColor = UIColor(red: 9.0/255.0, green: 156/255.0, blue: 78.0/255.0, alpha: 1.0)
+//let appGreenColor = UIColor(red: 9.0/255.0, green: 156/255.0, blue: 78.0/255.0, alpha: 1.0)
+let appGreenColor = UIColor(red: 40.0/255.0, green: 182/255.0, blue: 122.0/255.0, alpha: 1.0)
 
 class CourseCompareDetailsTableVC: UIViewController,UITableViewDelegate,UITableViewDataSource,UIWebViewDelegate
 {

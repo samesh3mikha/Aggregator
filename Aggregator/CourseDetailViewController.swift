@@ -60,10 +60,7 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
     CourseDetailTableview.reloadData()
-   self.navigationController?.navigationBar.barTintColor = appGreenColor
         self.navigationItem.title = "CourseDetails"
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
-        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     
     

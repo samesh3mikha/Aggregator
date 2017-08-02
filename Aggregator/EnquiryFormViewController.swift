@@ -49,11 +49,8 @@ class EnquiryFormViewController: UIViewController,UITextViewDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         fetchEnquiryInfo(token: "")
-        self.navigationController?.navigationBar.barStyle = UIBarStyle.black
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.barTintColor = appGreenColor
-        self.navigationItem.title = "Enquiry Form"
         self.navigationController?.navigationBar.isHidden = false
+        self.navigationItem.title = "Enquiry Form"
         navigationItem.backBarButtonItem?.title = "Back"
         self.navigationController?.navigationBar.topItem?.title = "Back"
         

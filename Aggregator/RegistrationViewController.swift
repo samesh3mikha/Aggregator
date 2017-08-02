@@ -26,8 +26,26 @@ class RegistrationViewController: UIViewController {
     @IBOutlet var nameLbl: CustomTxtField!
     
     
-    @IBAction func backBtn(_ sender: Any) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
+        navigationItem.title = "Registration"
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        self.navigationController?.navigationBar.isHidden = true
+        
+        let ui = UserDefaults.standard.string(forKey: "Kaccess_token")
+        if ui != nil
+        {
+            _ = self.navigationController?.popToRootViewController(animated: false)
+        }
+    }
+    
+
+    @IBAction func closeButtonClicked(_ sender: Any) {
        _ = navigationController?.popViewController(animated: true)
     }
     
@@ -154,27 +172,5 @@ class RegistrationViewController: UIViewController {
         
         
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-       // self.HolderView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "patternBackground"))
-    }
-
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-        self.navigationController?.navigationBar.isHidden = true
-        
-        let ui = UserDefaults.standard.string(forKey: "Kaccess_token")
-        if ui != nil
-        {
-            _ = self.navigationController?.popToRootViewController(animated: false)
-        }
-        
-    }
-
     
 }
