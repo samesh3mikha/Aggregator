@@ -672,7 +672,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="Gq3-8M-hqq">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" id="Gq3-8M-hqq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1989,7 +1989,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="Xdj-s8-ajX">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" id="Xdj-s8-ajX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2012,7 +2012,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="sBf-CR-Vlv">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" id="sBf-CR-Vlv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2042,7 +2042,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="296"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="bookmark&amp;wishlistid" id="m5o-ZK-nSZ" customClass="BookMark_WishTableViewCell" customModule="Aggregator" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="bookmark&amp;wishlistid" id="m5o-ZK-nSZ" customClass="BookMark_WishTableViewCell" customModule="Aggregator" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="300" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m5o-ZK-nSZ" id="2Xm-kO-V8R">
@@ -3523,7 +3523,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ioU-RD-uJh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ioU-RD-uJh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

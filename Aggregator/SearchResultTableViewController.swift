@@ -616,13 +616,13 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
     
     
     func lblCourseClick(tapGesture:UITapGestureRecognizer){
+        loadCourseDetailsPage(courseID: unidata)
+    }
+    
+    func loadCourseDetailsPage(courseID: String) {
         let courseViewController = self.storyboard?.instantiateViewController(withIdentifier: "CourseDetailViewController") as! CourseDetailViewController
-        courseViewController.myId = unidata
+        courseViewController.myId = courseID
         self.navigationController?.pushViewController(courseViewController, animated: true)
-       
-        
-
-        
     }
 
         
@@ -930,6 +930,13 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
             }
             weakself.removeOverlay()
             weakself.loadEnquiryDetailsView(enquiryID: enquiryID)
+        }        
+        popController.showBookmarkDetailsHandlerBlock = { [weak self] (courseID) in
+            guard let weakself = self else {
+                return
+            }
+            weakself.removeOverlay()
+            weakself.loadCourseDetailsPage(courseID: courseID)
         }        
         // present the popover
         self.present(popController, animated: true, completion: nil)

@@ -12,7 +12,7 @@ import SwiftyJSON
 import SwiftMessages
 
  public typealias ShowSearchResultHandler = (Int, String) -> Void
- public typealias ShowEnquiryDetailsHandler = (String) -> Void
+ public typealias ShowDetailsPageHandler = (String) -> Void
 
 class PopPresentationViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
@@ -21,7 +21,8 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
     var popUpArray = [PopupViewData]()
     var buttonIndex = 1
     var showSearchResultHandlerBlock: ShowSearchResultHandler?
-    var showEnquiryDetailsHandlerBlock: ShowEnquiryDetailsHandler?
+    var showEnquiryDetailsHandlerBlock: ShowDetailsPageHandler?
+    var showBookmarkDetailsHandlerBlock: ShowDetailsPageHandler?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -202,7 +203,12 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
                     handlerBlock(self.popUpArray[indexPath.row].courseID)
                 })
             }
-            
+        } else if buttonIndex == 3 {
+            if let handlerBlock = self.showBookmarkDetailsHandlerBlock {                        
+                self.dismiss(animated: true, completion: {
+                    handlerBlock(self.popUpArray[indexPath.row].courseID)
+                })
+            }
         }
     }
 }
