@@ -51,6 +51,7 @@ class RegistrationViewController: UIViewController {
         toolBar.isUserInteractionEnabled = true
         
         selectCountry.inputAccessoryView = toolBar
+        fetchCountrytoShow()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -132,6 +133,9 @@ class RegistrationViewController: UIViewController {
     
     
     func sendToServer() -> Void {
+        if selectedCountry == nil  || selectedCountry.isBlank{
+            return
+        }
         
         let statusHud = MessageView.viewFromNib(layout: .CardView)
        
@@ -198,18 +202,21 @@ class RegistrationViewController: UIViewController {
                 
                 if s == "SUCCESS"
                 {
+                    con.duration = .seconds(seconds: 5)
+                    statusHud.configureTheme(.success)
                     statusHud.configureContent(title: "Thanks For Signing Up", body: "You will shortly receive an email asking you to confirm your email address.Please check spam folders & add Edu Connect to your contact list to ensure delivery of emails.Please click the confirmation link in the email to confirm your new account.")
                     let _ = self.navigationController?.popViewController(animated: true)
                 }
                 
                 else
                 {
-                    let errorMsg = status["Error while register"] as! String
+                    let errorMsg = status["MESSAGE"] as! String
                     statusHud.configureTheme(.error)
-                     statusHud.configureContent(title: "aaaa", body: errorMsg )
+                     statusHud.configureContent(title: "Error", body: errorMsg )
                     
                 }
             }
+            SwiftMessages.show(config: con, view: statusHud)
         }
         
         
@@ -244,7 +251,7 @@ class RegistrationViewController: UIViewController {
         
         statusHud.configureTheme(.success)
         statusHud.id = "statusHud"
-        statusHud.configureContent(title: "", body: "PROCESSING YOUR DATA")
+        statusHud.configureContent(title: "", body: "Fetching country data.")
         var con = SwiftMessages.Config()
         
         con.presentationContext = .window(windowLevel: UIWindowLevelStatusBar)
@@ -303,6 +310,7 @@ class RegistrationViewController: UIViewController {
                         if let cl = data["COUNTRY_LIST"].arrayObject
                         {
                             
+                            self.selectCountry.optionalItemText = "Select your country of study"
                             for countries in 0...cl.count - 1
                             {
                                 
@@ -312,14 +320,16 @@ class RegistrationViewController: UIViewController {
                                 
                                     print(self.countryList)
                                
-                                self.selectCountry.optionalItemText = "Select your country of study"
-                                self.selectCountry.itemList = Array(self.countryList.keys).sorted()
-                            
-                               
-      
-                                
-                            
                             }
+                            let sortedCountryList = Array(self.countryList.keys).sorted()
+                            self.selectCountry.itemList = sortedCountryList
+//                            let defaultIndex = sortedCountryList.index(where: { (countryName) -> Bool in
+//                                countryName.localizedLowercase  == "australia" 
+//                            })
+//                            if defaultIndex != nil {
+//                                self.selectCountry.selectedRow = 13
+//                            }
+
                         }
 
                     

@@ -11,8 +11,8 @@ import SwiftyJSON
 import SwiftMessages
 import Alamofire
 
-//let baseUrl = "http://202.129.251.174:8089/api/main/"
-let baseUrl = "http://192.168.1.11:8089/api/main/"
+let baseUrl = "http://202.129.251.174:8089/api/main/"
+//let baseUrl = "http://192.168.1.11:8089/api/main/"
 //let baseUrl = "https://educonnect.online/api/main/"
 //let baseUrl = "https://educonnect.meshed.online/api/main/"
 

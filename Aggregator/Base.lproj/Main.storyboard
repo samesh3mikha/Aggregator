@@ -672,7 +672,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="Gq3-8M-hqq">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" id="Gq3-8M-hqq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -721,7 +721,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="951"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Become a member" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsw-uC-yTf">
-                                <rect key="frame" x="37.5" y="80" width="246" height="28"/>
+                                <rect key="frame" x="37" y="80" width="246" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="qff-m9-16C"/>
                                 </constraints>
@@ -1424,7 +1424,7 @@
                                                     <constraint firstAttribute="width" constant="150" id="W6f-xj-DVJ"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="preksha.shukla@websutrait.com" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="shg-Ds-jhV" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="shg-Ds-jhV" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
                                                 <rect key="frame" x="25" y="214" width="325" height="36"/>
                                                 <color key="tintColor" red="0.45092839000000001" green="0.45101028679999999" blue="0.45092326399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1442,7 +1442,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="password" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AE9-eG-YhQ" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AE9-eG-YhQ" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
                                                 <rect key="frame" x="25" y="267" width="325" height="36"/>
                                                 <color key="tintColor" red="0.45092839000000001" green="0.45101028679999999" blue="0.45092326399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1707,7 +1707,7 @@
                                                 <fontDescription key="fontDescription" name="Quicksand-Medium" family="Quicksand" pointSize="17"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="re" placeholder="FirstName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XPc-Hs-66n" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="FirstName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XPc-Hs-66n" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
                                                 <rect key="frame" x="25" y="95" width="325" height="30"/>
                                                 <color key="tintColor" red="0.45092839000000001" green="0.45101028679999999" blue="0.45092326399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1720,7 +1720,7 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="ImageName" value="profile"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="rekha.bohara@outlook.com" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n7H-GA-Sg3" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n7H-GA-Sg3" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
                                                 <rect key="frame" x="25" y="237" width="325" height="30"/>
                                                 <color key="tintColor" red="0.45092839000000001" green="0.45101028679999999" blue="0.45092326399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1733,7 +1733,7 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="ImageName" value="mail"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1234567890" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C8Y-O6-N3U" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="C8Y-O6-N3U" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
                                                 <rect key="frame" x="25" y="288" width="325" height="30"/>
                                                 <color key="tintColor" red="0.45092839000000001" green="0.45101028679999999" blue="0.45092326399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1746,7 +1746,7 @@
                                                     <userDefinedRuntimeAttribute type="string" keyPath="ImageName" value="password"/>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1234567890" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KJC-Yw-4yP" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="KJC-Yw-4yP" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
                                                 <rect key="frame" x="25" y="336" width="325" height="30"/>
                                                 <color key="tintColor" red="0.45092839000000001" green="0.45101028679999999" blue="0.45092326399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1778,7 +1778,7 @@
                                                     <action selector="registerNowBtnClicked:" destination="Mf9-wQ-JJH" eventType="touchUpInside" id="SeF-Pj-Khn"/>
                                                 </connections>
                                             </button>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="bohara" placeholder="LastName" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="scW-mo-s9R" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="LastName" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="scW-mo-s9R" customClass="CustomTxtField" customModule="Aggregator" customModuleProvider="target">
                                                 <rect key="frame" x="25" y="140" width="325" height="30"/>
                                                 <color key="tintColor" red="0.45092839000000001" green="0.45101028679999999" blue="0.45092326399999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
@@ -1834,10 +1834,10 @@
                                             <constraint firstItem="KJC-Yw-4yP" firstAttribute="top" secondItem="C8Y-O6-N3U" secondAttribute="bottom" constant="18" id="vXC-CE-qzg"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sVg-Wm-mJR">
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sVg-Wm-mJR">
                                         <rect key="frame" x="0.0" y="627" width="375" height="40"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6b-Ow-1sH">
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6b-Ow-1sH">
                                                 <rect key="frame" x="172.5" y="5" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="8lv-bW-ewJ"/>
@@ -1989,7 +1989,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="Xdj-s8-ajX">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" id="Xdj-s8-ajX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2012,7 +2012,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="sBf-CR-Vlv">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" id="sBf-CR-Vlv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -3516,7 +3516,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ioU-RD-uJh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ioU-RD-uJh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
