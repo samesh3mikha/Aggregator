@@ -87,53 +87,32 @@ class RegistrationViewController: UIViewController {
             if case .willShow = event { self.view.endEditing(true)}
         }
         
-        if ((emailLbl.text?.isEmail)! && !(nameLbl.text?.isBlank)!)
-        {
-            if((passwordLbl.text?.isValidPassword)! && passwordLbl.text == confirmPasswordLbl.text)
-            {
-            print("password match successful")
-                
-                self.sendToServer()
-            }
-            
-            else if((passwordLbl.text?.isValidPassword)! && passwordLbl.text != confirmPasswordLbl.text)
-            {
+        if ((emailLbl.text?.isEmail)! && !(nameLbl.text?.isBlank)!) {
+            if((passwordLbl.text?.isValidPassword)! && passwordLbl.text == confirmPasswordLbl.text) {
+                print("password match successful")
+                registerTheUser()
+            } else if((passwordLbl.text?.isValidPassword)! && passwordLbl.text != confirmPasswordLbl.text) {
                 statusHud.configureTheme(.warning)
                 statusHud.configureContent(title: "", body: "Password doesn't match")
                 SwiftMessages.show(config: con, view: statusHud)
-
-            }
-            
-            else if(!(passwordLbl.text?.isValidPassword)! )
-            {
-               
+            } else if(!(passwordLbl.text?.isValidPassword)! ) {
                 statusHud.configureTheme(.warning)
                 statusHud.configureContent(title: "", body: "Password not in correct format")
                 SwiftMessages.show(config: con, view: statusHud)
                 print("Password not in correct format")
             }
-            
-                }
-        
-        else
-        
-        {
+        } else {
             print("register unsuccessful")
             statusHud.configureTheme(.warning)
             statusHud.configureContent(title: "", body: "register unsuccessfu")
             SwiftMessages.show(config: con, view: statusHud)
-
-            
         }
-        
-        
-        
     }
     
     
     
-    func sendToServer() -> Void {
-        if selectedCountry == nil  || selectedCountry.isBlank{
+    func registerTheUser() {
+        if selectCountry.selectedItem!.isBlank{
             return
         }
         
