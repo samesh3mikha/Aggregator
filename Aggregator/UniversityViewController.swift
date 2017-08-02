@@ -235,7 +235,7 @@ class UniversityViewController: UIViewController,MKMapViewDelegate {
             case .success(let value):
                 let data = JSON(value)
                 if let responseArray = data["rto-form"].arrayObject {
-                    courseArray.removeAll()
+//                    courseArray.removeAll()
                     autoSuggestionArray.removeAll()
                     allAutosuggestionArray.removeAll()
                     countryAutosuggestionArray.removeAll()

@@ -14,9 +14,10 @@ import SwiftyJSON
 
 class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 {
-    @IBOutlet weak var courseNameLbl: UILabel!
     @IBOutlet weak var CourseDetailHeaderView: roundView!
-    @IBOutlet weak var courseDetailLbl: UILabel!
+    @IBOutlet weak var courseNameLbl: UILabel!
+//    @IBOutlet weak var courseDetailLbl: UILabel!
+    @IBOutlet weak var courseDetailTextview: UITextView!
     @IBOutlet weak var universityName: UILabel!
     @IBOutlet weak var CourseDetailTableview: UITableView!
     
@@ -108,7 +109,7 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
                 
                 if let responseArray = data["rto-form"].arrayObject
                 {
-                    courseArray.removeAll()
+//                    courseArray.removeAll()
                     autoSuggestionArray.removeAll()
                     allAutosuggestionArray.removeAll()
                     countryAutosuggestionArray.removeAll()
@@ -143,7 +144,8 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
                             self.detailArray.append(detail)
                             
                             self.courseNameLbl.text = detail.course_name
-                            self.courseDetailLbl.text = detail.course_description
+//                            self.courseDetailLbl.text = detail.course_description
+                            self.courseDetailTextview.text = detail.course_description 
                             self.universityName.text = detail.institute_name
                             self.universityName.text = detail.course_name
                         }
