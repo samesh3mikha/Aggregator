@@ -72,7 +72,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jdm-zD-wkf" customClass="HorizontalPickerView" customModule="HorizontalPicker">
                                 <rect key="frame" x="16" y="315" width="343" height="40"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" red="0.034001596269999997" green="0.61277771000000003" blue="0.30530640479999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="nn9-vI-kTm"/>
                                 </constraints>
@@ -105,10 +105,10 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="6"/>
+                                        <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1"/>
+                                        <real key="value" value="0.5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -267,10 +267,10 @@
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <real key="value" value="6"/>
+                                                                    <real key="value" value="5"/>
                                                                 </userDefinedRuntimeAttribute>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                    <real key="value" value="1"/>
+                                                                    <real key="value" value="0.5"/>
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
@@ -441,10 +441,10 @@
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="6"/>
+                                                            <real key="value" value="5"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="1"/>
+                                                            <real key="value" value="0.5"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
@@ -671,7 +671,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" id="Gq3-8M-hqq">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="Gq3-8M-hqq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -720,7 +720,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="951"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Become a member" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsw-uC-yTf">
-                                <rect key="frame" x="37.5" y="80" width="246" height="28"/>
+                                <rect key="frame" x="37" y="80" width="246" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="qff-m9-16C"/>
                                 </constraints>
@@ -883,10 +883,10 @@
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="6"/>
+                                                <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
+                                                <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -1013,10 +1013,10 @@
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="6"/>
+                                                <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
+                                                <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -1119,10 +1119,10 @@
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="6"/>
+                                                <real key="value" value="5"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                <real key="value" value="1"/>
+                                                <real key="value" value="0.5"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
@@ -1361,10 +1361,10 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="6"/>
+                                        <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.0"/>
+                                        <real key="value" value="0.5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
@@ -1988,7 +1988,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" id="Xdj-s8-ajX">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="Xdj-s8-ajX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2011,7 +2011,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" id="sBf-CR-Vlv">
+                    <navigationBar key="navigationBar" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" id="sBf-CR-Vlv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2070,11 +2070,12 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHA-DW-QnH">
-                                                            <rect key="frame" x="265" y="6" width="15" height="15"/>
+                                                            <rect key="frame" x="262" y="5" width="23" height="23"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="15" id="Mp8-1j-mkb"/>
-                                                                <constraint firstAttribute="height" constant="15" id="Zy7-lH-fMq"/>
+                                                                <constraint firstAttribute="width" constant="23" id="Mp8-1j-mkb"/>
+                                                                <constraint firstAttribute="height" constant="23" id="Zy7-lH-fMq"/>
                                                             </constraints>
+                                                            <color key="tintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <state key="normal" image="close"/>
                                                             <connections>
                                                                 <action selector="deleteItem:" destination="m5o-ZK-nSZ" eventType="touchUpInside" id="VTh-Vr-ZRH"/>
@@ -2083,20 +2084,20 @@
                                                     </subviews>
                                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
-                                                        <constraint firstItem="KHA-DW-QnH" firstAttribute="top" secondItem="Bpc-Kd-yep" secondAttribute="top" constant="6" id="7H8-UO-iqE"/>
+                                                        <constraint firstItem="KHA-DW-QnH" firstAttribute="top" secondItem="Bpc-Kd-yep" secondAttribute="top" constant="5" id="7H8-UO-iqE"/>
                                                         <constraint firstItem="tVl-CI-E6z" firstAttribute="top" secondItem="Bpc-Kd-yep" secondAttribute="top" constant="25" id="QMl-Ql-TZP"/>
                                                         <constraint firstAttribute="trailing" secondItem="tVl-CI-E6z" secondAttribute="trailing" constant="8" id="dfW-fb-Qhj"/>
                                                         <constraint firstItem="Cok-fi-RsZ" firstAttribute="leading" secondItem="Bpc-Kd-yep" secondAttribute="leading" constant="10" id="fAe-dL-0jV"/>
-                                                        <constraint firstAttribute="trailing" secondItem="KHA-DW-QnH" secondAttribute="trailing" constant="10" id="pob-fg-ccW"/>
+                                                        <constraint firstAttribute="trailing" secondItem="KHA-DW-QnH" secondAttribute="trailing" constant="5" id="pob-fg-ccW"/>
                                                         <constraint firstItem="tVl-CI-E6z" firstAttribute="leading" secondItem="Cok-fi-RsZ" secondAttribute="trailing" constant="8" id="qVz-v9-FqZ"/>
                                                         <constraint firstItem="Cok-fi-RsZ" firstAttribute="centerY" secondItem="Bpc-Kd-yep" secondAttribute="centerY" constant="0.5" id="zew-gA-QSt"/>
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="6"/>
+                                                            <real key="value" value="5"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="2"/>
+                                                            <real key="value" value="0.5"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
@@ -2152,11 +2153,12 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mM5-xz-ZHu">
-                                                            <rect key="frame" x="265" y="6" width="15" height="15"/>
+                                                            <rect key="frame" x="262" y="5" width="23" height="23"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="15" id="5jP-uq-58u"/>
-                                                                <constraint firstAttribute="height" constant="15" id="aV4-p7-OPS"/>
+                                                                <constraint firstAttribute="width" constant="23" id="5jP-uq-58u"/>
+                                                                <constraint firstAttribute="height" constant="23" id="aV4-p7-OPS"/>
                                                             </constraints>
+                                                            <color key="tintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <state key="normal" image="close"/>
                                                             <connections>
                                                                 <action selector="closeBtnClicked:" destination="huF-8h-MCv" eventType="touchUpInside" id="kO3-0y-iMa"/>
@@ -2168,9 +2170,9 @@
                                                         <constraint firstItem="W3a-vz-yHb" firstAttribute="width" secondItem="71W-iG-qmB" secondAttribute="width" id="3f9-po-AoB"/>
                                                         <constraint firstAttribute="bottom" secondItem="W3a-vz-yHb" secondAttribute="bottom" constant="10" id="4or-Xb-0S1"/>
                                                         <constraint firstItem="W3a-vz-yHb" firstAttribute="top" secondItem="71W-iG-qmB" secondAttribute="bottom" id="DCE-NU-MrH"/>
-                                                        <constraint firstItem="mM5-xz-ZHu" firstAttribute="top" secondItem="JUk-Ng-nWe" secondAttribute="top" constant="6" id="RIY-lp-rR1"/>
+                                                        <constraint firstItem="mM5-xz-ZHu" firstAttribute="top" secondItem="JUk-Ng-nWe" secondAttribute="top" constant="5" id="RIY-lp-rR1"/>
                                                         <constraint firstItem="tMm-1z-nTI" firstAttribute="centerY" secondItem="JUk-Ng-nWe" secondAttribute="centerY" constant="0.5" id="XB8-ds-CFN"/>
-                                                        <constraint firstAttribute="trailing" secondItem="mM5-xz-ZHu" secondAttribute="trailing" constant="10" id="bT2-UL-jUG"/>
+                                                        <constraint firstAttribute="trailing" secondItem="mM5-xz-ZHu" secondAttribute="trailing" constant="5" id="bT2-UL-jUG"/>
                                                         <constraint firstItem="tMm-1z-nTI" firstAttribute="leading" secondItem="JUk-Ng-nWe" secondAttribute="leading" constant="10" id="cQB-yE-VcQ"/>
                                                         <constraint firstItem="W3a-vz-yHb" firstAttribute="leading" secondItem="tMm-1z-nTI" secondAttribute="trailing" constant="8" id="d5Q-sk-N90"/>
                                                         <constraint firstItem="71W-iG-qmB" firstAttribute="leading" secondItem="tMm-1z-nTI" secondAttribute="trailing" constant="8" id="dPV-vX-Zgc"/>
@@ -2180,10 +2182,10 @@
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="6"/>
+                                                            <real key="value" value="5"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="2"/>
+                                                            <real key="value" value="0.5"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
@@ -2302,7 +2304,7 @@
                                             <constraint firstAttribute="width" constant="80" id="J5m-Ny-PGk"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="14"/>
-                                        <state key="normal" title="Favorites">
+                                        <state key="normal" title="Fav Search">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -2432,7 +2434,7 @@
                                 <rect key="frame" x="0.0" y="148" width="375" height="358"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yXq-TC-qcB">
-                                <rect key="frame" x="0.0" y="98" width="330" height="50"/>
+                                <rect key="frame" x="0.0" y="98" width="338" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="gMr-xK-75B"/>
@@ -2533,10 +2535,10 @@
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="6"/>
+                                                            <real key="value" value="5"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="1"/>
+                                                            <real key="value" value="0.5"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
@@ -2593,10 +2595,10 @@
                                                     </constraints>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="6"/>
+                                                            <real key="value" value="5"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="1"/>
+                                                            <real key="value" value="0.5"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
@@ -2644,7 +2646,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c2J-K6-Oxs">
-                                <rect key="frame" x="335" y="105" width="30" height="30"/>
+                                <rect key="frame" x="343" y="110.5" width="22" height="19"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="22" id="hMI-SH-hwQ"/>
@@ -3112,7 +3114,7 @@
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                            <real key="value" value="6"/>
+                                            <real key="value" value="5"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
@@ -3520,7 +3522,7 @@
                     </tabBarItem>
                     <toolbarItems/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ioU-RD-uJh">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ioU-RD-uJh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

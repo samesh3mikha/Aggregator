@@ -115,7 +115,7 @@ class LoginViewController:  UIViewController{
                 print(json)
                 
                 let data = JSON(response.result.value!)
-                
+                print("data ==> ", data)
                 if let responseStatus = data["STATUS"].arrayObject
                 {
                     let status = responseStatus[0] as! [String: AnyObject]

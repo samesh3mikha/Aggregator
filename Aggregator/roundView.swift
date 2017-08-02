@@ -20,7 +20,7 @@ import UIKit
         didSet{
             layer.cornerRadius = cornerRadius
             layer.borderWidth = borderWidth
-            layer.borderColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1).cgColor
+            layer.borderColor = UIColor.init(white: 0.2, alpha: 1).cgColor
 
         }
     }
