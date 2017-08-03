@@ -101,12 +101,26 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
                                     shortCmnt = "All results"
                                 }
                             }
-                            e = PopupViewData.init(courseID: "\(dict["favorite_search_id"]!)" ,courseName: searchWord, logo: "", shortComment: shortCmnt )
+                            e = PopupViewData(
+                                itemID: "\(dict["favorite_search_id"]!)",
+                                title: searchWord, 
+                                details: shortCmnt, 
+                                imageUrl: ""
+                            )
                         } else if weakself.buttonIndex == 2 {
-                            shortCmnt = "\(dict["shortcomment"]!)"
-                            e = PopupViewData.init(courseID: "\(dict["enquiry_id"]!)" ,courseName: "\(dict["course_name"]!)", logo: "\(dict["institute_logo"]!)", shortComment: shortCmnt )
+                            e = PopupViewData(
+                                itemID: "\(dict["enquiry_id"]!)",
+                                title: "\(dict["course_name"]!)", 
+                                details: "\(dict["shortcomment"]!)", 
+                                imageUrl: "\(dict["institute_logo"]!)"
+                            )
                         } else if weakself.buttonIndex == 3 {
-                            e = PopupViewData.init(courseID: "\(dict["institution_course_id"]!)" ,courseName: "\(dict["course_name"]!)", logo: "\(dict["institute_logo"]!)", shortComment: shortCmnt )
+                            e = PopupViewData(
+                                itemID: "\(dict["institution_course_id"]!)",
+                                title: "\(dict["course_name"]!)", 
+                                details: "", 
+                                imageUrl: "\(dict["institute_logo"]!)"
+                            )
                         }
                         weakself.popUpArray.append(e!)
                     }
@@ -159,58 +173,51 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if buttonIndex == 3 {
-            let cell =  tableView.dequeueReusableCell(withIdentifier: "bookmark&wishlistid")! as! BookMark_WishTableViewCell
-            cell.courseNameLbl.text = popUpArray[indexPath.row].courseName
-            cell.logoImageview.sd_setImage(with: URL.init(string: popUpArray[indexPath.row].logo), placeholderImage: #imageLiteral(resourceName: "placeholder"))
-            return cell
-        } else {
-            let cell =  tableView.dequeueReusableCell(withIdentifier: "enquiryid")! as! EnquiryTableViewCell
-            
-            cell.courseNameLbl.text = popUpArray[indexPath.row].courseName
-            cell.enquiryDetail.text = popUpArray[indexPath.row].shortComment
-            
-            print("COmment ==", popUpArray[indexPath.row].shortComment)
-            if buttonIndex == 1 {
-                cell.closeButton.isHidden = false
-                cell.itemID = popUpArray[indexPath.row].courseID
-                cell.deleteItemHandlerBlock = { [weak cell] in
-                    self.deleteFavoriteSearch(favSearchID: (cell?.itemID)!)
-                }
-            } else {
-                cell.closeButton.isHidden = true
+        let cell =  tableView.dequeueReusableCell(withIdentifier: "BasicTableViewCell")! as! BasicTableViewCell
+
+        let popData = popUpArray[indexPath.row]
+        cell.itemID = popData.itemID
+        cell.logoImageView.sd_setImage(with: URL.init(string: popData.imageUrl), placeholderImage: #imageLiteral(resourceName: "placeholder"))
+        cell.titleLabel.text = popData.title
+        cell.detailsLabel.text = popData.details
+        cell.closeButton.isHidden = false
+        if buttonIndex == 1 {
+            cell.deleteItemHandlerBlock = { [weak cell] in
+                self.deleteFavoriteSearch(favSearchID: (cell?.itemID)!)
             }
-            cell.logoImageView.sd_setImage(with: URL.init(string: popUpArray[indexPath.row].logo), placeholderImage: #imageLiteral(resourceName: "placeholder"))
-            cell.selectionStyle = .none
-            //set the data here
-            return cell
+        } else if buttonIndex == 2 {
+            cell.closeButton.isHidden = true
+        } else if buttonIndex == 3 {
+            cell.detailsLabel.isHidden = true
         }
+        return cell
     }
         
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let popData = popUpArray[indexPath.row]
         if buttonIndex == 1 {
             var searchOption: SearchOption = .All
-            if popUpArray[indexPath.row].shortComment == "By Course" {
+            if popData.details == "By Course" {
                 searchOption = .Course
-            } else if popUpArray[indexPath.row].shortComment == "By University" {
+            } else if popData.details == "By University" {
                 searchOption = .University
-            } else if popUpArray[indexPath.row].shortComment == "By Location" {
+            } else if popData.details == "By Location" {
                 searchOption = .Location
             }
             if let handlerBlock = self.showSearchResultHandlerBlock {                        
-                handlerBlock(searchOption.rawValue, popUpArray[indexPath.row].courseName)
+                handlerBlock(searchOption.rawValue, popData.title)
                 self.dismiss(animated: true, completion: nil)
             }
         } else if buttonIndex == 2 {
             if let handlerBlock = self.showEnquiryDetailsHandlerBlock {                        
                 self.dismiss(animated: true, completion: {
-                    handlerBlock(self.popUpArray[indexPath.row].courseID)
+                    handlerBlock(popData.itemID)
                 })
             }
         } else if buttonIndex == 3 {
             if let handlerBlock = self.showBookmarkDetailsHandlerBlock {                        
                 self.dismiss(animated: true, completion: {
-                    handlerBlock(self.popUpArray[indexPath.row].courseID)
+                    handlerBlock(popData.itemID)
                 })
             }
         }

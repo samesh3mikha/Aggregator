@@ -10,24 +10,18 @@ import Foundation
 
 class PopupViewData: NSObject{
     
-    let courseID : String
-    let courseName : String
-    let logo : String
-    let shortComment : String
+    var itemID : String = ""
+    var title : String = ""
+    var details : String = ""
+    var imageUrl : String = ""
    
-    
-    
-   
-    init(courseID : String , courseName : String, logo : String, shortComment : String ) {
-        
-        self.courseID = courseID
-        self.courseName = courseName
-        self.logo = logo
-        self.shortComment = shortComment
+    init(itemID : String , title : String, details : String, imageUrl : String ) {
+        self.itemID = itemID
+        self.title = title
+        self.details = details
+        self.imageUrl = imageUrl
                 
         super.init()
-        
-        
-}
+    }
 
 }

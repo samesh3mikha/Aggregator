@@ -2039,83 +2039,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="296"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="bookmark&amp;wishlistid" id="m5o-ZK-nSZ" customClass="BookMark_WishTableViewCell" customModule="Aggregator" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="BasicTableViewCell" id="huF-8h-MCv" customClass="BasicTableViewCell" customModule="Aggregator" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="300" height="100"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m5o-ZK-nSZ" id="2Xm-kO-V8R">
-                                            <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bpc-Kd-yep" customClass="roundView" customModule="Aggregator" customModuleProvider="target">
-                                                    <rect key="frame" x="5" y="4" width="290" height="96"/>
-                                                    <subviews>
-                                                        <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Cok-fi-RsZ" customClass="CustomImageView" customModule="Aggregator" customModuleProvider="target">
-                                                            <rect key="frame" x="10" y="9" width="80" height="80"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="80" id="HKm-Dp-bxi"/>
-                                                                <constraint firstAttribute="height" constant="80" id="TN6-af-jaj"/>
-                                                            </constraints>
-                                                            <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                    <real key="value" value="5"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                            </userDefinedRuntimeAttributes>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVl-CI-E6z">
-                                                            <rect key="frame" x="98" y="25" width="184" height="16.5"/>
-                                                            <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="13"/>
-                                                            <color key="textColor" red="0.24176943300000001" green="0.24177598950000001" blue="0.24177247290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KHA-DW-QnH">
-                                                            <rect key="frame" x="262" y="5" width="23" height="23"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="23" id="Mp8-1j-mkb"/>
-                                                                <constraint firstAttribute="height" constant="23" id="Zy7-lH-fMq"/>
-                                                            </constraints>
-                                                            <color key="tintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                            <state key="normal" image="close"/>
-                                                            <connections>
-                                                                <action selector="deleteItem:" destination="m5o-ZK-nSZ" eventType="touchUpInside" id="VTh-Vr-ZRH"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <constraints>
-                                                        <constraint firstItem="KHA-DW-QnH" firstAttribute="top" secondItem="Bpc-Kd-yep" secondAttribute="top" constant="5" id="7H8-UO-iqE"/>
-                                                        <constraint firstItem="tVl-CI-E6z" firstAttribute="top" secondItem="Bpc-Kd-yep" secondAttribute="top" constant="25" id="QMl-Ql-TZP"/>
-                                                        <constraint firstAttribute="trailing" secondItem="tVl-CI-E6z" secondAttribute="trailing" constant="8" id="dfW-fb-Qhj"/>
-                                                        <constraint firstItem="Cok-fi-RsZ" firstAttribute="leading" secondItem="Bpc-Kd-yep" secondAttribute="leading" constant="10" id="fAe-dL-0jV"/>
-                                                        <constraint firstAttribute="trailing" secondItem="KHA-DW-QnH" secondAttribute="trailing" constant="5" id="pob-fg-ccW"/>
-                                                        <constraint firstItem="tVl-CI-E6z" firstAttribute="leading" secondItem="Cok-fi-RsZ" secondAttribute="trailing" constant="8" id="qVz-v9-FqZ"/>
-                                                        <constraint firstItem="Cok-fi-RsZ" firstAttribute="centerY" secondItem="Bpc-Kd-yep" secondAttribute="centerY" constant="0.5" id="zew-gA-QSt"/>
-                                                    </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                            <real key="value" value="5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="0.5"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstItem="Bpc-Kd-yep" firstAttribute="leading" secondItem="2Xm-kO-V8R" secondAttribute="leading" constant="5" id="1z1-vw-YSh"/>
-                                                <constraint firstAttribute="trailing" secondItem="Bpc-Kd-yep" secondAttribute="trailing" constant="5" id="BkZ-Jp-QfG"/>
-                                                <constraint firstItem="Bpc-Kd-yep" firstAttribute="top" secondItem="2Xm-kO-V8R" secondAttribute="top" constant="4" id="Blo-Aq-gjB"/>
-                                                <constraint firstAttribute="bottom" secondItem="Bpc-Kd-yep" secondAttribute="bottom" id="SlQ-MJ-d2D"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <connections>
-                                            <outlet property="courseNameLbl" destination="tVl-CI-E6z" id="H6W-8G-HA3"/>
-                                            <outlet property="logoImageview" destination="Cok-fi-RsZ" id="tZf-aS-qU1"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="enquiryid" id="huF-8h-MCv" customClass="EnquiryTableViewCell" customModule="Aggregator" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="128" width="300" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="huF-8h-MCv" id="4Sd-wP-HbS">
                                             <rect key="frame" x="0.0" y="0.0" width="300" height="100"/>
@@ -2125,9 +2050,9 @@
                                                     <rect key="frame" x="5" y="4" width="290" height="96"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tMm-1z-nTI" customClass="CustomImageView" customModule="Aggregator" customModuleProvider="target">
-                                                            <rect key="frame" x="10" y="10" width="80" height="77"/>
+                                                            <rect key="frame" x="10" y="10" width="77" height="77"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="80" id="Rtt-KR-gjd"/>
+                                                                <constraint firstAttribute="width" secondItem="tMm-1z-nTI" secondAttribute="height" multiplier="1:1" id="z54-0n-UiA"/>
                                                             </constraints>
                                                             <userDefinedRuntimeAttributes>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -2136,13 +2061,13 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71W-iG-qmB">
-                                                            <rect key="frame" x="98" y="5" width="162" height="56"/>
+                                                            <rect key="frame" x="95" y="5" width="165" height="56"/>
                                                             <fontDescription key="fontDescription" name="Quicksand-Regular" family="Quicksand" pointSize="13"/>
                                                             <color key="textColor" red="0.24176943300000001" green="0.24177598950000001" blue="0.24177247290000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3a-vz-yHb">
-                                                            <rect key="frame" x="98" y="61" width="162" height="25"/>
+                                                            <rect key="frame" x="95" y="61" width="165" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="25" id="Bho-KS-j0b"/>
                                                             </constraints>
@@ -2159,7 +2084,7 @@
                                                             <color key="tintColor" red="0.1569375694" green="0.71436315770000003" blue="0.47983026499999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <state key="normal" backgroundImage="close"/>
                                                             <connections>
-                                                                <action selector="closeBtnClicked:" destination="huF-8h-MCv" eventType="touchUpInside" id="kO3-0y-iMa"/>
+                                                                <action selector="closeButtonClicked:" destination="huF-8h-MCv" eventType="touchUpInside" id="QvY-wE-zhH"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -2196,11 +2121,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="closeButton" destination="mM5-xz-ZHu" id="y7o-qH-9ev"/>
-                                            <outlet property="courseNameLbl" destination="71W-iG-qmB" id="7c6-ed-FeL"/>
-                                            <outlet property="enquiryDetail" destination="W3a-vz-yHb" id="zLv-Vy-3Oj"/>
+                                            <outlet property="closeButton" destination="mM5-xz-ZHu" id="UxP-pP-fK2"/>
+                                            <outlet property="detailsLabel" destination="W3a-vz-yHb" id="heV-yL-lZr"/>
                                             <outlet property="logoImageView" destination="tMm-1z-nTI" id="EIr-Hm-gjc"/>
-                                            <outlet property="shortCommentsLbl" destination="W3a-vz-yHb" id="2Ll-UC-pbX"/>
+                                            <outlet property="titleLabel" destination="71W-iG-qmB" id="VPR-Hh-Laz"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -2224,7 +2148,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tca-m1-9Ev" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388.80000000000001" y="-3593.7031484257873"/>
+            <point key="canvasLocation" x="107" y="-3592"/>
         </scene>
         <!--Search Result Table View Controller-->
         <scene sceneID="KzN-Y5-QiV">

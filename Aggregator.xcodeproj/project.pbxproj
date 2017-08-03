@@ -20,6 +20,7 @@
 		7DC973151F24543900DC9037 /* BasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC973141F24543900DC9037 /* BasicCell.swift */; };
 		7DCAA1471F3169C0005CEC4A /* UIViewBorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCAA1461F3169C0005CEC4A /* UIViewBorder.swift */; };
 		7DDE93EA1F2F2F28001B9C9D /* DataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DDE93E91F2F2F28001B9C9D /* DataParser.swift */; };
+		7DE3E1081F3335BD007CE02A /* BasicTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE3E1071F3335BD007CE02A /* BasicTableViewCell.swift */; };
 		7DFCBD2F1F26CD4D00200E08 /* CourseCompareDetailsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */; };
 		A195EFE9BB6794EA4B5BDAB6 /* Pods_Aggregator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 587899B53703051B849B9405 /* Pods_Aggregator.framework */; };
 		B812E7841F1CAE4900E87926 /* WebViewPopMoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */; };
@@ -50,8 +51,6 @@
 		C15E9C281E67CF2E006D5B44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C15E9C261E67CF2E006D5B44 /* LaunchScreen.storyboard */; };
 		C15E9C331E67CF2E006D5B44 /* AggregatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15E9C321E67CF2E006D5B44 /* AggregatorTests.swift */; };
 		C15E9C3E1E67CF2E006D5B44 /* AggregatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15E9C3D1E67CF2E006D5B44 /* AggregatorUITests.swift */; };
-		C161C5031EDEBDF70032F024 /* BookMark&WishTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C161C5021EDEBDF70032F024 /* BookMark&WishTableViewCell.swift */; };
-		C161C5051EDEBE090032F024 /* EnquiryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C161C5041EDEBE090032F024 /* EnquiryTableViewCell.swift */; };
 		C161C5071EDFCF860032F024 /* PopupViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C161C5061EDFCF860032F024 /* PopupViewData.swift */; };
 		C161C5091EE00F160032F024 /* searchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C161C5081EE00F160032F024 /* searchTableViewCell.swift */; };
 		C16372D31ECC070600E26691 /* roundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16372D21ECC070600E26691 /* roundView.swift */; };
@@ -118,6 +117,7 @@
 		7DC973141F24543900DC9037 /* BasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicCell.swift; sourceTree = "<group>"; };
 		7DCAA1461F3169C0005CEC4A /* UIViewBorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewBorder.swift; sourceTree = "<group>"; };
 		7DDE93E91F2F2F28001B9C9D /* DataParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataParser.swift; path = DataSync/DataParser.swift; sourceTree = "<group>"; };
+		7DE3E1071F3335BD007CE02A /* BasicTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicTableViewCell.swift; sourceTree = "<group>"; };
 		7DFCBD2E1F26CD4D00200E08 /* CourseCompareDetailsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CourseCompareDetailsModel.swift; sourceTree = "<group>"; };
 		B812E7831F1CAE4900E87926 /* WebViewPopMoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewPopMoreController.swift; sourceTree = "<group>"; };
 		B83A782D1F3030DC002753AE /* RadioButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioButton.swift; sourceTree = "<group>"; };
@@ -153,8 +153,6 @@
 		C15E9C391E67CF2E006D5B44 /* AggregatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AggregatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C15E9C3D1E67CF2E006D5B44 /* AggregatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AggregatorUITests.swift; sourceTree = "<group>"; };
 		C15E9C3F1E67CF2E006D5B44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C161C5021EDEBDF70032F024 /* BookMark&WishTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BookMark&WishTableViewCell.swift"; sourceTree = "<group>"; };
-		C161C5041EDEBE090032F024 /* EnquiryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnquiryTableViewCell.swift; sourceTree = "<group>"; };
 		C161C5061EDFCF860032F024 /* PopupViewData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopupViewData.swift; sourceTree = "<group>"; };
 		C161C5081EE00F160032F024 /* searchTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchTableViewCell.swift; sourceTree = "<group>"; };
 		C16372D21ECC070600E26691 /* roundView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = roundView.swift; sourceTree = "<group>"; };
@@ -385,11 +383,10 @@
 		C161C5011EDEBDC30032F024 /* CustomTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				C161C5021EDEBDF70032F024 /* BookMark&WishTableViewCell.swift */,
-				C161C5041EDEBE090032F024 /* EnquiryTableViewCell.swift */,
 				C161C5081EE00F160032F024 /* searchTableViewCell.swift */,
 				C1C76B7B1EFA848E008EE9CD /* CenterAlignedCollectionViewFlowLayout.swift */,
 				7D0C6EEB1F2DD69C00C7ADBF /* SimpleTableViewCell.swift */,
+				7DE3E1071F3335BD007CE02A /* BasicTableViewCell.swift */,
 			);
 			name = CustomTableViewCell;
 			sourceTree = "<group>";
@@ -693,17 +690,16 @@
 				C1B6C07E1E80F2140054BBA3 /* NotificationViewController.swift in Sources */,
 				7DC973111F24540900DC9037 /* MainViewController.swift in Sources */,
 				C1B6C07A1E80F1900054BBA3 /* CompareViewController.swift in Sources */,
-				C161C5051EDEBE090032F024 /* EnquiryTableViewCell.swift in Sources */,
 				B83A782E1F3030DC002753AE /* RadioButton.swift in Sources */,
 				C16372D31ECC070600E26691 /* roundView.swift in Sources */,
 				C1C76B7A1EFA3391008EE9CD /* LabelCollectionViewCell.swift in Sources */,
 				C1B6C0881E812B690054BBA3 /* CustomTxtField.swift in Sources */,
-				C161C5031EDEBDF70032F024 /* BookMark&WishTableViewCell.swift in Sources */,
 				C10D220F1E8D1C7200ED268E /* AreaOfInterest.swift in Sources */,
 				C18777E81F0A3BBD00EF84A1 /* campareTableViewCell.swift in Sources */,
 				C122FB881ED45AC90044A0F0 /* RecentSearchViewController.swift in Sources */,
 				C18791CD1E8543CC00E3F502 /* customTableViewCell.swift in Sources */,
 				7DDE93EA1F2F2F28001B9C9D /* DataParser.swift in Sources */,
+				7DE3E1081F3335BD007CE02A /* BasicTableViewCell.swift in Sources */,
 				C10D220D1E8D0A0900ED268E /* Extensions.swift in Sources */,
 				C15E9C1C1E67CF2E006D5B44 /* AppDelegate.swift in Sources */,
 				B8E7E0831F29B0240025FF53 /* EnquiryBasicInfoModel.swift in Sources */,
