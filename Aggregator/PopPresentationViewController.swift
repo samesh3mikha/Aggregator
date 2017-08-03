@@ -169,12 +169,16 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
             
             cell.courseNameLbl.text = popUpArray[indexPath.row].courseName
             cell.enquiryDetail.text = popUpArray[indexPath.row].shortComment
+            
             print("COmment ==", popUpArray[indexPath.row].shortComment)
             if buttonIndex == 1 {
+                cell.closeButton.isHidden = false
                 cell.itemID = popUpArray[indexPath.row].courseID
                 cell.deleteItemHandlerBlock = { [weak cell] in
                     self.deleteFavoriteSearch(favSearchID: (cell?.itemID)!)
                 }
+            } else {
+                cell.closeButton.isHidden = true
             }
             cell.logoImageView.sd_setImage(with: URL.init(string: popUpArray[indexPath.row].logo), placeholderImage: #imageLiteral(resourceName: "placeholder"))
             cell.selectionStyle = .none

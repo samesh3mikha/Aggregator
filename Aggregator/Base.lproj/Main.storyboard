@@ -718,7 +718,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="951"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Become a member" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsw-uC-yTf">
-                                <rect key="frame" x="37" y="80" width="246" height="28"/>
+                                <rect key="frame" x="37.5" y="80" width="246" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="qff-m9-16C"/>
                                 </constraints>
@@ -2196,6 +2196,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="closeButton" destination="mM5-xz-ZHu" id="y7o-qH-9ev"/>
                                             <outlet property="courseNameLbl" destination="71W-iG-qmB" id="7c6-ed-FeL"/>
                                             <outlet property="enquiryDetail" destination="W3a-vz-yHb" id="zLv-Vy-3Oj"/>
                                             <outlet property="logoImageView" destination="tMm-1z-nTI" id="EIr-Hm-gjc"/>

@@ -16,6 +16,7 @@ class EnquiryTableViewCell: UITableViewCell {
     @IBOutlet var logoImageView: CustomImageView!
     @IBOutlet var enquiryDetail: UILabel!
     @IBOutlet var courseNameLbl: UILabel!
+    @IBOutlet var closeButton: UIButton!
 
     var itemID: String = "0"
     var deleteItemHandlerBlock: DeleteItemHandler?
