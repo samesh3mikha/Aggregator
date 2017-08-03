@@ -3,7 +3,7 @@
 //  page
 //
 //  Created by Websutra MAC 2 on 7/5/17.
-//  Copyright © 2017 Websutra MAC 2. All rights reserved.
+//  Copyright © 2017 Websutra MAC 2 Rekha bohara. All rights reserved.
 //
 
 import UIKit

@@ -41,6 +41,10 @@ class LabelCollectionViewCell: UICollectionViewCell
         {
             tick.isHidden = false
         }
+        
+       
+        
+        
     }
     
     

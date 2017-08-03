@@ -32,10 +32,6 @@ class LoginViewController:  UIViewController{
         
     }
     
-    
-    
-    
-    
     @IBAction func registrationBtnClicked(_ sender: Any) {
         
         let registerViewController = self.storyboard?.instantiateViewController(withIdentifier: "registrationvcid") as! RegistrationViewController
@@ -65,12 +61,7 @@ class LoginViewController:  UIViewController{
     }
     
     //MARK: Network Request and response
-    
-    
-    
-    func sendToServer() -> Void {
-        
-        
+        func sendToServer() -> Void {
         let statusHud = MessageView.viewFromNib(layout: .StatusLine)
         statusHud.configureContent(title: "", body: "Validating! Please wait..")
         statusHud.configureTheme(.warning)

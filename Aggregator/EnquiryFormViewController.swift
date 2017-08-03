@@ -239,6 +239,7 @@ class EnquiryFormViewController: UIViewController,UITextViewDelegate{
     con.eventListeners.append() { event in
     
     if case .willShow = event { self.view.endEditing(true)}
+        
     
     
     }

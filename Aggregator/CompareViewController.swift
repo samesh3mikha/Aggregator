@@ -15,7 +15,7 @@ import Alamofire
 let baseUrl = "http://192.168.1.11:8089/api/main/"
 //let baseUrl = "https://educonnect.online/api/main/"
 //let baseUrl = "https://educonnect.meshed.online/api/main/"
-
+let baaseUrlRegistr  = "http://202.129.251.174:8089"
 
 class CompareViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
     @IBOutlet var compareBtn: RoundButton!
@@ -37,6 +37,7 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
     
     // MARK:PassData
     
+    @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var ComaprLbl: UILabel!
     @IBAction func compareBtnClicked(_ sender: Any) {
         addChildVC()
@@ -46,18 +47,28 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
        
+        holderView.isHidden = true
+        TableView.isHidden = true
         
+        backgroundImageView.isHidden = false
         let pref = UserDefaults.standard
         if let decoded = pref.object(forKey: "userinfo")
             
         {
             let decodedUserinfo = NSKeyedUnarchiver.unarchiveObject(with: decoded as! Data) as! UserInfo
             if !decodedUserinfo.access_token.isBlank
-            {
+                        {
+
+                backgroundImageView.isHidden = true
+                            holderView.isHidden = false
+                            TableView.isHidden = false
                 fetchBookmark(token: decodedUserinfo.access_token)
+                
+                
             }
+           
         }
-    }
+            }
     
     func addChildVC(){
         if let pageVC = self.storyboard?.instantiateViewController(withIdentifier: "pagecontrollerVCID") as? PageViewController {

@@ -27,6 +27,7 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.dismiss(animated: true, completion: nil)
+        
     }
     
     override func viewDidLoad() {
@@ -39,7 +40,7 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
         blurEffectView.frame = view.bounds
         blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.insertSubview(blurEffectView, at: 0)
-        
+     
         
         collectionView?.delegate = self
         collectionView?.dataSource = self
@@ -56,7 +57,7 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
         }
         
 
-        self.collectionView?.reloadData()
+        
      
         
 
@@ -65,8 +66,10 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         collectionView?.collectionViewLayout.invalidateLayout()
-        collectionView?.reloadData()
+        
     }
+    
+    
     
     
     
@@ -86,7 +89,7 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
         
         cell.configureWithIndexPath(indexPath, LabelData: areaOfInterestArray[indexPath.row].facultyName, showTick : areaOfInterestArray[indexPath.row].checkStatus)
       
-       
+        
         
         return cell
     }
@@ -123,20 +126,16 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
         
         if !decodedUserinfo.access_token.isBlank
         {
-            
             self.updateAOI(id: String(id), token: decodedUserinfo.access_token, indexpath: indexPath)
-            
-            
-           
-            
-            
-                    }
+         }
         
+//        let cell = self.collectionView?.cellForItem(at: indexPath) as! LabelCollectionViewCell
+//        cell.configureWithIndexPath(indexPath, LabelData: areaOfInterestArray[indexPath.row].facultyName, showTick: areaOfInterestArray[indexPath.row].checkStatus)
         
-  
-                
+
         
-    }
+         }
+    
     
     func updateAOI(id : String , token : String , indexpath : IndexPath) -> Void {
     
@@ -187,7 +186,7 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
                         
                         areaOfInterestArray.removeAll()
                         let resultDicts = uia as! [[String:AnyObject]]
-                        
+                        print("resultDicts -- ", resultDicts)
                         for dict in resultDicts
                         {
                             
@@ -196,13 +195,8 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
                             
                             areaOfInterestArray.append(aoi)
                         }
-                        
-                        let cell = self.collectionView?.cellForItem(at: indexpath) as! LabelCollectionViewCell
-                        cell.configureWithIndexPath(indexpath, LabelData: areaOfInterestArray[indexpath.row].facultyName, showTick: areaOfInterestArray[indexpath.row].checkStatus)
-                        //self.collectionView?.reloadData()
+                        self.collectionView?.reloadData()
                     }
-
-                    
                 }
                     
                 else

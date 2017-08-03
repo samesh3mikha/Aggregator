@@ -70,7 +70,7 @@ class SearchResultTableViewController: UIViewController,UITableViewDelegate,UISe
         let txtField = searchController.searchBar.value(forKey: "searchField") as? UITextField
         txtField?.font = UIFont(name: Style.quicksand_medium, size: 14)
         txtField?.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
-        txtField?.placeholder = "Search course,college or Places"
+        txtField?.placeholder = "Search course, college or Places"
         searchController.searchBar.layer.borderColor = Style.themeColor.cgColor
         searchController.searchBar.scopeBarBackgroundImage = UIImage.init(color: UIColor.clear)
         searchController.searchBar.showsCancelButton = false

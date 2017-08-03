@@ -61,7 +61,7 @@ class CourseDetailViewController: UIViewController,UITableViewDelegate,UITableVi
     
     override func viewWillAppear(_ animated: Bool) {
     CourseDetailTableview.reloadData()
-        self.navigationItem.title = "CourseDetails"
+        self.navigationItem.title = "Course Details"
     }
     
     

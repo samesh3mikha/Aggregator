@@ -83,7 +83,7 @@ class RegistrationViewController: UIViewController {
         con.duration = .automatic
         con.dimMode = .gray(interactive: false)
         con.eventListeners.append() { event in
-            
+        var isValidEmail = false
             if case .willShow = event { self.view.endEditing(true)}
         }
         
@@ -100,16 +100,35 @@ class RegistrationViewController: UIViewController {
                 statusHud.configureContent(title: "", body: "Password not in correct format")
                 SwiftMessages.show(config: con, view: statusHud)
                 print("Password not in correct format")
+            }else if !self.validate(YourEMailAddress: emailLbl.text!)
+            {
+                print("email invalid")
+                statusHud.configureTheme(.warning)
+                statusHud.configureContent(title: "", body: "please enter valid emailaddress")
+                SwiftMessages.show(config: con, view: statusHud)
             }
-        } else {
+            
+
+            
+         else {
+                
             print("register unsuccessful")
             statusHud.configureTheme(.warning)
-            statusHud.configureContent(title: "", body: "register unsuccessfu")
+            statusHud.configureContent(title: "", body: "register unsuccessful")
             SwiftMessages.show(config: con, view: statusHud)
         }
     }
     
+    }
     
+    
+    
+    
+    func validate(YourEMailAddress: String) -> Bool {
+        let REGEX: String
+        REGEX = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+        return NSPredicate(format: "SELF MATCHES %@", REGEX).evaluate(with: YourEMailAddress)
+    }
     
     func registerTheUser() {
         if selectCountry.selectedItem!.isBlank{
@@ -156,6 +175,7 @@ class RegistrationViewController: UIViewController {
                 "last_name" : lastnameLbl.text!,
                 "password": passwordLbl.text!,
                 "user_country" : selectedCountry,
+                "base_url" : baaseUrlRegistr,
                 "email_address": emailLbl.text!]
             
             ]
@@ -185,13 +205,16 @@ class RegistrationViewController: UIViewController {
                     statusHud.configureTheme(.success)
                     statusHud.configureContent(title: "Thanks For Signing Up", body: "You will shortly receive an email asking you to confirm your email address.Please check spam folders & add Edu Connect to your contact list to ensure delivery of emails.Please click the confirmation link in the email to confirm your new account.")
                     let _ = self.navigationController?.popViewController(animated: true)
+                    
                 }
                 
                 else
                 {
                     let errorMsg = status["MESSAGE"] as! String
                     statusHud.configureTheme(.error)
-                     statusHud.configureContent(title: "Error", body: errorMsg )
+                    statusHud.configureContent(title: "Error", body: errorMsg )
+                    
+                    
                     
                 }
             }
@@ -289,7 +312,7 @@ class RegistrationViewController: UIViewController {
                         if let cl = data["COUNTRY_LIST"].arrayObject
                         {
                             
-                            self.selectCountry.optionalItemText = "Select your country of study"
+                            self.selectCountry.optionalItemText = "Select your country"
                             for countries in 0...cl.count - 1
                             {
                                 
