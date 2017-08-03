@@ -71,24 +71,21 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
             }
     
     func addChildVC(){
-        if let pageVC = self.storyboard?.instantiateViewController(withIdentifier: "pagecontrollerVCID") as? PageViewController {
-            _ = UINavigationController(rootViewController: pageVC)
+//        if let pageVC = self.storyboard?.instantiateViewController(withIdentifier: "pagecontrollerVCID") as? PageViewController {
+//            _ = UINavigationController(rootViewController: pageVC)
+//            if selectedIDs.count > 0 {
+//                pageVC.bookmarkedCourseIDs = selectedIDs
+//                self.navigationController?.pushViewController(pageVC, animated: false)
+//            }
+//        }
+        if let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
+            _ = UINavigationController(rootViewController: mainVC)
             if selectedIDs.count > 0 {
-                pageVC.bookmarkedCourseIDs = selectedIDs
-                self.navigationController?.pushViewController(pageVC, animated: false)
+                mainVC.bookmarkedCourseIDs = selectedIDs
+                self.navigationController?.pushViewController(mainVC, animated: false)
             }
         }
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {        
-        if segue.identifier == "segueToPageVC"{
-            if let destVC = segue.destination as? PageViewController{
-                destVC.bookmarkedCourseIDs = selectedIDs           
-            }
-        }
-    }
-
-   
     
     //MARK: Network
     
