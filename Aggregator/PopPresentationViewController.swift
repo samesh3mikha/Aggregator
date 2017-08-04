@@ -152,7 +152,28 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
             }
         })
     }
-
+    
+    // Delete Bookmarh By ID
+    func deleteBookmark(courseID: String) {
+        let params : Parameters = [
+            "actionname": "user_course_bookmark",
+            "data": [
+                ["flag": "D"],
+                ["institution_course_id": courseID]
+            ]
+        ]
+        DataSynchronizer.syncData(params: params, completionBlock: { [weak self] (isRequestASuccess, message, data) in
+            guard let weakself = self else {
+                return
+            }
+            if isRequestASuccess {
+                weakself.fetchPopData()
+            } else {
+                weakself.showStatusHUD(title: "Action failed", details: "Couldn't delete the item", theme: .info, duration: .automatic)
+            }
+        })
+    }
+    
     
     
     //MARK: TABLEVIEW DELEGATE AND DATASOURCE
@@ -166,7 +187,7 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if buttonIndex == 1 {
+        if buttonIndex == 1 || buttonIndex == 3 {
             return 80
         }
         return 100
@@ -189,6 +210,9 @@ class PopPresentationViewController: UIViewController,UITableViewDataSource,UITa
             cell.closeButton.isHidden = true
         } else if buttonIndex == 3 {
             cell.detailsLabel.isHidden = true
+            cell.deleteItemHandlerBlock = { [weak cell] in
+                self.deleteBookmark(courseID: (cell?.itemID)!)
+            }
         }
         return cell
     }
