@@ -992,7 +992,7 @@ class ProfileViewController: UIViewController, MXParallaxHeaderDelegate, UITextV
                 
                 
                 let data = JSON(value)
-                print(data)
+                print("data ---", data)
                 
                 if let responseStatus = data["STATUS"].arrayObject
                 {
@@ -1005,34 +1005,36 @@ class ProfileViewController: UIViewController, MXParallaxHeaderDelegate, UITextV
                         
                         if let ui = data["rto-form"].arrayObject
                         {
-                            let userInfo = ui[0] as! [String: AnyObject]
-                            
-                            let userProfile = UserProfileDetails.init(firstName: self.nullToString(value: userInfo["first_name"])!,
-                                                                      lastName: self.nullToString(value: userInfo["last_name"])!,
-                                                                      email_address: self.nullToString(value: userInfo["email_address"])!,
-                                                                      date_of_birth: self.nullToString(value: userInfo["date_of_birth"])!,
-                                                                      gender: self.nullToString(value: userInfo["gender"])!,
-                                                                      highest_degree_name: self.nullToString(value: userInfo["highest_degree_name"])!,
-                                                                      english_proficiency_name: self.nullToString(value: userInfo["english_proficiency_name"])!,
-                                                                      country_of_study_name: self.nullToString(value: userInfo["country_of_study_name"])!,
-                                                                      work_experience: self.nullToString(value: userInfo["work_experience"])!,
-                                                                      notes: self.nullToString(value: userInfo["notes"])!,
-                                                                      state:  self.nullToString(value: userInfo["state_name"])!,
-                                                                      country: self.nullToString(value: userInfo["country_name"])!,
-                                                                      city: self.nullToString(value: userInfo["city"])!,
-                                                                      street_address: self.nullToString(value: userInfo["street_address"])!,
-                                                                      phone: self.nullToString(value: userInfo["phone1"])!,
-                                                                      profileImageLink: self.nullToString(value: userInfo["user_image"])! )
-                            
-                            
-                            
-                            if !isFromAreaOfInterest{
-                            self.customizeUI(userProfileDetails: userProfile)
+                            if ui.count > 0 {
+                                let userInfo = ui[0] as! [String: AnyObject]
+                                
+                                let userProfile = UserProfileDetails.init(firstName: self.nullToString(value: userInfo["first_name"])!,
+                                                                          lastName: self.nullToString(value: userInfo["last_name"])!,
+                                                                          email_address: self.nullToString(value: userInfo["email_address"])!,
+                                                                          date_of_birth: self.nullToString(value: userInfo["date_of_birth"])!,
+                                                                          gender: self.nullToString(value: userInfo["gender"])!,
+                                                                          highest_degree_name: self.nullToString(value: userInfo["highest_degree_name"])!,
+                                                                          english_proficiency_name: self.nullToString(value: userInfo["english_proficiency_name"])!,
+                                                                          country_of_study_name: self.nullToString(value: userInfo["country_of_study_name"])!,
+                                                                          work_experience: self.nullToString(value: userInfo["work_experience"])!,
+                                                                          notes: self.nullToString(value: userInfo["notes"])!,
+                                                                          state:  self.nullToString(value: userInfo["state_name"])!,
+                                                                          country: self.nullToString(value: userInfo["country_name"])!,
+                                                                          city: self.nullToString(value: userInfo["city"])!,
+                                                                          street_address: self.nullToString(value: userInfo["street_address"])!,
+                                                                          phone: self.nullToString(value: userInfo["phone1"])!,
+                                                                          profileImageLink: self.nullToString(value: userInfo["user_image"])! )
+                                
+                                
+                                
+                                if !isFromAreaOfInterest{
+                                    self.customizeUI(userProfileDetails: userProfile)
+                                }
+                                
+                                
+                                
+                                statusHud.configureContent(title: "", body: "FETCHING COMPLETE!")
                             }
-                            
-                            
-                                                            
-                            statusHud.configureContent(title: "", body: "FETCHING COMPLETE!")
                         }
                         
                         if let uia = data["USER_INTEREST_AREA"].arrayObject

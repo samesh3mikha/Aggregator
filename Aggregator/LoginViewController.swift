@@ -90,14 +90,12 @@ class LoginViewController:  UIViewController{
 //                "sessiontime": 200000000
                 ] ]
         ]
-        print("params -->", params  )
 
         
         Alamofire.request(baseUrl + "Authenticate", method: .post, parameters: params, encoding: JSONEncoding.default , headers: nil).responseJSON { (response) in
             
            
             
-            print("response -->", response)
             switch response.result
             {
                 
