@@ -119,107 +119,32 @@ class areaOfInterestViewController: UIViewController,UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let id = areaOfInterestArray[indexPath.row].facultyId
-        
-        let decodedUserinfo = self.getUserInfo()
-        
-        if !decodedUserinfo.access_token.isBlank
-        {
-            self.updateAOI(id: String(id), token: decodedUserinfo.access_token, indexpath: indexPath)
-         }
-        
-//        let cell = self.collectionView?.cellForItem(at: indexPath) as! LabelCollectionViewCell
-//        cell.configureWithIndexPath(indexPath, LabelData: areaOfInterestArray[indexPath.row].facultyName, showTick: areaOfInterestArray[indexPath.row].checkStatus)
-        
-
-        
-         }
-    
-    
-    func updateAOI(id : String , token : String , indexpath : IndexPath) -> Void {
-    
-        let headers: HTTPHeaders = [
-            "Authorization": "bearer " + token,
-            "Content-Type": "application/json"
-        ]
-        
-        let params : Parameters = [
-            
-            "actionname": "user_interest_area",
-            "data": [
-                
-                ["flag": "I"],
-                 ["checked_only": "Y"],
-                ["area_of_interest": id],
-                
-            ]
-        ]
-        
-        
-        Alamofire.request(baseUrl + "ProcessData", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
-            
-            switch response.result
-            {
-                
-            case .success(let value):
-                let json = JSON(value)
-                print(json)
-            case .failure(let error):
-                print(error)
-                
-            }
-            
-            let data = JSON(response.result.value!)
-            
-            if let responseStatus = data["STATUS"].arrayObject
-            {
-                let status = responseStatus[0] as! [String: AnyObject]
-                let s = status["STATUS"] as! String
-                
-                if s == "SUCCESS"
-                {
-                    
-
-                    if let uia = data["USER_INTEREST_AREA"].arrayObject
-                    {
-                        
-                        areaOfInterestArray.removeAll()
-                        let resultDicts = uia as! [[String:AnyObject]]
-                        print("resultDicts -- ", resultDicts)
-                        for dict in resultDicts
-                        {
-                            
-                            let aoi = AreaOfInterest.init(facultyName: dict["faculty_name"] as! String, facultyId: dict["faculty_id"] as! Int ,checkStatus:  dict["check_status"] as! Int )
-                            
-                            
-                            areaOfInterestArray.append(aoi)
-                        }
-                        self.collectionView?.reloadData()
-                    }
-                }
-                    
-                else
-                {
-                    let errorMsg = status["MESSAGE"] as! String
-                    
-                    let alert = UIAlertController(title: "", message: errorMsg, preferredStyle: .alert)
-                    let alertAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-                    
-                    alert.addAction(alertAction)
-                    self.present(alert, animated: true, completion: nil)
-                }
-            }
-            
-            
-            
-            
-        }
-        
-        
+        let aoiID = areaOfInterestArray[indexPath.row].facultyId
+        self.uodateAOI(aoiID: String(aoiID), indexPath: indexPath)
     }
     
-   
+    func uodateAOI(aoiID: String, indexPath: IndexPath) {
+        let params : Parameters = [
+            "actionname": "user_interest_area",
+            "data": [
+                ["flag": "I"],
+                ["checked_only": "Y"],
+                ["area_of_interest": aoiID],
+            ]
+        ]        
+        DataSynchronizer.syncData(params: params, completionBlock: { [weak self] (isRequestASuccess, message, data) in
+            guard let weakself = self else {
+                return
+            }
+            if isRequestASuccess {
+                areaOfInterestArray[indexPath.row].checkStatus = (areaOfInterestArray[indexPath.row].checkStatus == 0) ? 1 : 0
+                if let cell = weakself.collectionView?.cellForItem(at: indexPath) as? LabelCollectionViewCell {
+                    cell.configureWithIndexPath(indexPath, LabelData: areaOfInterestArray[indexPath.row].facultyName, showTick: areaOfInterestArray[indexPath.row].checkStatus)
+                }
+            } else {
+                weakself.showStatusHUD(title: "Error!", details: message, theme: .error, duration: .seconds(seconds: 2))
+            }
+        })
 
-  
+    }
 }

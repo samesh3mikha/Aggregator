@@ -12,7 +12,7 @@ class AreaOfInterest: NSObject{
     
     let facultyName : String
     let facultyId : Int
-    let checkStatus : Int
+    var checkStatus : Int
     
     
     init(facultyName : String, facultyId : Int, checkStatus : Int)
