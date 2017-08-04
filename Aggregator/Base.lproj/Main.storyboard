@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -718,7 +718,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="951"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Become a member" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dsw-uC-yTf">
-                                <rect key="frame" x="37.5" y="80" width="246" height="28"/>
+                                <rect key="frame" x="37" y="80" width="246" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="qff-m9-16C"/>
                                 </constraints>
@@ -3591,7 +3591,6 @@
         <image name="circleImage" width="319" height="176"/>
         <image name="close" width="30" height="30"/>
         <image name="compare" width="30" height="30"/>
-        <image name="comparecourse-base cut" width="320" height="582"/>
         <image name="forward" width="30" height="30"/>
         <image name="globe2" width="24" height="24"/>
         <image name="greenBookmark" width="283" height="319"/>

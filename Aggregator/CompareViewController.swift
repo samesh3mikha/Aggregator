@@ -11,67 +11,59 @@ import SwiftyJSON
 import SwiftMessages
 import Alamofire
 
-class CompareViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
+class CompareViewController: UIViewController, UITabBarControllerDelegate, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet var compareBtn: RoundButton!
     @IBOutlet var holderView: UIView!
     @IBOutlet var TableView: UITableView!
-   var bookMarkArray = [Courses]()
-    
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    @IBOutlet weak var ComaprLbl: UILabel!
+
+    var bookMarkArray = [Courses]()
     var selectedIDs = [String]()
-    
+    var fetchingData: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.selectedIDs.removeAll()
         compareBtn.isUserInteractionEnabled = false
         compareBtn.alpha = 0.5
+        self.tabBarController?.delegate = self
+        
+        fetchData()
     }
-    
-    
-    // MARK:PassData
-    
-    @IBOutlet weak var backgroundImageView: UIImageView!
-    @IBOutlet weak var ComaprLbl: UILabel!
-    @IBAction func compareBtnClicked(_ sender: Any) {
-        addChildVC()
-    }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.navigationBar.isHidden = true
-       
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let tabBarIndex = tabBarController.selectedIndex
+        if tabBarIndex == 1 {
+            fetchData()
+        }
+    }
+    
+    func fetchData() {
+        if fetchingData {
+            return
+        }
         holderView.isHidden = true
         TableView.isHidden = true
-        
         backgroundImageView.isHidden = false
-        let pref = UserDefaults.standard
-        if let decoded = pref.object(forKey: "userinfo")
-            
-        {
-            let decodedUserinfo = NSKeyedUnarchiver.unarchiveObject(with: decoded as! Data) as! UserInfo
-            if !decodedUserinfo.access_token.isBlank
-                        {
-
-                backgroundImageView.isHidden = true
-                            holderView.isHidden = false
-                            TableView.isHidden = false
-                fetchBookmark(token: decodedUserinfo.access_token)
-                
-                
-            }
-           
+        let accessToken = DataSynchronizer.getAccessToken()
+        if !accessToken.isBlank {
+            backgroundImageView.isHidden = true
+            holderView.isHidden = false
+            TableView.isHidden = false
+            selectedIDs.removeAll()
+            fetchBookmark(token: accessToken)
         }
-            }
-    
+    }
+
+    @IBAction func compareBtnClicked(_ sender: Any) {
+        addChildVC()
+    }
+
     func addChildVC(){
-//        if let pageVC = self.storyboard?.instantiateViewController(withIdentifier: "pagecontrollerVCID") as? PageViewController {
-//            _ = UINavigationController(rootViewController: pageVC)
-//            if selectedIDs.count > 0 {
-//                pageVC.bookmarkedCourseIDs = selectedIDs
-//                self.navigationController?.pushViewController(pageVC, animated: false)
-//            }
-//        }
         if let mainVC = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController") as? MainViewController {
             _ = UINavigationController(rootViewController: mainVC)
             if selectedIDs.count > 0 {
@@ -80,10 +72,11 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
             }
         }
     }
-    
+
     //MARK: Network
     
     func fetchBookmark(token : String) -> Void {
+        fetchingData = true
         let statusHud = MessageView.viewFromNib(layout: .StatusLine)
         statusHud.configureContent(title: "", body: "Fetching your data! Please wait..")
         statusHud.id = "statusHud"
@@ -117,7 +110,7 @@ class CompareViewController: UIViewController , UITableViewDelegate, UITableView
         
         
         Alamofire.request(baseUrl + "ProcessData", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).responseJSON { (response) in
-            
+            self.fetchingData = false
             switch response.result
             {
                 

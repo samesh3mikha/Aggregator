@@ -12,11 +12,6 @@ import SwiftMessages
 import SwiftyJSON
 
 
-
-
-
-
-
 //let baseUrl = "http://202.129.251.174:8089/api/main/"
 class MainViewController: UIViewController {
     @IBOutlet weak var compareingCountLabel: UILabel!
